@@ -18,3 +18,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+  front:
+    build: ./front
+    ports:
+      - "8011:80"
+    container_name: front
