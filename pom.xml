@@ -4,7 +4,7 @@
     <parent>
         <groupId>ru.hh.nab</groupId>
         <artifactId>nuts-and-bolts-parent</artifactId>
-        <version>4.22.24</version>
+        <version>4.28.10</version>
     </parent>
 
     <artifactId>hh-career-solution</artifactId>
@@ -13,10 +13,9 @@
     <name>Career solution service</name>
 
     <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <java.version>15</java.version>
     </properties>
-
+    
     <dependencies>
         <dependency>
             <groupId>ru.hh.nab</groupId>
@@ -37,8 +36,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>15</source>
-                    <target>15</target>
+                    <release>${java.version}</release>
                 </configuration>
             </plugin>
             <plugin>
@@ -91,4 +89,17 @@
         </plugins>
     </build>
 
+    <repositories>
+        <repository>
+            <id>hh-public</id>
+            <name>hh public releases repository</name>
+            <url>http://m2.hh.ru/content/repositories/public-releases</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 </project>

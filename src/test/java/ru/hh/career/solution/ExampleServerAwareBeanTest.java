@@ -1,39 +1,39 @@
 package ru.hh.career.solution;
 
-import java.util.function.Function;
-import javax.inject.Inject;
-import org.junit.Test;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.test.context.ContextConfiguration;
-import ru.hh.nab.starter.NabApplication;
-import ru.hh.nab.testbase.NabTestBase;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import javax.ws.rs.core.Response;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
-@ContextConfiguration(classes = TestConfig.class)
-public class ExampleServerAwareBeanTest extends NabTestBase {
+import ru.hh.nab.starter.NabApplication;
+import ru.hh.nab.testbase.ResourceHelper;
+import ru.hh.nab.testbase.extensions.NabJunitWebConfig;
+import ru.hh.nab.testbase.extensions.NabTestServer;
+import ru.hh.nab.testbase.extensions.OverrideNabApplication;
 
-  @Inject
-  private Function<String, String> serverPortAwareBean;
+@NabJunitWebConfig(TestConfig.class)
+public class ExampleServerAwareBeanTest {
+
+  @NabTestServer(overrideApplication = SpringCtxForJersey.class)
+  ResourceHelper resourceHelper;
 
   @Test
   public void testBeanWithNabTestContext() {
-    try (Response response = createRequestFromAbsoluteUrl(serverPortAwareBean.apply("/hello")).get()) {
+    try (Response response = resourceHelper.createRequestFromAbsoluteUrl(resourceHelper.baseUrl() + "/hello").get()) {
       assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
       assertEquals("Hello, world!", response.readEntity(String.class));
     }
   }
 
-  @Override
-  protected NabApplication getApplication() {
-    return NabApplication.builder().configureJersey(SpringCtxForJersey.class).bindToRoot().build();
-  }
-
   @Configuration
   @Import(ExampleResource.class)
-  static class SpringCtxForJersey {
+  public static class SpringCtxForJersey implements OverrideNabApplication {
+    @Override
+    public NabApplication getNabApplication() {
+      return NabApplication.builder().configureJersey(SpringCtxForJersey.class).bindToRoot().build();
+    }
   }
 }
