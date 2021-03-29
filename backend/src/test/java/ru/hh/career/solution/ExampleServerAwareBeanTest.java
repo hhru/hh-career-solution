@@ -1,12 +1,21 @@
 package ru.hh.career.solution;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import javax.ws.rs.core.Response;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+
+import ru.hh.nab.starter.NabApplication;
+import ru.hh.nab.testbase.ResourceHelper;
 import ru.hh.nab.testbase.extensions.NabJunitWebConfig;
-
+import ru.hh.nab.testbase.extensions.NabTestServer;
+import ru.hh.nab.testbase.extensions.OverrideNabApplication;
 
 @NabJunitWebConfig(TestConfig.class)
 public class ExampleServerAwareBeanTest {
-  /*
 
   @NabTestServer(overrideApplication = SpringCtxForJersey.class)
   ResourceHelper resourceHelper;
@@ -27,6 +36,4 @@ public class ExampleServerAwareBeanTest {
       return NabApplication.builder().configureJersey(SpringCtxForJersey.class).bindToRoot().build();
     }
   }
-
-   */
 }
