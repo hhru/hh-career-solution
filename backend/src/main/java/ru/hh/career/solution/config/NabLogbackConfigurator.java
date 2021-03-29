@@ -1,4 +1,4 @@
-package ru.hh.career.solution;
+package ru.hh.career.solution.config;
 
 import io.sentry.logback.SentryAppender;
 import org.slf4j.event.Level;

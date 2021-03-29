@@ -1,0 +1,5 @@
+CREATE TABLE area
+(
+  area_id     INTEGER PRIMARY KEY,
+  name   VARCHAR(100) NOT NULL
+);
