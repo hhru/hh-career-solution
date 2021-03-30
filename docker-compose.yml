@@ -1,7 +1,8 @@
-version: "2.2"
+version: "3.8"
 
 services:
   postgres:
+    container_name: "postgres"
     image: postgres:13.2-alpine
     restart: always
     volumes:
