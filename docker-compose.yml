@@ -18,8 +18,19 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+
   front:
     build: ./front
     ports:
       - "8011:80"
     container_name: front
+
+  backend:
+    build: ./backend/
+    container_name: "backend"
+    restart: always
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "9999:9999"
