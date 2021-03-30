@@ -14,7 +14,6 @@ import javax.sql.DataSource;
 @Import({
         NabProdConfig.class,
         NabHibernateProdConfig.class,
-        JerseyConfig.class,
 })
 public class ProdConfig {
 
