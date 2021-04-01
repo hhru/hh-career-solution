@@ -5,3 +5,4 @@ COPY ./src/main ./src/main
 RUN mvn install
 COPY ./src/etc/hh-career-solution ./src/etc/hh-career-solution
 ENTRYPOINT ["mvn", "exec:java"]
+
