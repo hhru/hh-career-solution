@@ -34,5 +34,4 @@ public class SpecDeserializer extends StdDeserializer<ProfEnvDTO> {
         profEnv.setSpecialization(Arrays.asList(specDTOS));
         return profEnv;
     }
-
 }
