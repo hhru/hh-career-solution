@@ -12,13 +12,13 @@ import javax.sql.DataSource;
 
 @Configuration
 @Import({
-        NabProdConfig.class,
-        NabHibernateProdConfig.class,
+    NabProdConfig.class,
+    NabHibernateProdConfig.class,
 })
 public class ProdConfig {
 
-    @Bean
-    public DataSource dataSource(DataSourceFactory dataSourceFactory, FileSettings fileSettings) {
-        return dataSourceFactory.create("master", false, fileSettings);
-    }
+  @Bean
+  public DataSource dataSource(DataSourceFactory dataSourceFactory, FileSettings fileSettings) {
+    return dataSourceFactory.create("master", false, fileSettings);
+  }
 }

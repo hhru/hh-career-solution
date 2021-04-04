@@ -8,14 +8,14 @@ import ru.hh.nab.hibernate.MappingConfig;
 
 @Configuration
 @Import({
-        ExampleResource.class,
+    ExampleResource.class,
 })
 public class JerseyConfig {
 
-    @Bean
-    public MappingConfig mappingConfig() {
-        MappingConfig mappingConfig = new MappingConfig();
-        mappingConfig.addPackagesToScan("ru.hh.career.solution.entity");
-        return mappingConfig;
-    }
+  @Bean
+  public MappingConfig mappingConfig() {
+    MappingConfig mappingConfig = new MappingConfig();
+    mappingConfig.addPackagesToScan("ru.hh.career.solution.entity");
+    return mappingConfig;
+  }
 }
