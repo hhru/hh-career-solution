@@ -12,6 +12,11 @@ docker-compose build
 docker-compose up
 ```
 
+### Clean
+```bash
+docker-compose down --remove-orphans
+```
+
 ## Frontend
 
 ### Build
