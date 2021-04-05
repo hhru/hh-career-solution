@@ -14,20 +14,20 @@ import ru.hh.nab.starter.NabProdConfig;
 
 @Configuration
 @Import({
-    NabProdConfig.class,
-    NabHibernateProdConfig.class,
+  NabProdConfig.class,
+  NabHibernateProdConfig.class,
 })
 public class ProdConfig {
 
-    @Bean
-    public MappingConfig mappingConfig() {
-        MappingConfig mappingConfig = new MappingConfig();
-        mappingConfig.addPackagesToScan("ru.hh.career.solution.entity");
-        return mappingConfig;
-    }
+  @Bean
+  public MappingConfig mappingConfig() {
+    MappingConfig mappingConfig = new MappingConfig();
+    mappingConfig.addPackagesToScan("ru.hh.career.solution.entity");
+    return mappingConfig;
+  }
 
-    @Bean
-    public DataSource dataSource(DataSourceFactory dataSourceFactory, FileSettings fileSettings) {
-        return dataSourceFactory.create("master", false, fileSettings);
-    }
+  @Bean
+  public DataSource dataSource(DataSourceFactory dataSourceFactory, FileSettings fileSettings) {
+    return dataSourceFactory.create("master", false, fileSettings);
+  }
 }
