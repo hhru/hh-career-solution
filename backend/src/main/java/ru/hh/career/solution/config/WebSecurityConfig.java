@@ -10,13 +10,14 @@ import org.springframework.security.web.FilterChainProxy;
 @Configuration
 @EnableWebSecurity
 @Import(FilterChainProxy.class)
-public class CareerSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http.authorizeRequests()
-      .anyRequest().denyAll()
+    http
+      .authorizeRequests()
+      .antMatchers("/**").denyAll().anyRequest().hasRole("USER")
       .and()
-      .formLogin();
+      .formLogin().permitAll();
   }
 }
