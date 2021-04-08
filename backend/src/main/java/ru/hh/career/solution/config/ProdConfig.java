@@ -14,6 +14,7 @@ import ru.hh.nab.starter.NabProdConfig;
 
 @Configuration
 @Import({
+  WebSecurityConfig.class,
   NabProdConfig.class,
   NabHibernateProdConfig.class,
 })

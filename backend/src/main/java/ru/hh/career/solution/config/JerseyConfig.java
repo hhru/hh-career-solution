@@ -7,7 +7,7 @@ import ru.hh.career.solution.ExampleResource;
 
 @Configuration
 @Import({
-    ExampleResource.class,
+  ExampleResource.class,
 })
 public class JerseyConfig {
 }
