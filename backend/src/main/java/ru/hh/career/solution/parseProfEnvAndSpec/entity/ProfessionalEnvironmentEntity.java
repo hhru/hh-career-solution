@@ -2,10 +2,8 @@ package ru.hh.career.solution.parseProfEnvAndSpec.entity;
 
 import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "professional_environment")
@@ -34,5 +32,16 @@ public class ProfessionalEnvironmentEntity {
         this.envName = envName;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ProfessionalEnvironmentEntity)) return false;
+        ProfessionalEnvironmentEntity that = (ProfessionalEnvironmentEntity) o;
+        return getId().equals(that.getId()) && getEnvName().equals(that.getEnvName());
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getEnvName());
+    }
 }
