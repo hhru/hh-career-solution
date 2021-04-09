@@ -1,4 +1,4 @@
-package ru.hh.career.solution.parseProfEnvAndSpec;
+package ru.hh.career.solution.parseProfEnvAndSpec.dto;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.hh.jclient.common.*;
@@ -6,7 +6,7 @@ import ru.hh.jclient.common.util.storage.SingletonStorage;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -39,7 +39,7 @@ public class PPEAS {
                 .withProperties(jClientProperty)
                 .withRequestStrategy(new DefaultRequestStrategy())
                 .withCallbackExecutor(Runnable::run)
-                //.withHostsWithSession(hostsWithSession)
+                .withHostsWithSession(Collections.singleton(jClientProperty.getProperty("jclient.hostsWithSession")))
                 .withUserAgent("my service")
                 .build();
         Request request = new RequestBuilder("GET").setUrl("https://api.hh.ru/specializations").build();
