@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import java.util.List;
 
-@JsonDeserialize(using = SpecializationsDeserializer.class)
+@JsonDeserialize(using = ProfessionalEnvironmentDeserializer.class)
 public class ProfessionalEnvironmentDTO {
     private Integer id;
     private String name;
