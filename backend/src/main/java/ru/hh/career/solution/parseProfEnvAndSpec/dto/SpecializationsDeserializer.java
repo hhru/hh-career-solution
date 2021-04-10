@@ -3,28 +3,26 @@ package ru.hh.career.solution.parseProfEnvAndSpec.dto;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 
-public class SpecializationsDeserializer extends StdDeserializer<SpecializationsDTO> {
+public class SpecializationsDeserializer extends StdDeserializer<SpecializationsDto> {
     public SpecializationsDeserializer() {
         super(SpecializationsDeserializer.class);
     }
 
     @Override
-    public SpecializationsDTO deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
-        SpecializationsDTO specDTO = new SpecializationsDTO();
+    public SpecializationsDto deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
+        SpecializationsDto specDto = new SpecializationsDto();
         JsonNode treeNode = jsonParser.readValueAsTree();
         if (treeNode == null) {
             return null;
         }
-        specDTO.setId(treeNode.get("id").asInt());
-        specDTO.setName(treeNode.get("name").asText());
-
-        return specDTO;
+        specDto.setId(Integer.parseInt(treeNode.get("id").asText().split(".")[1]));
+        specDto.setName(treeNode.get("name").asText());
+        specDto.setLaboring(treeNode.get("laboring").asBoolean());
+        return specDto;
     }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 public class ProfessionalEnvironmentDTO {
     private Integer id;
     private String name;
-    private List<SpecializationsDTO> specialization;
+    private List<SpecializationsDto> specialization;
 
     public Integer getId() {
         return id;
@@ -26,11 +26,11 @@ public class ProfessionalEnvironmentDTO {
         this.name = name;
     }
 
-    public List<SpecializationsDTO> getSpecialization() {
+    public List<SpecializationsDto> getSpecialization() {
         return specialization;
     }
 
-    public void setSpecialization(List<SpecializationsDTO> specialization) {
+    public void setSpecialization(List<SpecializationsDto> specialization) {
         this.specialization = specialization;
     }
 }

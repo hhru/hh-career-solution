@@ -3,7 +3,7 @@ package ru.hh.career.solution.parseProfEnvAndSpec.dto;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @JsonDeserialize(using = SpecializationsDeserializer.class)
-public class SpecializationsDTO {
+public class SpecializationsDto {
     private Integer id;
     private String name;
     private Boolean laboring;

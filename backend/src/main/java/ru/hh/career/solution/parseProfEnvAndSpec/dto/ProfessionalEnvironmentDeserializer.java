@@ -25,7 +25,7 @@ public class ProfessionalEnvironmentDeserializer extends StdDeserializer<Profess
         profEnv.setId(treeNode.get("id").asInt());
         profEnv.setName(treeNode.get("name").asText());
         ObjectMapper objectMapper = new ObjectMapper();
-        SpecializationsDTO[] specDTOS = objectMapper.readValue(treeNode.get("specializations").toString(), SpecializationsDTO[].class);
+        SpecializationsDto[] specDTOS = objectMapper.readValue(treeNode.get("specializations").toString(), SpecializationsDto[].class);
         profEnv.setSpecialization(Arrays.asList(specDTOS));
         return profEnv;
     }

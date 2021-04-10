@@ -1,7 +1,5 @@
 package ru.hh.career.solution.parseProfEnvAndSpec.entity;
 
-import org.hibernate.annotations.DynamicUpdate;
-
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -10,10 +8,11 @@ import java.util.Objects;
 public class ProfessionalEnvironmentEntity {
 
     @Id
-    @Column(name = "env_id")
+    @OneToMany()
+    @Column(name = "professional_environment_id")
     private Integer id;
 
-    @Column(name = "env_name")
+    @Column(name = "professional_environment_name")
     private String envName;
 
     public Integer getId() {
@@ -35,7 +34,7 @@ public class ProfessionalEnvironmentEntity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ProfessionalEnvironmentEntity)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         ProfessionalEnvironmentEntity that = (ProfessionalEnvironmentEntity) o;
         return getId().equals(that.getId()) && getEnvName().equals(that.getEnvName());
     }

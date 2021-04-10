@@ -7,17 +7,17 @@ import javax.persistence.*;
 public class SpecializationEntity {
 
     @Id
-    @Column(name = "spec_id")
-    private Integer specializationID;
+    @Column(name = "specialization_id")
+    private Integer specializationId;
 
-    @Column(name = "spec_name")
+    @Column(name = "specialization_name")
     private String specializationName;
 
     @Column(name = "laboring")
     private Boolean laboring;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "env_id")
-    private Integer environmentID;
+    @JoinColumn(name = "professional_environment_id")
+    private Integer environmentId;
 
 }

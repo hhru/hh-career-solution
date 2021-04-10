@@ -13,7 +13,7 @@ import java.util.Properties;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-public class PPEAS {
+public class ParseProfessionalEnvironmentAndSpecialization {
     private ProfessionalEnvironmentDTO[] value;
 
     public ProfessionalEnvironmentDTO[] getValue() {
@@ -25,14 +25,14 @@ public class PPEAS {
     }
 
     private Properties getjClientProperty() throws IOException {
-        InputStream is = PPEAS.class.getResourceAsStream("./jclient.properties");
+        InputStream is = ParseProfessionalEnvironmentAndSpecialization.class.getResourceAsStream("./jclient.properties");
         Properties properties = new Properties();
         properties.load(is);
         if (is != null) is.close();
         return properties;
     }
 
-    public void parse() throws IOException, ExecutionException, InterruptedException {
+    public ProfessionalEnvironmentDTO[] parse() throws IOException, ExecutionException, InterruptedException {
         ObjectMapper mapper = new ObjectMapper();
         Properties jClientProperty = this.getjClientProperty();
         HttpClientFactory http = new HttpClientFactoryBuilder(new SingletonStorage<>(() -> new HttpClientContext(Map.of(), Map.of(), List.of())), List.of())
@@ -45,5 +45,6 @@ public class PPEAS {
         Request request = new RequestBuilder("GET").setUrl("https://api.hh.ru/specializations").build();
         CompletableFuture<ProfessionalEnvironmentDTO[]> profEnvDTOFuture = http.with(request).expectJson(mapper, ProfessionalEnvironmentDTO[].class).result();
         this.setValue(profEnvDTOFuture.get());
+        return this.getValue();
     }
 }
