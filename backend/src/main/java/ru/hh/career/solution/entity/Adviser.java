@@ -1,6 +1,5 @@
 package ru.hh.career.solution.entity;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;

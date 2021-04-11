@@ -2,9 +2,7 @@ package ru.hh.career.solution.service;
 
 import org.springframework.transaction.annotation.Transactional;
 import ru.hh.career.solution.dao.AdviserDao;
-import ru.hh.career.solution.dto.AdviserDto;
 import ru.hh.career.solution.entity.Adviser;
-import ru.hh.career.solution.mapper.AdviserMapper;
 
 import javax.inject.Singleton;
 import javax.ws.rs.NotFoundException;
