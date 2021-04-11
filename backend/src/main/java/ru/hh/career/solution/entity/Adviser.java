@@ -1,5 +1,7 @@
 package ru.hh.career.solution.entity;
 
+import org.hibernate.annotations.DynamicInsert;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -7,20 +9,19 @@ import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 @Entity
+@DynamicInsert
 @Table(name = "adviser")
 public class Adviser {
 
     @Id
-    @Column(name = "adviser_id" , nullable = false)
+    @Column(name = "id" , nullable = false)
     private Integer id;
 
-    @Id
-    @Column(name = "adviser_name" , nullable = false)
+    @Column(name = "name" , nullable = false)
     private String name;
 
-    @Id
-    @Column(name = "adviser_soname" , nullable = false)
-    private String soname;
+    @Column(name = "surname" , nullable = false)
+    private String surname;
 
     @Column(name = "created")
     private LocalDateTime created;
@@ -28,10 +29,10 @@ public class Adviser {
     @Column(name = "updated")
     private LocalDateTime updated;
 
-    public Adviser(Integer id, String name, String soname, LocalDateTime created, LocalDateTime updated) {
+    public Adviser(Integer id, String name, String surname, LocalDateTime created, LocalDateTime updated) {
         this.id = id;
         this.name = name;
-        this.soname = soname;
+        this.surname = surname;
         this.created = created;
         this.updated = updated;
     }
@@ -47,8 +48,8 @@ public class Adviser {
         return name;
     }
 
-    public String getSoname() {
-        return soname;
+    public String getSurname() {
+        return surname;
     }
 
     public LocalDateTime getCreated() {
@@ -67,8 +68,8 @@ public class Adviser {
         this.name = name;
     }
 
-    public void setSoname(String soname) {
-        this.soname = soname;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public void setCreated(LocalDateTime created) {

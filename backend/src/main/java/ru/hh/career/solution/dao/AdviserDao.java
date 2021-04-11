@@ -20,17 +20,39 @@ public class AdviserDao {
         return sessionFactory;
     }
 
-    public List<Adviser> getAll(Integer limit, Integer page) {
+    public List<Adviser> getAllByProfessionalField(Integer professionalFieldId, Integer limit, Integer page) {
         return session()
                 .getCurrentSession()
-                .createQuery("SELECT f FROM Adviser f ORDER BY f.adviserId", Adviser.class)
+                .createQuery("SELECT a FROM Adviser a WHERE a.professional_field_id = :professionalFieldId " +
+                        "ORDER BY a.id", Adviser.class)
+                .setParameter("professionalFieldId", professionalFieldId)
                 .setFirstResult(page*limit)
                 .setMaxResults(limit)
                 .getResultList();
     }
 
-    public Optional<Adviser> get(Integer employerId) {
-        return Optional.ofNullable(session().getCurrentSession().get(Adviser.class, employerId));
+    public List<Adviser> getAllByArea(Integer areaId, Integer limit, Integer page) {
+        return session()
+                .getCurrentSession()
+                .createQuery("SELECT a FROM Adviser a WHERE a.area_id = :areaId " +
+                        "ORDER BY a.id", Adviser.class)
+                .setParameter("areaId", areaId)
+                .setFirstResult(page*limit)
+                .setMaxResults(limit)
+                .getResultList();
+    }
+
+    public List<Adviser> getAll(Integer limit, Integer page) {
+        return session()
+                .getCurrentSession()
+                .createQuery("SELECT a FROM Adviser a ORDER BY a.id", Adviser.class)
+                .setFirstResult(page*limit)
+                .setMaxResults(limit)
+                .getResultList();
+    }
+
+    public Optional<Adviser> get(Integer id) {
+        return Optional.ofNullable(session().getCurrentSession().get(Adviser.class, id));
     }
 
     public Adviser update(Adviser adviser) {
@@ -48,4 +70,10 @@ public class AdviserDao {
         return adviser;
     }
 
+    public Long getCount() {
+        return (Long) session()
+                .getCurrentSession()
+                .createQuery("SELECT count(*) FROM Adviser")
+                .uniqueResult();
+    }
 }

@@ -22,7 +22,7 @@ public class AdviserMapper {
         return adviser == null ? null : new AdviserDto(
                 adviser.getId(),
                 adviser.getName(),
-                adviser.getSoname(),
+                adviser.getSurname(),
                 adviser.getCreated().toString(),
                 adviser.getUpdated().toString());
     }

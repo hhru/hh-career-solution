@@ -22,13 +22,24 @@ public class AdviserService {
     }
 
     @Transactional
+    public List<Adviser> getAllByProfessionalField(Integer professionalFieldId, Integer limit, Integer page) {
+        return adviserDao.getAllByProfessionalField(professionalFieldId, limit, page);
+    }
+
+    @Transactional
     public List<Adviser> getAll(Integer limit, Integer page) {
-        final int defaultLimit = 100;
-        final int defaultPage = 0;
-        limit = limit == null ? defaultLimit : limit;
-        page = page == null ? defaultPage : page;
+        return adviserDao.getAll(limit, page);
+    }
+
+    @Transactional
+    public List<Adviser> getAllByFilters(Integer limit, Integer page, Integer areaId, Integer professionalFieldsId) {
 
         return adviserDao.getAll(limit, page);
+    }
+
+    @Transactional
+    public List<Adviser> getAllByArea(Integer areaId, Integer limit, Integer page) {
+        return adviserDao.getAllByArea(areaId, limit, page);
     }
 
     @Transactional
@@ -37,7 +48,17 @@ public class AdviserService {
     }
 
     @Transactional
+    public Adviser update(Adviser adviser) {
+        return adviserDao.update(adviser);
+    }
+
+    @Transactional
     public Adviser saveOrUpdate(Adviser adviser) {
         return adviserDao.saveOrUpdate(adviser);
+    }
+
+    @Transactional()
+    public Integer getPagesCount(Integer limit) {
+        return (int) Math.ceil((double) adviserDao.getCount() / limit);
     }
 }
