@@ -21,9 +21,6 @@ public class ProfessionalEnvironmentDao extends GenericDao{
     }
 
     public void delete(ProfessionalEnvironmentEntity professionalEnvironmentEntity) {
-        if (professionalEnvironmentEntity == null) {
-            return;
-        }
-        getSession().delete(professionalEnvironmentEntity);
+        super.delete(professionalEnvironmentEntity);
     }
 }
