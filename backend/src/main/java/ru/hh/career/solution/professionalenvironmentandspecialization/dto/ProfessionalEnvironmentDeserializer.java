@@ -15,19 +15,18 @@ public class ProfessionalEnvironmentDeserializer extends StdDeserializer<Profess
         super(ProfessionalEnvironmentDto.class);
     }
 
-    static final ObjectMapper mapper = new ObjectMapper();
-
     @Override
     public ProfessionalEnvironmentDto deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
-        ProfessionalEnvironmentDto professionalEnvironmentDto = new ProfessionalEnvironmentDto();
+        ProfessionalEnvironmentDto profEnv = new ProfessionalEnvironmentDto();
         JsonNode treeNode = jsonParser.readValueAsTree();
         if (treeNode == null) {
             return null;
         }
-        professionalEnvironmentDto.setId(treeNode.get("id").asInt());
-        professionalEnvironmentDto.setName(treeNode.get("name").asText());
-        SpecializationsDto[] specDTOS = mapper.readValue(treeNode.get("specializations").toString(), SpecializationsDto[].class);
-        professionalEnvironmentDto.setSpecialization(Arrays.asList(specDTOS));
-        return professionalEnvironmentDto;
+        profEnv.setId(treeNode.get("id").asInt());
+        profEnv.setName(treeNode.get("name").asText());
+        ObjectMapper objectMapper = new ObjectMapper();
+        SpecializationsDto[] specDTOS = objectMapper.readValue(treeNode.get("specializations").toString(), SpecializationsDto[].class);
+        profEnv.setSpecialization(Arrays.asList(specDTOS));
+        return profEnv;
     }
 }

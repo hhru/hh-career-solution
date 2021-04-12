@@ -11,7 +11,6 @@ import java.util.Objects;
 @Table(name = "professional_environment")
 public class ProfessionalEnvironmentEntity {
 
-
     @Id
     @OneToMany()
     @Column(name = "professional_environment_id")
