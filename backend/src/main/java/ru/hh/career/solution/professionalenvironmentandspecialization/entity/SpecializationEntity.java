@@ -12,6 +12,13 @@ import javax.persistence.Table;
 @Table
 public class SpecializationEntity {
 
+    public SpecializationEntity(Integer id, String name, Boolean laboring, Integer environmentId) {
+        this.environmentId = environmentId;
+        this.specializationId = id;
+        this.specializationName = name;
+        this.laboring = laboring;
+    }
+
     @Id
     @Column(name = "specialization_id")
     private Integer specializationId;
