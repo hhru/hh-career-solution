@@ -1,0 +1,23 @@
+.goal {
+  background-color: #f5f5f5;
+  padding: 50px 0;
+}
+
+.mainText {
+  padding: 0 30px 30px;
+  text-align: left;
+  line-height: 1.5;
+
+  @media (min-width: 1024px) {
+    font-size: 1.7rem;
+  }
+
+  @media (min-width: 1280px) {
+    font-size: 2.1rem;
+  }
+}
+
+.mainImg {
+  max-width: 500px;
+  width: 100%;
+}

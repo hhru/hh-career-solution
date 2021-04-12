@@ -1,0 +1,31 @@
+.appHeader {
+  background-color: #282c34;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.header {
+  font-weight: 600;
+}
+
+.subHeader {
+  font-size: 16px;
+  padding-left: 1.5rem;
+  line-height: 1.2rem;
+}
+
+.button {
+  color: white; // @todo подтянуть из темы
+}
+
+.buttonWrapper {
+  padding-left: 10px;
+}
+
+.fill {
+  flex-grow: 1;
+}
