@@ -20,6 +20,8 @@ import java.util.concurrent.ExecutionException;
 
 public class ParserProfessionalEnvironmentAndSpecialization {
 
+    static final ObjectMapper mapper = new ObjectMapper();
+
     private Properties getjClientProperty() throws IOException {
         InputStream is = ParserProfessionalEnvironmentAndSpecialization.class.getResourceAsStream("./jclient.properties");
         Properties properties = new Properties();
@@ -33,7 +35,6 @@ public class ParserProfessionalEnvironmentAndSpecialization {
 
     public ProfessionalEnvironmentDto[] parse()
             throws IOException, ExecutionException, InterruptedException {
-        final ObjectMapper mapper = new ObjectMapper();
         Properties jClientProperty = this.getjClientProperty();
         HttpClientFactory http = new HttpClientFactoryBuilder(new SingletonStorage<>(() ->
                     new HttpClientContext(Map.of(), Map.of(), List.of())), List.of())
