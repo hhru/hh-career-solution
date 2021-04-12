@@ -1,4 +1,4 @@
-package ru.hh.career.solution.parseProfEnvAndSpec.dto;
+package ru.hh.career.solution.professionalenvironmentandspecialization.dto;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -20,7 +20,8 @@ public class SpecializationsDeserializer extends StdDeserializer<Specializations
         if (treeNode == null) {
             return null;
         }
-        specDto.setId(Integer.parseInt(treeNode.get("id").asText().split(".")[1]));
+        specDto.setIdProfessionalEnvironment(Integer.parseInt(treeNode.get("id").asText().split("\\.")[0]));
+        specDto.setIdSpecialization(Integer.parseInt(treeNode.get("id").asText().split("\\.")[1]));
         specDto.setName(treeNode.get("name").asText());
         specDto.setLaboring(treeNode.get("laboring").asBoolean());
         return specDto;

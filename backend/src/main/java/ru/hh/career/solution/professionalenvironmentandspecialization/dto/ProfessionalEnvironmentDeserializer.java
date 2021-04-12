@@ -1,4 +1,4 @@
-package ru.hh.career.solution.parseProfEnvAndSpec.dto;
+package ru.hh.career.solution.professionalenvironmentandspecialization.dto;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -10,14 +10,14 @@ import java.io.IOException;
 import java.util.Arrays;
 
 
-public class ProfessionalEnvironmentDeserializer extends StdDeserializer<ProfessionalEnvironmentDTO> {
+public class ProfessionalEnvironmentDeserializer extends StdDeserializer<ProfessionalEnvironmentDto> {
     public ProfessionalEnvironmentDeserializer() {
-        super(ProfessionalEnvironmentDTO.class);
+        super(ProfessionalEnvironmentDto.class);
     }
 
     @Override
-    public ProfessionalEnvironmentDTO deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
-        ProfessionalEnvironmentDTO profEnv = new ProfessionalEnvironmentDTO();
+    public ProfessionalEnvironmentDto deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
+        ProfessionalEnvironmentDto profEnv = new ProfessionalEnvironmentDto();
         JsonNode treeNode = jsonParser.readValueAsTree();
         if (treeNode == null) {
             return null;
