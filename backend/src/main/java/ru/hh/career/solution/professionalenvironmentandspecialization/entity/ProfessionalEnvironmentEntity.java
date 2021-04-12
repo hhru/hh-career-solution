@@ -11,6 +11,7 @@ import java.util.Objects;
 @Table(name = "professional_environment")
 public class ProfessionalEnvironmentEntity {
 
+
     @Id
     @OneToMany()
     @Column(name = "professional_environment_id")
@@ -27,12 +28,17 @@ public class ProfessionalEnvironmentEntity {
         this.id = id;
     }
 
-    public String getEnvName() {
+    public String getProfessionalEnvironmentName() {
         return professionalEnvironmentName;
     }
 
-    public void setEnvName(String envName) {
-        this.professionalEnvironmentName = envName;
+    public void setProfessionalEnvironmentName(String professionalEnvironmentName) {
+        this.professionalEnvironmentName = professionalEnvironmentName;
+    }
+
+    public ProfessionalEnvironmentEntity(Integer id, String professionalEnvironmentName) {
+        this.id = id;
+        this.professionalEnvironmentName = professionalEnvironmentName;
     }
 
     @Override
@@ -40,7 +46,7 @@ public class ProfessionalEnvironmentEntity {
         if (this != o) {
             if (o != null && getClass() == o.getClass()) {
                 ProfessionalEnvironmentEntity that = (ProfessionalEnvironmentEntity) o;
-                return getId().equals(that.getId()) && getEnvName().equals(that.getEnvName());
+                return getId().equals(that.getId()) && getProfessionalEnvironmentName().equals(that.getProfessionalEnvironmentName());
             } else {
                 return false;
             }
@@ -51,6 +57,6 @@ public class ProfessionalEnvironmentEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getEnvName());
+        return Objects.hash(getId(), getProfessionalEnvironmentName());
     }
 }
