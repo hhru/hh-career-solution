@@ -8,7 +8,8 @@ import ru.hh.career.solution.professionalenvironmentandspecialization.dto.Specia
 import ru.hh.career.solution.professionalenvironmentandspecialization.entity.ProfessionalEnvironmentEntity;
 import ru.hh.career.solution.professionalenvironmentandspecialization.entity.SpecializationEntity;
 
-import javax.inject.*;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
