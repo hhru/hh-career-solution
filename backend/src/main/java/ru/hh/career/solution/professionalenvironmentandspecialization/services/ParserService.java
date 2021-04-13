@@ -24,8 +24,8 @@ public class ParserService {
         ProfessionalEnvironmentDto[] professionalEnvironmentDto = parserProfessionalEnvironmentAndSpecialization.parse();
         for (ProfessionalEnvironmentDto i : professionalEnvironmentDto) {
             ProfessionalEnvironmentEntity professionalEnvironmentEntity = new ProfessionalEnvironmentEntity(i.getId(), i.getName());
-            ProfessionalEnvironmentDao tmp = new ProfessionalEnvironmentDao(sessionFactory);
-            tmp.save(professionalEnvironmentEntity);
+            ProfessionalEnvironmentDao professionalEnvironmentDao = new ProfessionalEnvironmentDao(sessionFactory);
+            professionalEnvironmentDao.save(professionalEnvironmentEntity);
             for (SpecializationsDto j: i.getSpecialization()){
                 SpecializationEntity specializationEntity = new SpecializationEntity(j.getIdSpecialization(), j.getName(), j.getLaboring(), i.getId());
                 SpecializationDao specializationDao = new SpecializationDao(sessionFactory);

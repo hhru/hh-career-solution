@@ -4,6 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.io.Serializable;
 
 public abstract class GenericDao {
@@ -15,6 +16,7 @@ public abstract class GenericDao {
         this.sessionFactory = sessionFactory;
     }
 
+    @Transactional
     protected void save(Object object) {
         if (object == null) {
             return;
@@ -22,10 +24,12 @@ public abstract class GenericDao {
         getSession().save(object);
     }
 
+    @Transactional
     protected <T> T get(Class<T> clazz, Serializable id) {
         return getSession().get(clazz, id);
     }
 
+    @Transactional
     protected void update(Object object) {
         if (object == null) {
             return;
@@ -33,6 +37,7 @@ public abstract class GenericDao {
         getSession().update(object);
     }
 
+    @Transactional
     protected void delete(Object object) {
         if (object == null) {
             return;
