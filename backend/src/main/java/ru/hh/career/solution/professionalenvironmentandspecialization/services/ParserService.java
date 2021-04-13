@@ -8,16 +8,13 @@ import ru.hh.career.solution.professionalenvironmentandspecialization.dto.Specia
 import ru.hh.career.solution.professionalenvironmentandspecialization.entity.ProfessionalEnvironmentEntity;
 import ru.hh.career.solution.professionalenvironmentandspecialization.entity.SpecializationEntity;
 
+import javax.inject.Singleton;
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
+@Singleton
 public class ParserService {
-//    private final SessionFactory sessionFactory;
-//
-//    public ParserService(SessionFactory sessionFactory) {
-//        this.sessionFactory = sessionFactory;
-//    }
-
     private final ProfessionalEnvironmentDao professionalEnvironmentDao;
     private final SpecializationDao specializationDao;
 
@@ -26,7 +23,7 @@ public class ParserService {
         this.specializationDao = specializationDao;
     }
 
-
+    @Transactional
     public void mainParser() throws IOException, ExecutionException, InterruptedException {
         ParserProfessionalEnvironmentAndSpecialization parserProfessionalEnvironmentAndSpecialization = new ParserProfessionalEnvironmentAndSpecialization();
         ProfessionalEnvironmentDto[] professionalEnvironmentDto = parserProfessionalEnvironmentAndSpecialization.parse();

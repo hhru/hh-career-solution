@@ -3,7 +3,10 @@ package ru.hh.career.solution.professionalenvironmentandspecialization.dao;
 import org.hibernate.SessionFactory;
 import ru.hh.career.solution.professionalenvironmentandspecialization.entity.ProfessionalEnvironmentEntity;
 
+import javax.inject.Inject;
+
 public class ProfessionalEnvironmentDao extends GenericDao{
+    @Inject
     public ProfessionalEnvironmentDao(SessionFactory sessionFactory) {
         super(sessionFactory);
     }
