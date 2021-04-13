@@ -12,6 +12,15 @@ import javax.persistence.Table;
 @Table
 public class SpecializationEntity {
 
+    public SpecializationEntity(Integer id, String name, Boolean laboring, Integer environmentId) {
+        this.environmentId = environmentId;
+        this.specializationId = id;
+        this.specializationName = name;
+        this.laboring = laboring;
+    }
+
+    public SpecializationEntity(){}
+
     @Id
     @Column(name = "specialization_id")
     private Integer specializationId;
@@ -26,4 +35,35 @@ public class SpecializationEntity {
     @JoinColumn(name = "professional_environment_id")
     private Integer environmentId;
 
+    public Integer getSpecializationId() {
+        return specializationId;
+    }
+
+    public void setSpecializationId(Integer specializationId) {
+        this.specializationId = specializationId;
+    }
+
+    public String getSpecializationName() {
+        return specializationName;
+    }
+
+    public void setSpecializationName(String specializationName) {
+        this.specializationName = specializationName;
+    }
+
+    public Boolean getLaboring() {
+        return laboring;
+    }
+
+    public void setLaboring(Boolean laboring) {
+        this.laboring = laboring;
+    }
+
+    public Integer getEnvironmentId() {
+        return environmentId;
+    }
+
+    public void setEnvironmentId(Integer environmentId) {
+        this.environmentId = environmentId;
+    }
 }

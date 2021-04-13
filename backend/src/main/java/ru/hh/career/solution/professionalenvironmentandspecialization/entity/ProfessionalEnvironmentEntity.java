@@ -11,6 +11,13 @@ import java.util.Objects;
 @Table(name = "professional_environment")
 public class ProfessionalEnvironmentEntity {
 
+    public ProfessionalEnvironmentEntity(Integer id, String professionalEnvironmentName) {
+        this.id = id;
+        this.professionalEnvironmentName = professionalEnvironmentName;
+    }
+
+    public ProfessionalEnvironmentEntity(){}
+
     @Id
     @OneToMany()
     @Column(name = "professional_environment_id")

@@ -26,7 +26,7 @@ public class ProfessionalEnvironmentDto {
         this.name = name;
     }
 
-    public List<SpecializationsDto> getSpecialization() {
+    public List<SpecializationsDto> getSpecializations() {
         return specialization;
     }
 

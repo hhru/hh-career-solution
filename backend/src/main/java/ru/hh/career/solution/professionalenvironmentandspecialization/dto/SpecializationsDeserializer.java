@@ -15,15 +15,15 @@ public class SpecializationsDeserializer extends StdDeserializer<Specializations
 
     @Override
     public SpecializationsDto deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
-        SpecializationsDto specDto = new SpecializationsDto();
+        SpecializationsDto specializationsDto = new SpecializationsDto();
         JsonNode treeNode = jsonParser.readValueAsTree();
         if (treeNode == null) {
             return null;
         }
-        specDto.setIdProfessionalEnvironment(Integer.parseInt(treeNode.get("id").asText().split("\\.")[0]));
-        specDto.setIdSpecialization(Integer.parseInt(treeNode.get("id").asText().split("\\.")[1]));
-        specDto.setName(treeNode.get("name").asText());
-        specDto.setLaboring(treeNode.get("laboring").asBoolean());
-        return specDto;
+        specializationsDto.setIdProfessionalEnvironment(Integer.parseInt(treeNode.get("id").asText().split("\\.")[0]));
+        specializationsDto.setIdSpecialization(Integer.parseInt(treeNode.get("id").asText().split("\\.")[1]));
+        specializationsDto.setName(treeNode.get("name").asText());
+        specializationsDto.setLaboring(treeNode.get("laboring").asBoolean());
+        return specializationsDto;
     }
 }
