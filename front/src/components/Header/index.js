@@ -1,9 +1,10 @@
-import css from './styles.module.scss';
-import Hidden from '@material-ui/core/Hidden';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
+import css from "./styles.module.scss";
+import Hidden from "@material-ui/core/Hidden";
+import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
+import React from "react";
 
 const Header = () => {
   return (
@@ -12,11 +13,20 @@ const Header = () => {
         <Grid container alignItems="center">
           <Grid item xs={4} sm={6} md={5}>
             <Grid container alignItems="center" direction="row" wrap="nowrap">
-              <Typography className={css.header} variant="h3" component="h1" color="secondary">
+              <Typography
+                className={css.header}
+                variant="h3"
+                component="h1"
+                color="secondary"
+              >
                 Lift
               </Typography>
               <Hidden only="xs">
-                <Typography className={css.subHeader} variant="caption" component="span">
+                <Typography
+                  className={css.subHeader}
+                  variant="caption"
+                  component="span"
+                >
                   сервис карьерных&nbsp;наставников
                 </Typography>
               </Hidden>
@@ -30,8 +40,8 @@ const Header = () => {
           </Grid>
         </Grid>
       </Container>
-    </header >
+    </header>
   );
-}
+};
 
 export default Header;

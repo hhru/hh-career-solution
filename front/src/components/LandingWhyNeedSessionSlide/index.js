@@ -1,21 +1,25 @@
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import { Typography } from '@material-ui/core';
-import css from './styles.module.scss';
+import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
+import { Typography } from "@material-ui/core";
+import css from "./styles.module.scss";
+import React from "react";
 
 const items = [
   {
     key: 1,
     title: "Инвестируете в карьеру",
-    p1: "В среднем в РФ люди ищут новую работу 7 месяцев, т.е. теряет 7 новых зарплат",
-    p2: "Вы инвестируете в 5 занятий, находите работу на 2-3 месяца быстрее и начинаете зарабатываете",
+    p1:
+      "В среднем в РФ люди ищут новую работу 7 месяцев, т.е. теряет 7 новых зарплат",
+    p2:
+      "Вы инвестируете в 5 занятий, находите работу на 2-3 месяца быстрее и начинаете зарабатываете",
   },
   {
     key: 2,
     title: "Пытаетесь срезать путь",
     p1: "Меньше чем за 5 занятий никто не сможет разобраться в вашей карьере",
-    p2: "Меньше чем за 5 занятий вы не сможете получить инсайты для достижения своей цели",
+    p2:
+      "Меньше чем за 5 занятий вы не сможете получить инсайты для достижения своей цели",
   },
 ];
 
@@ -29,14 +33,33 @@ const LandingWhyNeedSessionSlide = () => {
         <Grid container className={css.list}>
           {items.map((item) => {
             return (
-              <Grid key={item.key} className={css.listItem} item xs={12} sm={6} md={6}>
-                <Typography variant="subtitle1" component="p" className={css.itemSubtitle}>
+              <Grid
+                key={item.key}
+                className={css.listItem}
+                item
+                xs={12}
+                sm={6}
+                md={6}
+              >
+                <Typography
+                  variant="subtitle1"
+                  component="p"
+                  className={css.itemSubtitle}
+                >
                   <b>{item.title}</b>
                 </Typography>
-                <Typography variant="body1" component="p" className={css.itemParagraph}>
+                <Typography
+                  variant="body1"
+                  component="p"
+                  className={css.itemParagraph}
+                >
                   {item.p1}
                 </Typography>
-                <Typography variant="body1" component="p" className={css.itemParagraph}>
+                <Typography
+                  variant="body1"
+                  component="p"
+                  className={css.itemParagraph}
+                >
                   {item.p2}
                 </Typography>
               </Grid>
@@ -49,6 +72,6 @@ const LandingWhyNeedSessionSlide = () => {
       </Container>
     </section>
   );
-}
+};
 
 export default LandingWhyNeedSessionSlide;

@@ -1,13 +1,25 @@
-import { Card, CardContent, CardMedia, Typography, Button } from '@material-ui/core';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import React from 'react';
-import css from './styles.module.scss';
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  Button,
+} from "@material-ui/core";
+import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
+import React from "react";
+import css from "./styles.module.scss";
+import people1 from './people1.jpg';
+import people2 from './people2.jpg';
+import people3 from './people3.jpg';
+import people4 from './people4.jpg';
+import people5 from './people5.jpg';
+import people6 from './people6.jpg';
 
 const items = [
   {
     key: 1,
-    imgSrc: "people1.jpg",
+    imgSrc: people1,
     name: "Светлана Н.",
     position: "Ит-рекрутер",
     experience: "7 лет",
@@ -15,7 +27,7 @@ const items = [
   },
   {
     key: 5,
-    imgSrc: "people5.jpg",
+    imgSrc: people5,
     name: "Сергей С.",
     position: "Стратегический консультант",
     experience: "13 лет",
@@ -23,7 +35,7 @@ const items = [
   },
   {
     key: 2,
-    imgSrc: "people2.jpg",
+    imgSrc: people2,
     name: "Вера О.",
     position: "HR-менеджер",
     experience: "8 лет",
@@ -31,7 +43,7 @@ const items = [
   },
   {
     key: 4,
-    imgSrc: "people4.jpg",
+    imgSrc: people4,
     name: "Татьяна А.",
     position: "Рекрутер",
     experience: "11 лет",
@@ -39,7 +51,7 @@ const items = [
   },
   {
     key: 3,
-    imgSrc: "people3.jpg",
+    imgSrc: people3,
     name: "Евгения С.",
     position: "Рекрутер",
     experience: "9 лет",
@@ -47,7 +59,7 @@ const items = [
   },
   {
     key: 6,
-    imgSrc: "people6.jpg",
+    imgSrc: people6,
     name: "Михаил В.",
     position: "Бизнес-консультант",
     experience: "12 лет",
@@ -64,7 +76,11 @@ const LandingPeoplesSlide = () => {
             <Typography variant="h5" component="h2">
               Мы нашли лучших экспертов в сфере развития карьеры
             </Typography>
-            <Typography variant="h6" component="h3" className={css.wrapSubTitle}>
+            <Typography
+              variant="h6"
+              component="h3"
+              className={css.wrapSubTitle}
+            >
               2 из 10 становятся нашими сотрудниками
             </Typography>
             <Grid container justify="center" className={css.wrapContainer}>
@@ -79,13 +95,25 @@ const LandingPeoplesSlide = () => {
                           title={item.name}
                         />
                         <CardContent>
-                          <Typography variant="body1" color="textSecondary" component="p">
+                          <Typography
+                            variant="body1"
+                            color="textSecondary"
+                            component="p"
+                          >
                             {item.name}
                           </Typography>
-                          <Typography variant="body1" color="textSecondary" component="p">
+                          <Typography
+                            variant="body1"
+                            color="textSecondary"
+                            component="p"
+                          >
                             {item.position}, {item.experience}
                           </Typography>
-                          <Typography variant="body1" color="textSecondary" component="p">
+                          <Typography
+                            variant="body1"
+                            color="textSecondary"
+                            component="p"
+                          >
                             {item.specialization}
                           </Typography>
                         </CardContent>
@@ -103,6 +131,6 @@ const LandingPeoplesSlide = () => {
       </Container>
     </section>
   );
-}
+};
 
 export default LandingPeoplesSlide;
