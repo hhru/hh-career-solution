@@ -8,7 +8,7 @@ import javax.ws.rs.core.Response.Status;
  */
 public class LocalizableException extends RuntimeException {
 
-  private static final long serialVersionUID = 2597973811236103575L;
+  private static final long serialVersionUID = 4325482881823157625L;
 
   public static final int DEFAULT_STATUS_CODE = Status.BAD_REQUEST.getStatusCode();
 
