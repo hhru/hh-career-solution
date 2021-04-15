@@ -63,7 +63,7 @@ public class AccountServiceTest {
   void createUserShouldSaveAccountWithEncodedPassword() {
     when(dao.getByUsername(DEFAULT_USERNAME)).thenReturn(Optional.empty());
     when(encoder.encode(DEFAULT_PASSWORD)).thenReturn(DEFAULT_PASSWORD_HASH);
-    doAnswer(new Answer<Account>(){
+    doAnswer(new Answer<Account>() {
       @Override
       public Account answer(InvocationOnMock invocation) throws Throwable {
         Account account = ((Account) invocation.getArgument(0));
