@@ -42,10 +42,6 @@ public class ProfessionalEnvironmentEntity {
         this.professionalEnvironmentName = professionalEnvironmentName;
     }
 
-    public ProfessionalEnvironmentEntity(Integer id, String professionalEnvironmentName) {
-        this.id = id;
-        this.professionalEnvironmentName = professionalEnvironmentName;
-    }
 
     @Override
     public boolean equals(Object o) {
