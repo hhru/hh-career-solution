@@ -6,7 +6,6 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 import ru.hh.career.solution.service.AccountService;
 
@@ -23,8 +22,7 @@ public class AccountResource {
 
   @POST
   @Path("/signup")
-  public Response signup(@FormParam("username") String username, @FormParam("password") String password) {
+  public void signup(@FormParam("username") String username, @FormParam("password") String password) {
     service.createUser(username, password);
-    return Response.ok().build();
   }
 }
