@@ -16,19 +16,12 @@ public class LocalizableException extends RuntimeException {
 
   private ErrorCode errorCode;
 
-  {
-    httpStatusCode = DEFAULT_STATUS_CODE;
-  }
-
   public LocalizableException(ErrorCode errorCode) {
-    super();
-    this.errorCode = errorCode;
+    this(errorCode, DEFAULT_STATUS_CODE);
   }
 
   public LocalizableException(ErrorCode errorCode, Status status) {
-    super();
-    this.errorCode = errorCode;
-    httpStatusCode = status.getStatusCode();
+    this(errorCode, status.getStatusCode());
   }
 
   public LocalizableException(ErrorCode errorCode, int httpStatusCode) {
