@@ -16,5 +16,5 @@ import ru.hh.career.solution.service.AccountService;
   AccountService.class,
   AccountDao.class,
 })
-public class BeansConfig {
+public class BeanConfig {
 }

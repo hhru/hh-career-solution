@@ -7,7 +7,7 @@ import ru.hh.nab.hibernate.NabHibernateCommonConfig;
 
 @Configuration
 @Import({
-  BeansConfig.class,
+  BeanConfig.class,
   NabHibernateCommonConfig.class,
 })
 public class JerseyConfig {
