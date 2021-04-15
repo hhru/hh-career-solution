@@ -10,7 +10,6 @@ import ru.hh.career.solution.entity.Account;
 import ru.hh.career.solution.exception.ErrorCode;
 import ru.hh.career.solution.exception.LocalizableException;
 
-@Transactional
 public class AccountService {
 
   private final AccountDao dao;
@@ -23,6 +22,7 @@ public class AccountService {
     this.encoder = encoder;
   }
 
+  @Transactional
   public void createUser(String username, String password) {
     if (dao.getByUsername(username).isPresent()) {
       throw new LocalizableException(ErrorCode.USER_EXISTS_PRIOR_TO_REGISTRATION);
