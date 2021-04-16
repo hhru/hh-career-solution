@@ -53,7 +53,7 @@ public abstract class GenericDao {
     Root<T> entity = query.from(clazz);
     Predicate allEqual = entityFieldNamesToExpectedValues.entrySet().stream()
       .map(nameToValue -> cb.equal(entity.get(nameToValue.getKey()), nameToValue.getValue()))
-      .reduce(cb.and(), cb::and);
+      .reduce(cb::and).orElseGet(cb::and);
     return query.where(allEqual);
   }
 
