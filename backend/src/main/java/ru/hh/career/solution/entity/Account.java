@@ -20,6 +20,14 @@ public class Account {
   @Column(name = "password_hash")
   private String passwordHash;
 
+  public Account() {
+  }
+
+  public Account(String username, String passwordHash) {
+    this.username = username;
+    this.passwordHash = passwordHash;
+  }
+
   public Integer getId() {
     return id;
   }

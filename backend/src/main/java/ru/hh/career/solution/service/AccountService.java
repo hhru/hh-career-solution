@@ -27,9 +27,6 @@ public class AccountService {
     if (dao.getByUsername(username).isPresent()) {
       throw new LocalizableException(ErrorCode.USER_EXISTS_PRIOR_TO_REGISTRATION);
     }
-    Account account = new Account();
-    account.setUsername(username);
-    account.setPasswordHash(encoder.encode(password));
-    dao.save(account);
+    dao.save(new Account(username, encoder.encode(password)));
   }
 }
