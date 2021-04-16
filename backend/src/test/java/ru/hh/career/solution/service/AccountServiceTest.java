@@ -3,9 +3,11 @@ package ru.hh.career.solution.service;
 import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.io.Serializable;
 import java.util.Optional;
 
 import org.junit.jupiter.api.AfterEach;
@@ -65,15 +67,16 @@ public class AccountServiceTest {
   void createUserShouldSaveAccountWithEncodedPassword() {
     when(dao.getByUsername(DEFAULT_USERNAME)).thenReturn(Optional.empty());
     when(encoder.encode(DEFAULT_PASSWORD)).thenReturn(DEFAULT_PASSWORD_HASH);
-    doAnswer(new Answer<Account>() {
+    when(dao.save(any())).thenAnswer(new Answer<Serializable>() {
       @Override
-      public Account answer(InvocationOnMock invocation) throws Throwable {
+      public Serializable answer(InvocationOnMock invocation) throws Throwable {
         Account account = ((Account) invocation.getArgument(0));
         assertEquals(DEFAULT_USERNAME, account.getUsername());
         assertEquals(DEFAULT_PASSWORD_HASH, account.getPasswordHash());
-        return account;
+        return null;
       }
-    }).when(dao).save(any());
+    });
     service.createUser(DEFAULT_USERNAME, DEFAULT_PASSWORD);
+    verify(dao, times(1)).save(any());
   }
 }
