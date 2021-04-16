@@ -1,5 +1,6 @@
 package ru.hh.career.solution.service;
 
+import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doAnswer;
@@ -51,6 +52,7 @@ public class AccountServiceTest {
   @Test
   void createUserShouldThrowLocalizableExceptionOnRegisteringAlreadyExistingUser() {
     when(dao.getByUsername(DEFAULT_USERNAME)).thenReturn(Optional.of(new Account()));
+    assertThrows(LocalizableException.class, () -> service.createUser(DEFAULT_USERNAME, DEFAULT_PASSWORD));
     try {
       service.createUser(DEFAULT_USERNAME, DEFAULT_PASSWORD);
     }
