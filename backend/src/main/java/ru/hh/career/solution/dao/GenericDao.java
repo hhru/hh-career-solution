@@ -3,6 +3,7 @@ package ru.hh.career.solution.dao;
 import java.io.Serializable;
 import java.util.Map;
 
+import javax.inject.Inject;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -11,36 +12,37 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-public abstract class GenericDao {
+public class GenericDao {
 
   private final SessionFactory sessionFactory;
 
-  protected GenericDao(SessionFactory sessionFactory) {
+  @Inject
+  public GenericDao(SessionFactory sessionFactory) {
     this.sessionFactory = sessionFactory;
   }
 
   /**
    * @return the generated identifier
    */
-  protected Serializable save(Object object) {
+  public Serializable save(Object object) {
     if (object == null) {
       return null;
     }
     return getSession().save(object);
   }
 
-  protected <T> T get(Class<T> clazz, Serializable id) {
+  public <T> T get(Class<T> clazz, Serializable id) {
     return getSession().get(clazz, id);
   }
 
-  protected void update(Object object) {
+  public void update(Object object) {
     if (object == null) {
       return;
     }
     getSession().update(object);
   }
 
-  protected void delete(Object object) {
+  public void delete(Object object) {
     if (object == null) {
       return;
     }

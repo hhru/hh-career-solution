@@ -16,10 +16,6 @@ public class AccountDao extends GenericDao {
     super(sessionFactory);
   }
 
-  public void save(Account account) {
-    super.save(account);
-  }
-
   public Optional<Account> getByUsername(String username) {
     return getSession().createQuery(selectWhereAllEqual(Account.class, Map.of("username", username))).uniqueResultOptional();
   }
