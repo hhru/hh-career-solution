@@ -1,5 +1,9 @@
 package ru.hh.career.solution.exception;
 
+import java.util.Map;
+
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 /**
@@ -7,8 +11,6 @@ import javax.ws.rs.core.Response.Status;
  * <p> {@code LocalizableException} intended as a way to communicate with frontend application uniformly.
  */
 public class LocalizableException extends RuntimeException {
-
-  private static final long serialVersionUID = 2597973811236103575L;
 
   public static final int DEFAULT_STATUS_CODE = Status.BAD_REQUEST.getStatusCode();
 
@@ -28,6 +30,11 @@ public class LocalizableException extends RuntimeException {
     super();
     this.errorCode = errorCode;
     this.httpStatusCode = httpStatusCode;
+  }
+
+  public void rethrowAsWebApplicationException() throws WebApplicationException {
+    throw new WebApplicationException(Response.status(httpStatusCode)
+      .entity(Map.of("code", errorCode.ordinal())).build());
   }
 
   public int getStatusCode() {

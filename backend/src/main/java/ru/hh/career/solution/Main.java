@@ -14,7 +14,6 @@ public class Main {
         .addFilterBean(ctx -> (Filter) ctx.getBean("springSecurityFilterChain"))
         .bindToRoot()
         .configureJersey(JerseyConfig.class)
-        .executeOnConfig(JerseyConfig::registerExceptionMappers)
         .bindToRoot()
         .build()
         .run(ProdConfig.class);
