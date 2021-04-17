@@ -1,6 +1,7 @@
 package ru.hh.career.solution.resource;
 
 import javax.inject.Inject;
+import javax.validation.constraints.NotBlank;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -23,7 +24,9 @@ public class AccountResource {
 
   @POST
   @Path("/signup")
-  public void signup(@FormParam("username") String username, @FormParam("password") String password) {
+  public void signup(
+      @NotBlank @FormParam("username") String username,
+      @NotBlank @FormParam("password") String password) {
     try {
       service.createUser(username, password);
     }
