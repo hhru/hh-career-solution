@@ -5,5 +5,6 @@ package ru.hh.career.solution.exception;
  * Be sure that fronenders are aware of new error to localize.
  */
 public enum ErrorCode {
+  RESERVED,
   USER_EXISTS_PRIOR_TO_REGISTRATION,
 }
