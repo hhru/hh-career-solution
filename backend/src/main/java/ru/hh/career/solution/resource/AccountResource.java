@@ -7,6 +7,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import ru.hh.career.solution.exception.LocalizableException;
 import ru.hh.career.solution.service.AccountService;
 
 @Path("/account")
@@ -23,6 +24,11 @@ public class AccountResource {
   @POST
   @Path("/signup")
   public void signup(@FormParam("username") String username, @FormParam("password") String password) {
-    service.createUser(username, password);
+    try {
+      service.createUser(username, password);
+    }
+    catch (LocalizableException e) {
+      e.rethrowAsWebApplicationException();
+    }
   }
 }
