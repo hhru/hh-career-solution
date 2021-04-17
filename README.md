@@ -14,7 +14,7 @@ docker-compose up
 
 ### Clean
 ```bash
-docker-compose down --remove-orphans
+docker-compose down
 ```
 
 ## Frontend

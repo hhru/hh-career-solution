@@ -2,16 +2,14 @@ package ru.hh.career.solution.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
-import ru.hh.career.solution.dao.AdviserDao;
-import ru.hh.career.solution.mapper.AdviserMapper;
-import ru.hh.career.solution.mapper.AreaMapper;
-import ru.hh.career.solution.resource.AdviserResource;
-import ru.hh.career.solution.service.AdviserService;
+
+import ru.hh.nab.hibernate.NabHibernateCommonConfig;
 
 @Configuration
 @EnableTransactionManagement
 @Import({
+  BeanConfig.class,
+  NabHibernateCommonConfig.class,
   AdviserMapper.class,
   AdviserDao.class,
   AdviserService.class,

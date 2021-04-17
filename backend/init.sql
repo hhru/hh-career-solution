@@ -103,3 +103,10 @@ CREATE TABLE IF NOT EXISTS adviser_to_professional_association
 INSERT INTO public.country (iso_code, name, created, updated) VALUES ('RU', 'Россия', '2021-04-12 22:42:32.000000', '2021-04-12 22:42:34.000000');
 INSERT INTO public.area (country_iso_code, name, created, updated) VALUES ('RU', 'Москва', '2021-04-12 22:44:23.000000', '2021-04-12 22:44:25.000000');
 INSERT INTO public.adviser (name, surname, area_id, consultation, experience, career_practice, customer_type, problem_type, created, updated) VALUES ('Дмитрий', 'Васянин', 1, 'all', 'от 1 г - 3 лет', 'Использую обе практики', 'Топ менеджмент', 'Договоримся на месте', '2021-04-12 22:46:35.000000', '2021-04-12 22:46:36.000000');
+
+CREATE TABLE account
+(
+  id              serial      primary key,
+  username        text        not null,
+  password_hash   text        not null
+)
