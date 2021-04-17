@@ -34,7 +34,10 @@ public class LocalizableException extends RuntimeException {
 
   public void rethrowAsWebApplicationException() throws WebApplicationException {
     throw new WebApplicationException(Response.status(httpStatusCode)
-      .entity(Map.of("code", errorCode.ordinal())).build());
+      .entity(Map.of(
+        "code", errorCode.ordinal(),
+        "message", errorCode.toString()
+      )).build());
   }
 
   public int getStatusCode() {
