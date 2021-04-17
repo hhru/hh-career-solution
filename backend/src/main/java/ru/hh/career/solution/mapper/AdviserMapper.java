@@ -9,21 +9,40 @@ import java.time.LocalDateTime;
 @Singleton
 public class AdviserMapper {
 
-    public Adviser map(AdviserDto adviserDto) {
-        return adviserDto == null ? null : new Adviser(
-                adviserDto.getAdviserId(),
-                adviserDto.getName(),
-                adviserDto.getSoname(),
-                LocalDateTime.now(),
-                LocalDateTime.now());
-    }
+  private final AreaMapper areaMapper;
 
-    public AdviserDto map(Adviser adviser) {
-        return adviser == null ? null : new AdviserDto(
-                adviser.getId(),
-                adviser.getName(),
-                adviser.getSurname(),
-                adviser.getCreated().toString(),
-                adviser.getUpdated().toString());
-    }
+  public AdviserMapper(AreaMapper areaMapper) {
+    this.areaMapper = areaMapper;
+  }
+
+  public Adviser map(AdviserDto adviserDto) {
+    return adviserDto == null ? null : new Adviser(
+      adviserDto.getAdviserId(),
+      adviserDto.getName(),
+      adviserDto.getSurname(),
+      adviserDto.getConsultation(),
+      adviserDto.getExperience(),
+      adviserDto.getCareerPractice(),
+      adviserDto.getCustomerType(),
+      adviserDto.getProblemType(),
+      LocalDateTime.now(),
+      LocalDateTime.now());
+  }
+
+  public AdviserDto map(Adviser adviser) {
+    return adviser == null ? null : new AdviserDto(
+      adviser.getId(),
+      adviser.getName(),
+      adviser.getSurname(),
+      adviser.getConsultation(),
+      adviser.getExperience(),
+      adviser.getCareerPractice(),
+      adviser.getCustomerType(),
+      adviser.getProblemType(),
+      adviser.getCreated(),
+      adviser.getUpdated(),
+      areaMapper.map(adviser.getArea()),
+      adviser.getEducationalList());
+  }
+
 }

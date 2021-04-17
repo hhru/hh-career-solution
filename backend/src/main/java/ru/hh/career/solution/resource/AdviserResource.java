@@ -6,11 +6,9 @@ import ru.hh.career.solution.mapper.AdviserMapper;
 import ru.hh.career.solution.service.AdviserService;
 
 import javax.inject.Singleton;
-import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
-import javax.ws.rs.PATCH;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -25,48 +23,48 @@ import java.util.stream.Collectors;
 @Singleton
 public class AdviserResource {
 
-    private final AdviserService adviserService;
-    private final AdviserMapper adviserMapper;
+  private final AdviserService adviserService;
+  private final AdviserMapper adviserMapper;
 
-    public AdviserResource(AdviserService adviserService, AdviserMapper adviserMapper) {
-        this.adviserService = adviserService;
-        this.adviserMapper = adviserMapper;
-    }
+  public AdviserResource(AdviserService adviserService, AdviserMapper adviserMapper) {
+    this.adviserService = adviserService;
+    this.adviserMapper = adviserMapper;
+  }
 
-    @GET
-    @Consumes(MediaType.APPLICATION_JSON)
-    public PageResponseDto getAll(@DefaultValue("100") @QueryParam("limit") Integer limit,
-                                  @DefaultValue("0") @QueryParam("page") Integer page,
-                                  @QueryParam("area_id") Integer areaId,
-                                  @QueryParam("professionalFieldsId") Integer professionalFieldsId) {
+  @GET
+  @Consumes(MediaType.APPLICATION_JSON)
+  public PageResponseDto getAdvisers(@DefaultValue("100") @QueryParam("limit") Integer limit,
+                                     @DefaultValue("0") @QueryParam("page") Integer page,
+                                     @QueryParam("area_id") Integer areaId,
+                                     @QueryParam("professionalFieldsId") Integer professionalFieldsId) {
 
-        return new PageResponseDto(adviserService.getAll(limit, page).stream().
-                map(adviserMapper::map).
-                collect(Collectors.toList()),
-                adviserService.getPagesCount(limit));
-    }
+    return new PageResponseDto(adviserService.get(limit, page).stream().
+      map(adviserMapper::map).
+      collect(Collectors.toList()),
+      adviserService.getPagesCount(limit));
+  }
 
-    @GET
-    @Path(value = "/{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public AdviserDto getAdviserById(@PathParam(value = "id") Integer id) {
-        return adviserMapper.map(adviserService.get(id));
-    }
+  @GET
+  @Path(value = "/{id:[\\d]+}")
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  public AdviserDto getAdviserById(@PathParam(value = "id") Integer id) {
+    return adviserMapper.map(adviserService.getById(id));
+  }
 
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response createAdviser(AdviserDto adviserDto) {
-        AdviserDto adviserDtoCreated = adviserMapper.map(adviserService.create(adviserMapper.map(adviserDto)));
-        return Response.status(Response.Status.CREATED).entity(adviserDtoCreated.getAdviserId()).build();
-    }
-
-    @PATCH
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public AdviserDto updateAdviser(@Valid AdviserDto adviserDto) {
-        return adviserMapper.map(adviserService.update(adviserMapper.map(adviserDto)));
-    }
+  @POST
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response createAdviser(AdviserDto adviserDto) {
+    AdviserDto adviserDtoCreated = adviserMapper.map(adviserService.create(adviserMapper.map(adviserDto)));
+    return Response.status(Response.Status.CREATED).entity(adviserDtoCreated.getAdviserId()).build();
+  }
+//
+//  @PATCH
+//  @Consumes(MediaType.APPLICATION_JSON)
+//  @Produces(MediaType.APPLICATION_JSON)
+//  public AdviserDto updateAdviser(@Valid AdviserDto adviserDto) {
+//    return adviserMapper.map(adviserService.update(adviserMapper.map(adviserDto)));
+//  }
 
 }

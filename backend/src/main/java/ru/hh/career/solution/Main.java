@@ -1,10 +1,10 @@
 package ru.hh.career.solution;
 
-import javax.servlet.Filter;
-
 import ru.hh.career.solution.config.JerseyConfig;
 import ru.hh.career.solution.config.ProdConfig;
 import ru.hh.nab.starter.NabApplication;
+
+import javax.servlet.Filter;
 
 public class Main {
 

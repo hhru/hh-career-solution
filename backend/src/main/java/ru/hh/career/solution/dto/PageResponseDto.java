@@ -4,31 +4,31 @@ import java.util.List;
 
 public class PageResponseDto {
 
-    List<Object> items;
+  List<Object> items;
 
-    Integer pages;
+  Integer pages;
 
-    public PageResponseDto() {
-    }
+  public PageResponseDto() {
+  }
 
-    public PageResponseDto(List<Object> items, Integer pages) {
-        this.items = items;
-        this.pages = pages;
-    }
+  public PageResponseDto(List<Object> items, Integer pages) {
+    this.items = items;
+    this.pages = pages;
+  }
 
-    public List<Object> getItems() {
-        return items;
-    }
+  public List<Object> getItems() {
+    return items;
+  }
 
-    public void setItems(List<Object> items) {
-        this.items = items;
-    }
+  public void setItems(List<Object> items) {
+    this.items = items;
+  }
 
-    public Integer getPages() {
-        return pages;
-    }
+  public Integer getPages() {
+    return pages;
+  }
 
-    public void setPages(Integer pages) {
-        this.pages = pages;
-    }
+  public void setPages(Integer pages) {
+    this.pages = pages;
+  }
 }
