@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS educational_institution
   updated          TIMESTAMP  NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS professional_field
+CREATE TABLE IF NOT EXISTS professional_skill
 (
   id      SERIAL PRIMARY KEY,
   name    VARCHAR   NOT NULL,
@@ -61,7 +61,7 @@ CREATE TYPE adviser_problem_type AS ENUM ('Любые проблемы', 'Реш
 
 CREATE TABLE IF NOT EXISTS adviser
 (
-  id              SERIAL    NOT NULL UNIQUE PRIMARY KEY,
+  id              SERIAL PRIMARY KEY,
   name            VARCHAR   NOT NULL,
   surname         VARCHAR   NOT NULL,
   area_id         INTEGER   NOT NULL REFERENCES area (id),
@@ -76,37 +76,43 @@ CREATE TABLE IF NOT EXISTS adviser
 
 CREATE TABLE IF NOT EXISTS adviser_to_educational
 (
+  id SERIAL PRIMARY KEY,
   adviser_id                 INTEGER   NOT NULL REFERENCES adviser (id),
   educational_institution_id INTEGER   NOT NULL REFERENCES educational_institution (id),
   educational_period_id      INTEGER   NOT NULL REFERENCES educational_period (id),
-  document_link                   TEXT,
-  created                    TIMESTAMP NOT NULL,
-  updated                    TIMESTAMP NOT NULL
+  document_link                   TEXT
 );
 
-CREATE TABLE IF NOT EXISTS adviser_to_professional_field
+CREATE TABLE IF NOT EXISTS adviser_to_professional_skill
 (
+  id SERIAL PRIMARY KEY,
   adviser_id                 INTEGER   NOT NULL REFERENCES adviser (id),
-  professional_field_id INTEGER   NOT NULL REFERENCES professional_field (id),
-  created                    TIMESTAMP NOT NULL,
-  updated                    TIMESTAMP NOT NULL
+  professional_skill_id INTEGER   NOT NULL REFERENCES professional_skill (id)
 );
 
 CREATE TABLE IF NOT EXISTS adviser_to_professional_association
 (
+  id SERIAL PRIMARY KEY,
   adviser_id                 INTEGER   NOT NULL REFERENCES adviser (id),
-  professional_association_id INTEGER   NOT NULL REFERENCES professional_association (id),
-  created                    TIMESTAMP NOT NULL,
-  updated                    TIMESTAMP NOT NULL
+  professional_association_id INTEGER   NOT NULL REFERENCES professional_association (id)
 );
 
 INSERT INTO public.country (iso_code, name, created, updated) VALUES ('RU', 'Россия', '2021-04-12 22:42:32.000000', '2021-04-12 22:42:34.000000');
 INSERT INTO public.area (country_iso_code, name, created, updated) VALUES ('RU', 'Москва', '2021-04-12 22:44:23.000000', '2021-04-12 22:44:25.000000');
 INSERT INTO public.adviser (name, surname, area_id, consultation, experience, career_practice, customer_type, problem_type, created, updated) VALUES ('Дмитрий', 'Васянин', 1, 'all', 'от 1 г - 3 лет', 'Использую обе практики', 'Топ менеджмент', 'Договоримся на месте', '2021-04-12 22:46:35.000000', '2021-04-12 22:46:36.000000');
+INSERT INTO public.professional_skill (id, name, created, updated) VALUES (1, 'java', '2021-04-19 09:08:45.000000', '2021-04-19 09:08:48.000000');
+INSERT INTO public.professional_skill (id, name, created, updated) VALUES (2, 'python', '2021-04-19 09:08:46.000000', '2021-04-19 09:08:49.000000');
+INSERT INTO public.educational_institution (id, country_iso_code, name, site, created, updated) VALUES (1, 'RU', 'СПБГУТ', 'http://spbgut.ru', '2021-04-19 09:22:52.000000', '2021-04-19 09:22:54.000000');
+INSERT INTO public.educational_period (id, year_from, year_to) VALUES (1, '2010-01-01', '2015-06-30');
+INSERT INTO public.adviser_to_educational (id, adviser_id, educational_institution_id, educational_period_id, document_link) VALUES (1, 1, 1, 1, 'http://example.com');
+INSERT INTO public.adviser_to_professional_skill (id, adviser_id, professional_skill_id) VALUES (1, 1, 1);
+INSERT INTO public.adviser_to_professional_skill (id, adviser_id, professional_skill_id) VALUES (2, 1, 2);
+INSERT INTO public.professional_association (id, name, created, updated) VALUES (1, 'it', '2021-04-19 09:28:09.000000', '2021-04-19 09:28:10.000000');
+INSERT INTO public.adviser_to_professional_association (id, adviser_id, professional_association_id) VALUES (1, 1, 1);
 
 CREATE TABLE account
 (
   id              serial      primary key,
   username        text        not null,
   password_hash   text        not null
-)
+);

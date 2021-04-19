@@ -20,7 +20,7 @@ public class AdviserDao {
     return sessionFactory;
   }
 
-  public List<Adviser> getByProfessionalField(Integer professionalFieldId, Integer limit, Integer page) {
+  public List<Adviser> getByProfessionalFieldId(Integer professionalFieldId, Integer limit, Integer page) {
     return session()
             .getCurrentSession()
             .createQuery("SELECT a FROM Adviser a WHERE a.professional_field_id = :professionalFieldId " +
@@ -31,7 +31,7 @@ public class AdviserDao {
             .getResultList();
   }
 
-  public List<Adviser> getByArea(Integer areaId, Integer limit, Integer page) {
+  public List<Adviser> getByAreaId(Integer areaId, Integer limit, Integer page) {
     return session()
             .getCurrentSession()
             .createQuery("SELECT a FROM Adviser a WHERE a.area_id = :areaId " +

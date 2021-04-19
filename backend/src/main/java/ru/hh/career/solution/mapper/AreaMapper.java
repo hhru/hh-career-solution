@@ -12,9 +12,7 @@ public class AreaMapper {
     return area == null ? null : new AreaDto(
       area.getId(),
       area.getCountryIsoCode(),
-      area.getName(),
-      area.getCreated(),
-      area.getUpdated()
+      area.getName()
     );
   }
 }

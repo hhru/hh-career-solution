@@ -12,7 +12,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "adviser")
@@ -29,13 +29,18 @@ public class Adviser {
   @Column(name = "surname", nullable = false)
   private String surname;
 
-  @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "area_id")
   private Area area;
 
   @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "adviserId")
-  //@JoinTable(name = "adviser_to_educational", joinColumns = @JoinColumn(columnDefinition = "adviser_id"))
-  private List<AdviserToEducational> educationalList;
+  private Set<AdviserToEducational> educationalSet;
+
+  @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "adviserId")
+  private Set<AdviserToProfessionalSkill> professionalSkillSet;
+
+  @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "adviserId")
+  private Set<AdviserToProfessionalAssociation> professionalAssociationSet;
 
   @Column(name = "consultation", nullable = false)
   private String consultation;
@@ -58,16 +63,17 @@ public class Adviser {
   @Column(name = "updated")
   private LocalDateTime updated;
 
-  public Adviser() {
-  }
-
-  public Adviser(Integer id, String name, String surname, String consultation, String experience,
-                 String careerPractice, String customerType, String problemType,
+  public Adviser(Integer id, String name, String surname, Area area, Set<AdviserToEducational> educationalSet,
+                 Set<AdviserToProfessionalSkill> professionalSkillSet, Set<AdviserToProfessionalAssociation> professionalAssociationSet,
+                 String consultation, String experience, String careerPractice, String customerType, String problemType,
                  LocalDateTime created, LocalDateTime updated) {
     this.id = id;
     this.name = name;
     this.surname = surname;
     this.area = area;
+    this.educationalSet = educationalSet;
+    this.professionalSkillSet = professionalSkillSet;
+    this.professionalAssociationSet = professionalAssociationSet;
     this.consultation = consultation;
     this.experience = experience;
     this.careerPractice = careerPractice;
@@ -77,21 +83,7 @@ public class Adviser {
     this.updated = updated;
   }
 
-  public Adviser(Integer id, String name, String surname, Area area, List<AdviserToEducational> educationalList,
-                 String consultation, String experience, String careerPractice, String customerType,
-                 String problemType, LocalDateTime created, LocalDateTime updated) {
-    this.id = id;
-    this.name = name;
-    this.surname = surname;
-    this.area = area;
-    this.educationalList = educationalList;
-    this.consultation = consultation;
-    this.experience = experience;
-    this.careerPractice = careerPractice;
-    this.customerType = customerType;
-    this.problemType = problemType;
-    this.created = created;
-    this.updated = updated;
+  public Adviser() {
   }
 
   public Integer getId() {
@@ -182,11 +174,27 @@ public class Adviser {
     this.area = area;
   }
 
-  public List<AdviserToEducational> getEducationalList() {
-    return educationalList;
+  public Set<AdviserToEducational> getEducationalSet() {
+    return educationalSet;
   }
 
-  public void setEducationalList(List<AdviserToEducational> educationalList) {
-    this.educationalList = educationalList;
+  public void setEducationalSet(Set<AdviserToEducational> educationalSet) {
+    this.educationalSet = educationalSet;
+  }
+
+  public Set<AdviserToProfessionalSkill> getProfessionalSkillSet() {
+    return professionalSkillSet;
+  }
+
+  public void setProfessionalSkillSet(Set<AdviserToProfessionalSkill> professionalSkillSet) {
+    this.professionalSkillSet = professionalSkillSet;
+  }
+
+  public Set<AdviserToProfessionalAssociation> getProfessionalAssociationSet() {
+    return professionalAssociationSet;
+  }
+
+  public void setProfessionalAssociationSet(Set<AdviserToProfessionalAssociation> professionalAssociationSet) {
+    this.professionalAssociationSet = professionalAssociationSet;
   }
 }

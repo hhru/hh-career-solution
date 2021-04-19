@@ -9,13 +9,11 @@ import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.util.stream.Collectors;
 
 @Path("/advisers")
@@ -34,11 +32,9 @@ public class AdviserResource {
   @GET
   @Consumes(MediaType.APPLICATION_JSON)
   public PageResponseDto getAdvisers(@DefaultValue("100") @QueryParam("limit") Integer limit,
-                                     @DefaultValue("0") @QueryParam("page") Integer page,
-                                     @QueryParam("area_id") Integer areaId,
-                                     @QueryParam("professionalFieldsId") Integer professionalFieldsId) {
+                                     @DefaultValue("0") @QueryParam("page") Integer page) {
 
-    return new PageResponseDto(adviserService.get(limit, page).stream().
+    return new PageResponseDto(adviserService.getAdvisers(limit, page).stream().
       map(adviserMapper::map).
       collect(Collectors.toList()),
       adviserService.getPagesCount(limit));
@@ -49,22 +45,7 @@ public class AdviserResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public AdviserDto getAdviserById(@PathParam(value = "id") Integer id) {
-    return adviserMapper.map(adviserService.getById(id));
+    return adviserMapper.map(adviserService.getAdviserById(id));
   }
-
-  @POST
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response createAdviser(AdviserDto adviserDto) {
-    AdviserDto adviserDtoCreated = adviserMapper.map(adviserService.create(adviserMapper.map(adviserDto)));
-    return Response.status(Response.Status.CREATED).entity(adviserDtoCreated.getAdviserId()).build();
-  }
-//
-//  @PATCH
-//  @Consumes(MediaType.APPLICATION_JSON)
-//  @Produces(MediaType.APPLICATION_JSON)
-//  public AdviserDto updateAdviser(@Valid AdviserDto adviserDto) {
-//    return adviserMapper.map(adviserService.update(adviserMapper.map(adviserDto)));
-//  }
 
 }

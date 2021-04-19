@@ -12,11 +12,9 @@ import java.time.LocalDateTime;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class AreaDto {
+public class ProfessionalSkillDto {
 
   private Integer id;
-
-  private String countryIsoCode;
 
   private String name;
 
@@ -30,29 +28,23 @@ public class AreaDto {
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
   private LocalDateTime updated;
 
-  public AreaDto() {
+  public ProfessionalSkillDto(Integer id, String name) {
+    this.id = id;
+    this.name = name;
   }
 
-  public AreaDto(Integer id, String countryIsoCode, String name, LocalDateTime created, LocalDateTime updated) {
+  public ProfessionalSkillDto(Integer id, String name, LocalDateTime created, LocalDateTime updated) {
     this.id = id;
-    this.countryIsoCode = countryIsoCode;
     this.name = name;
     this.created = created;
     this.updated = updated;
   }
 
-  public AreaDto(Integer id, String countryIsoCode, String name) {
-    this.id = id;
-    this.countryIsoCode = countryIsoCode;
-    this.name = name;
+  public ProfessionalSkillDto() {
   }
 
   public Integer getId() {
     return id;
-  }
-
-  public String getCountryIsoCode() {
-    return countryIsoCode;
   }
 
   public String getName() {
@@ -69,10 +61,6 @@ public class AreaDto {
 
   public void setId(Integer id) {
     this.id = id;
-  }
-
-  public void setCountryIsoCode(String countryIsoCode) {
-    this.countryIsoCode = countryIsoCode;
   }
 
   public void setName(String name) {

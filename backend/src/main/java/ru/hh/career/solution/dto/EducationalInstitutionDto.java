@@ -12,13 +12,15 @@ import java.time.LocalDateTime;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class AreaDto {
+public class EducationalInstitutionDto {
 
   private Integer id;
 
   private String countryIsoCode;
 
   private String name;
+
+  private String site;
 
   @JsonDeserialize(using = LocalDateTimeDeserializer.class)
   @JsonSerialize(using = LocalDateTimeSerializer.class)
@@ -30,21 +32,25 @@ public class AreaDto {
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
   private LocalDateTime updated;
 
-  public AreaDto() {
-  }
+  private EducationalPeriodDto educationalPeriod;
 
-  public AreaDto(Integer id, String countryIsoCode, String name, LocalDateTime created, LocalDateTime updated) {
+  public EducationalInstitutionDto(Integer id, String countryIsoCode, String name, String site,
+                                   LocalDateTime created, LocalDateTime updated) {
     this.id = id;
     this.countryIsoCode = countryIsoCode;
     this.name = name;
+    this.site = site;
     this.created = created;
     this.updated = updated;
   }
 
-  public AreaDto(Integer id, String countryIsoCode, String name) {
+  public EducationalInstitutionDto(Integer id, String countryIsoCode, String name, String site,
+                                   EducationalPeriodDto educationalPeriod) {
     this.id = id;
     this.countryIsoCode = countryIsoCode;
     this.name = name;
+    this.site = site;
+    this.educationalPeriod = educationalPeriod;
   }
 
   public Integer getId() {
@@ -57,6 +63,10 @@ public class AreaDto {
 
   public String getName() {
     return name;
+  }
+
+  public String getSite() {
+    return site;
   }
 
   public LocalDateTime getCreated() {
@@ -79,11 +89,23 @@ public class AreaDto {
     this.name = name;
   }
 
+  public void setSite(String site) {
+    this.site = site;
+  }
+
   public void setCreated(LocalDateTime created) {
     this.created = created;
   }
 
   public void setUpdated(LocalDateTime updated) {
     this.updated = updated;
+  }
+
+  public EducationalPeriodDto getEducationalPeriod() {
+    return educationalPeriod;
+  }
+
+  public void setEducationalPeriod(EducationalPeriodDto educationalPeriod) {
+    this.educationalPeriod = educationalPeriod;
   }
 }

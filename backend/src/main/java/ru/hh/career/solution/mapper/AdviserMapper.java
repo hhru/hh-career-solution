@@ -4,29 +4,22 @@ import ru.hh.career.solution.dto.AdviserDto;
 import ru.hh.career.solution.entity.Adviser;
 
 import javax.inject.Singleton;
-import java.time.LocalDateTime;
+import java.util.stream.Collectors;
 
 @Singleton
 public class AdviserMapper {
 
   private final AreaMapper areaMapper;
+  private final EducationalInstitutionMapper educationalInstitutionMapper;
+  private final ProfessionalSkillMapper professionalSkillMapper;
+  private final ProfessionalAssociationMapper professionalAssociationMapper;
 
-  public AdviserMapper(AreaMapper areaMapper) {
+  public AdviserMapper(AreaMapper areaMapper, EducationalInstitutionMapper educationalInstitutionMapper,
+                       ProfessionalSkillMapper professionalSkillMapper, ProfessionalAssociationMapper professionalAssociationMapper) {
     this.areaMapper = areaMapper;
-  }
-
-  public Adviser map(AdviserDto adviserDto) {
-    return adviserDto == null ? null : new Adviser(
-      adviserDto.getAdviserId(),
-      adviserDto.getName(),
-      adviserDto.getSurname(),
-      adviserDto.getConsultation(),
-      adviserDto.getExperience(),
-      adviserDto.getCareerPractice(),
-      adviserDto.getCustomerType(),
-      adviserDto.getProblemType(),
-      LocalDateTime.now(),
-      LocalDateTime.now());
+    this.educationalInstitutionMapper = educationalInstitutionMapper;
+    this.professionalSkillMapper = professionalSkillMapper;
+    this.professionalAssociationMapper = professionalAssociationMapper;
   }
 
   public AdviserDto map(Adviser adviser) {
@@ -42,7 +35,9 @@ public class AdviserMapper {
       adviser.getCreated(),
       adviser.getUpdated(),
       areaMapper.map(adviser.getArea()),
-      adviser.getEducationalList());
+      adviser.getEducationalSet().stream().map(educationalInstitutionMapper::map).collect(Collectors.toList()),
+      adviser.getProfessionalSkillSet().stream().map(professionalSkillMapper::map).collect(Collectors.toList()),
+      adviser.getProfessionalAssociationSet().stream().map(professionalAssociationMapper::map).collect(Collectors.toList())
+    );
   }
-
 }

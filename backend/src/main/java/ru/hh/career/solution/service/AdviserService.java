@@ -17,12 +17,12 @@ public class AdviserService {
   }
 
   @Transactional
-  public List<Adviser> get(Integer limit, Integer page) {
+  public List<Adviser> getAdvisers(Integer limit, Integer page) {
     return adviserDao.get(limit, page);
   }
 
   @Transactional
-  public Adviser getById(Integer adviserId) {
+  public Adviser getAdviserById(Integer adviserId) {
     return adviserDao.getById(adviserId).orElseThrow(NotFoundException::new);
   }
 

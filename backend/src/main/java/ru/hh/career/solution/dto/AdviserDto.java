@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
-import ru.hh.career.solution.entity.AdviserToEducational;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -42,7 +41,11 @@ public class AdviserDto {
 
   private AreaDto area;
 
-  private List<AdviserToEducational> educationalList;
+  private List<EducationalInstitutionDto> educationalList;
+
+  private List<ProfessionalSkillDto> professionalSkillList;
+
+  private List<ProfessionalAssociationDto> professionalAssociationList;
 
 
   public AdviserDto() {
@@ -50,7 +53,8 @@ public class AdviserDto {
 
   public AdviserDto(Integer adviserId, String name, String surname, String consultation, String experience,
                     String careerPractice, String customerType, String problemType, LocalDateTime created,
-                    LocalDateTime updated, AreaDto area, List<AdviserToEducational> educationalList) {
+                    LocalDateTime updated, AreaDto area, List<EducationalInstitutionDto> educationalList,
+                    List<ProfessionalSkillDto> professionalSkillList, List<ProfessionalAssociationDto> professionalAssociationList) {
     this.adviserId = adviserId;
     this.name = name;
     this.surname = surname;
@@ -63,6 +67,8 @@ public class AdviserDto {
     this.updated = updated;
     this.area = area;
     this.educationalList = educationalList;
+    this.professionalSkillList = professionalSkillList;
+    this.professionalAssociationList = professionalAssociationList;
   }
 
   public Integer getAdviserId() {
@@ -153,11 +159,27 @@ public class AdviserDto {
     this.area = area;
   }
 
-  public List<AdviserToEducational> getEducationalList() {
+  public List<EducationalInstitutionDto> getEducationalList() {
     return educationalList;
   }
 
-  public void setEducationalList(List<AdviserToEducational> educationalList) {
+  public void setEducationalList(List<EducationalInstitutionDto> educationalList) {
     this.educationalList = educationalList;
+  }
+
+  public List<ProfessionalSkillDto> getProfessionalSkillList() {
+    return professionalSkillList;
+  }
+
+  public void setProfessionalSkillList(List<ProfessionalSkillDto> professionalSkillList) {
+    this.professionalSkillList = professionalSkillList;
+  }
+
+  public List<ProfessionalAssociationDto> getProfessionalAssociationList() {
+    return professionalAssociationList;
+  }
+
+  public void setProfessionalAssociationList(List<ProfessionalAssociationDto> professionalAssociationList) {
+    this.professionalAssociationList = professionalAssociationList;
   }
 }
