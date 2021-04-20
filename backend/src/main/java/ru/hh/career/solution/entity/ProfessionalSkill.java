@@ -1,6 +1,5 @@
 package ru.hh.career.solution.entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,16 +13,12 @@ public class ProfessionalSkill {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", nullable = false)
   private Integer id;
 
-  @Column(name = "name", nullable = false)
   private String name;
 
-  @Column(name = "created")
   private LocalDateTime created;
 
-  @Column(name = "updated")
   private LocalDateTime updated;
 
   public ProfessionalSkill() {

@@ -14,22 +14,17 @@ public class EducationalInstitution {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", nullable = false)
   private Integer id;
 
   @Column(name = "country_iso_code", nullable = false)
   private String countryIsoCode;
 
-  @Column(name = "name", nullable = false)
   private String name;
 
-  @Column(name = "site")
   private String site;
 
-  @Column(name = "created")
   private LocalDateTime created;
 
-  @Column(name = "updated")
   private LocalDateTime updated;
 
   public EducationalInstitution() {

@@ -22,22 +22,20 @@ import java.util.stream.Collectors;
 public class AdviserResource {
 
   private final AdviserService adviserService;
-  private final AdviserMapper adviserMapper;
 
-  public AdviserResource(AdviserService adviserService, AdviserMapper adviserMapper) {
+  public AdviserResource(AdviserService adviserService) {
     this.adviserService = adviserService;
-    this.adviserMapper = adviserMapper;
   }
 
   @GET
   @Consumes(MediaType.APPLICATION_JSON)
-  public PageResponseDto getAdvisers(@DefaultValue("100") @QueryParam("limit") Integer limit,
+  public PageResponseDto getAdvisers(@DefaultValue("20") @QueryParam("per_page") Integer perPage,
                                      @DefaultValue("0") @QueryParam("page") Integer page) {
 
-    return new PageResponseDto(adviserService.getAdvisers(limit, page).stream().
-      map(adviserMapper::map).
+    return new PageResponseDto(adviserService.getAdvisers(perPage, page).stream().
+      map(AdviserMapper::map).
       collect(Collectors.toList()),
-      adviserService.getPagesCount(limit));
+      adviserService.getPagesCount(perPage));
   }
 
   @GET
@@ -45,7 +43,6 @@ public class AdviserResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public AdviserDto getAdviserById(@PathParam(value = "id") Integer id) {
-    return adviserMapper.map(adviserService.getAdviserById(id));
+    return AdviserMapper.map(adviserService.getAdviserById(id));
   }
-
 }

@@ -1,16 +1,9 @@
 package ru.hh.career.solution.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 import java.time.LocalDateTime;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class EducationalInstitutionDto {
 
@@ -22,35 +15,19 @@ public class EducationalInstitutionDto {
 
   private String site;
 
-  @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-  @JsonSerialize(using = LocalDateTimeSerializer.class)
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
   private LocalDateTime created;
 
-  @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-  @JsonSerialize(using = LocalDateTimeSerializer.class)
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
   private LocalDateTime updated;
 
   private EducationalPeriodDto educationalPeriod;
 
-  public EducationalInstitutionDto(Integer id, String countryIsoCode, String name, String site,
-                                   LocalDateTime created, LocalDateTime updated) {
-    this.id = id;
-    this.countryIsoCode = countryIsoCode;
-    this.name = name;
-    this.site = site;
-    this.created = created;
-    this.updated = updated;
-  }
+  private String diplomaLink;
 
-  public EducationalInstitutionDto(Integer id, String countryIsoCode, String name, String site,
-                                   EducationalPeriodDto educationalPeriod) {
+  public EducationalInstitutionDto(Integer id, String countryIsoCode, String name, String site) {
     this.id = id;
     this.countryIsoCode = countryIsoCode;
     this.name = name;
     this.site = site;
-    this.educationalPeriod = educationalPeriod;
   }
 
   public Integer getId() {
@@ -107,5 +84,13 @@ public class EducationalInstitutionDto {
 
   public void setEducationalPeriod(EducationalPeriodDto educationalPeriod) {
     this.educationalPeriod = educationalPeriod;
+  }
+
+  public String getDiplomaLink() {
+    return diplomaLink;
+  }
+
+  public void setDiplomaLink(String diplomaLink) {
+    this.diplomaLink = diplomaLink;
   }
 }

@@ -1,16 +1,11 @@
 package ru.hh.career.solution.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class AdviserDto {
 
   private Integer adviserId;
@@ -29,14 +24,8 @@ public class AdviserDto {
 
   private String problemType;
 
-  @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-  @JsonSerialize(using = LocalDateTimeSerializer.class)
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
   private LocalDateTime created;
 
-  @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-  @JsonSerialize(using = LocalDateTimeSerializer.class)
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
   private LocalDateTime updated;
 
   private AreaDto area;
@@ -53,8 +42,8 @@ public class AdviserDto {
 
   public AdviserDto(Integer adviserId, String name, String surname, String consultation, String experience,
                     String careerPractice, String customerType, String problemType, LocalDateTime created,
-                    LocalDateTime updated, AreaDto area, List<EducationalInstitutionDto> educationalList,
-                    List<ProfessionalSkillDto> professionalSkillList, List<ProfessionalAssociationDto> professionalAssociationList) {
+                    LocalDateTime updated, AreaDto area, List<ProfessionalSkillDto> professionalSkillList,
+                    List<ProfessionalAssociationDto> professionalAssociationList) {
     this.adviserId = adviserId;
     this.name = name;
     this.surname = surname;
@@ -66,7 +55,6 @@ public class AdviserDto {
     this.created = created;
     this.updated = updated;
     this.area = area;
-    this.educationalList = educationalList;
     this.professionalSkillList = professionalSkillList;
     this.professionalAssociationList = professionalAssociationList;
   }

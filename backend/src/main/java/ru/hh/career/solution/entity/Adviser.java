@@ -1,6 +1,5 @@
 package ru.hh.career.solution.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,10 +7,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -20,32 +21,30 @@ public class Adviser {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", nullable = false)
   private Integer id;
 
-  @Column(name = "name", nullable = false)
   private String name;
 
-  @Column(name = "surname", nullable = false)
   private String surname;
 
-  @ManyToOne(fetch = FetchType.EAGER)
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "area_id")
   private Area area;
 
-  @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "adviserId")
-  private Set<AdviserToEducational> educationalSet;
+  @ManyToMany(fetch = FetchType.LAZY)
+  @JoinTable(name = "adviser_to_professional_skill",
+    joinColumns = @JoinColumn(name = "adviser_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "professional_skill_id", referencedColumnName = "id"))
+  private Set<ProfessionalSkill> professionalSkillList = new HashSet<>();
 
-  @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "adviserId")
-  private Set<AdviserToProfessionalSkill> professionalSkillSet;
+  @ManyToMany(fetch = FetchType.LAZY)
+  @JoinTable(name = "adviser_to_professional_association",
+    joinColumns = @JoinColumn(name = "adviser_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "professional_association_id", referencedColumnName = "id"))
+  private Set<ProfessionalAssociation> professionalAssociationList = new HashSet<>();
 
-  @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "adviserId")
-  private Set<AdviserToProfessionalAssociation> professionalAssociationSet;
-
-  @Column(name = "consultation", nullable = false)
   private String consultation;
 
-  @Column(name = "experience", nullable = false)
   private String experience;
 
   @Column(name = "career_practice", nullable = false)
@@ -57,23 +56,19 @@ public class Adviser {
   @Column(name = "problem_type", nullable = false)
   private String problemType;
 
-  @Column(name = "created")
   private LocalDateTime created;
 
-  @Column(name = "updated")
   private LocalDateTime updated;
 
-  public Adviser(Integer id, String name, String surname, Area area, Set<AdviserToEducational> educationalSet,
-                 Set<AdviserToProfessionalSkill> professionalSkillSet, Set<AdviserToProfessionalAssociation> professionalAssociationSet,
-                 String consultation, String experience, String careerPractice, String customerType, String problemType,
-                 LocalDateTime created, LocalDateTime updated) {
+  public Adviser(Integer id, String name, String surname, Area area, Set<ProfessionalSkill> professionalSkillList,
+                 Set<ProfessionalAssociation> professionalAssociationList, String consultation, String experience,
+                 String careerPractice, String customerType, String problemType, LocalDateTime created, LocalDateTime updated) {
     this.id = id;
     this.name = name;
     this.surname = surname;
     this.area = area;
-    this.educationalSet = educationalSet;
-    this.professionalSkillSet = professionalSkillSet;
-    this.professionalAssociationSet = professionalAssociationSet;
+    this.professionalSkillList = professionalSkillList;
+    this.professionalAssociationList = professionalAssociationList;
     this.consultation = consultation;
     this.experience = experience;
     this.careerPractice = careerPractice;
@@ -174,27 +169,19 @@ public class Adviser {
     this.area = area;
   }
 
-  public Set<AdviserToEducational> getEducationalSet() {
-    return educationalSet;
+  public Set<ProfessionalSkill> getProfessionalSkillList() {
+    return professionalSkillList;
   }
 
-  public void setEducationalSet(Set<AdviserToEducational> educationalSet) {
-    this.educationalSet = educationalSet;
+  public void setProfessionalSkillList(Set<ProfessionalSkill> professionalSkillList) {
+    this.professionalSkillList = professionalSkillList;
   }
 
-  public Set<AdviserToProfessionalSkill> getProfessionalSkillSet() {
-    return professionalSkillSet;
+  public Set<ProfessionalAssociation> getProfessionalAssociationList() {
+    return professionalAssociationList;
   }
 
-  public void setProfessionalSkillSet(Set<AdviserToProfessionalSkill> professionalSkillSet) {
-    this.professionalSkillSet = professionalSkillSet;
-  }
-
-  public Set<AdviserToProfessionalAssociation> getProfessionalAssociationSet() {
-    return professionalAssociationSet;
-  }
-
-  public void setProfessionalAssociationSet(Set<AdviserToProfessionalAssociation> professionalAssociationSet) {
-    this.professionalAssociationSet = professionalAssociationSet;
+  public void setProfessionalAssociationList(Set<ProfessionalAssociation> professionalAssociationList) {
+    this.professionalAssociationList = professionalAssociationList;
   }
 }

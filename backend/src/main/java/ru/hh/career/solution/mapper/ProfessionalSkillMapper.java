@@ -1,17 +1,14 @@
 package ru.hh.career.solution.mapper;
 
 import ru.hh.career.solution.dto.ProfessionalSkillDto;
-import ru.hh.career.solution.entity.AdviserToProfessionalSkill;
+import ru.hh.career.solution.entity.ProfessionalSkill;
 
-import javax.inject.Singleton;
+public final class ProfessionalSkillMapper {
 
-@Singleton
-public class ProfessionalSkillMapper {
-
-  public ProfessionalSkillDto map(AdviserToProfessionalSkill adviser) {
-    return adviser == null ? null : new ProfessionalSkillDto(
-      adviser.getProfessionalSkill().getId(),
-      adviser.getProfessionalSkill().getName()
-    );
+  public static ProfessionalSkillDto map(ProfessionalSkill professionalSkill) {
+    return professionalSkill == null ? null : new ProfessionalSkillDto(
+      professionalSkill.getId(),
+      professionalSkill.getName());
   }
+
 }

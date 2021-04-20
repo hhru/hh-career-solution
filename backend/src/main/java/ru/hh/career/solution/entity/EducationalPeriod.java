@@ -14,7 +14,6 @@ public class EducationalPeriod {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", nullable = false)
   private Integer id;
 
   @Column(name = "year_from", nullable = false)

@@ -3,77 +3,42 @@ package ru.hh.career.solution.dao;
 import org.hibernate.SessionFactory;
 import ru.hh.career.solution.entity.Adviser;
 
-import javax.inject.Singleton;
+import javax.inject.Inject;
 import java.util.List;
-import java.util.Optional;
 
-@Singleton
-public class AdviserDao {
+public class AdviserDao extends GenericDao {
 
-  private final SessionFactory sessionFactory;
-
+  @Inject
   public AdviserDao(SessionFactory sessionFactory) {
-    this.sessionFactory = sessionFactory;
+    super(sessionFactory);
   }
 
-  public SessionFactory session() {
-    return sessionFactory;
+  public List<Adviser> getList(Integer perPage, Integer page) {
+    return getSession()
+      .createQuery("SELECT a FROM Adviser a " +
+        "LEFT JOIN FETCH a.area " +
+        "LEFT JOIN FETCH a.professionalSkillList " +
+        "LEFT JOIN FETCH a.professionalAssociationList " +
+        "ORDER BY a.id", Adviser.class)
+      .setFirstResult(page * perPage)
+      .setMaxResults(perPage)
+      .getResultList();
   }
 
-  public List<Adviser> getByProfessionalFieldId(Integer professionalFieldId, Integer limit, Integer page) {
-    return session()
-            .getCurrentSession()
-            .createQuery("SELECT a FROM Adviser a WHERE a.professional_field_id = :professionalFieldId " +
-                    "ORDER BY a.id", Adviser.class)
-            .setParameter("professionalFieldId", professionalFieldId)
-            .setFirstResult(page * limit)
-            .setMaxResults(limit)
-            .getResultList();
-  }
-
-  public List<Adviser> getByAreaId(Integer areaId, Integer limit, Integer page) {
-    return session()
-            .getCurrentSession()
-            .createQuery("SELECT a FROM Adviser a WHERE a.area_id = :areaId " +
-                    "ORDER BY a.id", Adviser.class)
-            .setParameter("areaId", areaId)
-            .setFirstResult(page * limit)
-            .setMaxResults(limit)
-            .getResultList();
-  }
-
-  public List<Adviser> get(Integer limit, Integer page) {
-    return session()
-            .getCurrentSession()
-            .createQuery("SELECT a FROM Adviser a ORDER BY a.id", Adviser.class)
-            .setFirstResult(page * limit)
-            .setMaxResults(limit)
-            .getResultList();
-  }
-
-  public Optional<Adviser> getById(Integer id) {
-    return Optional.ofNullable(session().getCurrentSession().get(Adviser.class, id));
-  }
-
-  public Adviser update(Adviser adviser) {
-    session().getCurrentSession().update(adviser);
-    return adviser;
-  }
-
-  public Adviser create(Adviser adviser) {
-    session().getCurrentSession().persist(adviser);
-    return adviser;
-  }
-
-  public Adviser saveOrUpdate(Adviser adviser) {
-    session().getCurrentSession().saveOrUpdate(adviser);
-    return adviser;
+  public Adviser getById(Integer id) {
+    return getSession()
+      .createQuery("SELECT a FROM Adviser a " +
+        "LEFT JOIN FETCH a.area " +
+        "LEFT JOIN FETCH a.professionalSkillList " +
+        "LEFT JOIN FETCH a.professionalAssociationList " +
+        "WHERE a.id = :id", Adviser.class)
+      .setParameter("id", id)
+      .getSingleResult();
   }
 
   public Long getCount() {
-    return (Long) session()
-            .getCurrentSession()
-            .createQuery("SELECT count(*) FROM Adviser")
-            .uniqueResult();
+    return (Long) getSession()
+      .createQuery("SELECT count(*) FROM Adviser")
+      .uniqueResult();
   }
 }

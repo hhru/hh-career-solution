@@ -5,7 +5,6 @@ import ru.hh.career.solution.dao.AdviserDao;
 import ru.hh.career.solution.entity.Adviser;
 
 import javax.inject.Singleton;
-import javax.ws.rs.NotFoundException;
 import java.util.List;
 
 @Singleton
@@ -17,28 +16,13 @@ public class AdviserService {
   }
 
   @Transactional
-  public List<Adviser> getAdvisers(Integer limit, Integer page) {
-    return adviserDao.get(limit, page);
+  public List<Adviser> getAdvisers(Integer perPage, Integer page) {
+    return adviserDao.getList(perPage, page);
   }
 
   @Transactional
   public Adviser getAdviserById(Integer adviserId) {
-    return adviserDao.getById(adviserId).orElseThrow(NotFoundException::new);
-  }
-
-  @Transactional
-  public Adviser create(Adviser adviser) {
-    return adviserDao.create(adviser);
-  }
-
-  @Transactional
-  public Adviser update(Adviser adviser) {
-    return adviserDao.update(adviser);
-  }
-
-  @Transactional
-  public Adviser saveOrUpdate(Adviser adviser) {
-    return adviserDao.saveOrUpdate(adviser);
+    return adviserDao.getById(adviserId);
   }
 
   @Transactional()

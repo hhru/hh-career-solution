@@ -1,17 +1,14 @@
 package ru.hh.career.solution.mapper;
 
 import ru.hh.career.solution.dto.ProfessionalAssociationDto;
-import ru.hh.career.solution.entity.AdviserToProfessionalAssociation;
+import ru.hh.career.solution.entity.ProfessionalAssociation;
 
-import javax.inject.Singleton;
+public final class ProfessionalAssociationMapper {
 
-@Singleton
-public class ProfessionalAssociationMapper {
-
-  public ProfessionalAssociationDto map(AdviserToProfessionalAssociation adviser) {
-    return adviser == null ? null : new ProfessionalAssociationDto(
-      adviser.getProfessionalAssociation().getId(),
-      adviser.getProfessionalAssociation().getName()
-    );
+  public static ProfessionalAssociationDto map(ProfessionalAssociation professionalAssociation) {
+    return professionalAssociation == null ? null : new ProfessionalAssociationDto(
+      professionalAssociation.getId(),
+      professionalAssociation.getName());
   }
+
 }

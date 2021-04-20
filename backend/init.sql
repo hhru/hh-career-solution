@@ -76,25 +76,28 @@ CREATE TABLE IF NOT EXISTS adviser
 
 CREATE TABLE IF NOT EXISTS adviser_to_educational
 (
-  id SERIAL PRIMARY KEY,
   adviser_id                 INTEGER   NOT NULL REFERENCES adviser (id),
   educational_institution_id INTEGER   NOT NULL REFERENCES educational_institution (id),
   educational_period_id      INTEGER   NOT NULL REFERENCES educational_period (id),
-  document_link                   TEXT
+  diploma_link                   TEXT,
+
+  PRIMARY KEY (adviser_id, educational_institution_id)
 );
 
 CREATE TABLE IF NOT EXISTS adviser_to_professional_skill
 (
-  id SERIAL PRIMARY KEY,
   adviser_id                 INTEGER   NOT NULL REFERENCES adviser (id),
-  professional_skill_id INTEGER   NOT NULL REFERENCES professional_skill (id)
+  professional_skill_id INTEGER   NOT NULL REFERENCES professional_skill (id),
+
+  PRIMARY KEY (adviser_id, professional_skill_id)
 );
 
 CREATE TABLE IF NOT EXISTS adviser_to_professional_association
 (
-  id SERIAL PRIMARY KEY,
   adviser_id                 INTEGER   NOT NULL REFERENCES adviser (id),
-  professional_association_id INTEGER   NOT NULL REFERENCES professional_association (id)
+  professional_association_id INTEGER   NOT NULL REFERENCES professional_association (id),
+
+PRIMARY KEY (adviser_id, professional_association_id)
 );
 
 INSERT INTO public.country (iso_code, name, created, updated) VALUES ('RU', 'Россия', '2021-04-12 22:42:32.000000', '2021-04-12 22:42:34.000000');
@@ -104,11 +107,11 @@ INSERT INTO public.professional_skill (id, name, created, updated) VALUES (1, 'j
 INSERT INTO public.professional_skill (id, name, created, updated) VALUES (2, 'python', '2021-04-19 09:08:46.000000', '2021-04-19 09:08:49.000000');
 INSERT INTO public.educational_institution (id, country_iso_code, name, site, created, updated) VALUES (1, 'RU', 'СПБГУТ', 'http://spbgut.ru', '2021-04-19 09:22:52.000000', '2021-04-19 09:22:54.000000');
 INSERT INTO public.educational_period (id, year_from, year_to) VALUES (1, '2010-01-01', '2015-06-30');
-INSERT INTO public.adviser_to_educational (id, adviser_id, educational_institution_id, educational_period_id, document_link) VALUES (1, 1, 1, 1, 'http://example.com');
-INSERT INTO public.adviser_to_professional_skill (id, adviser_id, professional_skill_id) VALUES (1, 1, 1);
-INSERT INTO public.adviser_to_professional_skill (id, adviser_id, professional_skill_id) VALUES (2, 1, 2);
+INSERT INTO public.adviser_to_educational (adviser_id, educational_institution_id, educational_period_id, diploma_link) VALUES (1, 1, 1, 'http://example.com');
+INSERT INTO public.adviser_to_professional_skill (adviser_id, professional_skill_id) VALUES (1, 1);
+INSERT INTO public.adviser_to_professional_skill (adviser_id, professional_skill_id) VALUES (1, 2);
 INSERT INTO public.professional_association (id, name, created, updated) VALUES (1, 'it', '2021-04-19 09:28:09.000000', '2021-04-19 09:28:10.000000');
-INSERT INTO public.adviser_to_professional_association (id, adviser_id, professional_association_id) VALUES (1, 1, 1);
+INSERT INTO public.adviser_to_professional_association (adviser_id, professional_association_id) VALUES (1, 1);
 
 CREATE TABLE account
 (
