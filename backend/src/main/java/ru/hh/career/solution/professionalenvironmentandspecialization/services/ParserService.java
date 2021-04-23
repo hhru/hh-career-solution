@@ -1,7 +1,6 @@
 package ru.hh.career.solution.professionalenvironmentandspecialization.services;
 
-import ru.hh.career.solution.professionalenvironmentandspecialization.dao.ProfessionalEnvironmentDao;
-import ru.hh.career.solution.professionalenvironmentandspecialization.dao.SpecializationDao;
+import ru.hh.career.solution.professionalenvironmentandspecialization.dao.GenericDao;
 import ru.hh.career.solution.professionalenvironmentandspecialization.dto.ParserProfessionalEnvironmentAndSpecialization;
 import ru.hh.career.solution.professionalenvironmentandspecialization.dto.ProfessionalEnvironmentDto;
 import ru.hh.career.solution.professionalenvironmentandspecialization.dto.SpecializationDto;
@@ -16,13 +15,11 @@ import java.util.concurrent.ExecutionException;
 
 @Singleton
 public class ParserService {
-  private final ProfessionalEnvironmentDao professionalEnvironmentDao;
-  private final SpecializationDao specializationDao;
+  private final GenericDao genericDao;
 
   @Inject
-  public ParserService(ProfessionalEnvironmentDao professionalEnvironmentDao, SpecializationDao specializationDao) {
-    this.professionalEnvironmentDao = professionalEnvironmentDao;
-    this.specializationDao = specializationDao;
+  public ParserService(GenericDao genericDao) {
+    this.genericDao = genericDao;
   }
 
   @Transactional
@@ -35,7 +32,7 @@ public class ParserService {
               professionalEnvironmentDto.getId(),
               professionalEnvironmentDto.getName()
       );
-      professionalEnvironmentDao.save(professionalEnvironmentEntity);
+      genericDao.save(professionalEnvironmentEntity);
       for (SpecializationDto specializationDto : professionalEnvironmentDto.getSpecializations()){
         SpecializationEntity specializationEntity =
                 new SpecializationEntity(
@@ -44,7 +41,7 @@ public class ParserService {
                         specializationDto.getLaboring(),
                         professionalEnvironmentDto.getId()
                 );
-        specializationDao.save(specializationEntity);
+        genericDao.save(specializationEntity);
       }
     }
   }
