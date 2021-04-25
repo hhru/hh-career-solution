@@ -1,10 +1,8 @@
-import css from "./styles.module.scss";
-import Hidden from "@material-ui/core/Hidden";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
 import React from "react";
+
+import { Hidden, Typography, Container, Grid, Button } from "@material-ui/core";
+
+import css from "./styles.module.scss";
 
 const Header = () => {
   return (

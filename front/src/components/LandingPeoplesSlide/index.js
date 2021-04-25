@@ -1,13 +1,7 @@
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-  Button,
-} from "@material-ui/core";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
 import React from "react";
+
+import { Container, Grid, Card, CardContent, CardMedia, Typography, Button } from "@material-ui/core";
+
 import css from "./styles.module.scss";
 import people1 from './people1.jpg';
 import people2 from './people2.jpg';

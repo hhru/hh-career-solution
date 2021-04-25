@@ -1,10 +1,9 @@
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
-import { Typography } from "@material-ui/core";
-import Accent from "../Accent";
-import css from "./styles.module.scss";
 import React from "react";
+
+import { Container, Grid, Typography, Button } from "@material-ui/core";
+import Accent from "src/components/Accent";
+
+import css from "./styles.module.scss";
 import mainImg from './Career_progress-pana.png';
 
 const LandingGoalsSlide = () => {

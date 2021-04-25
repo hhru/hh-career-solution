@@ -1,8 +1,8 @@
-import { Typography } from "@material-ui/core";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import css from "./styles.module.scss";
 import React from "react";
+
+import { Container, Grid, Typography } from "@material-ui/core";
+
+import css from "./styles.module.scss";
 import okImg from './Ok-pana.png';
 import secureImg from './Secure_data-pana.png';
 import upgradeImg from './Upgrade-pana.png';

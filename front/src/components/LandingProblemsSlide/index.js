@@ -1,11 +1,8 @@
-import { Typography } from '@material-ui/core';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import css from './styles.module.scss';
 import React from "react";
+
+import { Container, Grid, List, ListItem, ListItemText, Typography } from '@material-ui/core';
+
+import css from './styles.module.scss';
 
 const items = [
   {

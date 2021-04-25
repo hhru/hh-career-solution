@@ -1,5 +1,7 @@
+@import "src/services/theme.scss";
+
 .appFooter {
-  background-color: #282c34;
+  background-color: $color-dark-bg;
   color: white;
   padding: 10px 0;
   margin-top: auto;

@@ -1,7 +1,8 @@
-import { Typography } from "@material-ui/core";
-import Container from "@material-ui/core/Container";
-import css from "./styles.module.scss";
 import React from "react";
+
+import { Typography, Container } from "@material-ui/core";
+
+import css from "./styles.module.scss";
 
 const LandingFaqSlide = () => {
   return (

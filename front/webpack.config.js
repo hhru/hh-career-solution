@@ -26,6 +26,14 @@ module.exports = (env, argv) => {
       pathinfo: true,
       filename: '[name].js',
     },
+    devServer: {
+      historyApiFallback: true,
+    },
+    resolve: {
+      alias: {
+        src: path.resolve(__dirname, './src'),
+      },
+    },
     module: {
       rules: [
         {

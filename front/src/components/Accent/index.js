@@ -1,16 +1,9 @@
-import { makeStyles } from "@material-ui/core";
-import theme from "./../../services/theme";
 import React from "react";
 
-const useStyles = makeStyles({
-  accent: {
-    color: theme.palette.secondary.main,
-  },
-});
+import css from "./styles.module.scss";
 
 const Accent = ({ children }) => {
-  const classes = useStyles();
-  return <span className={classes.accent}>{children}</span>;
+  return <span className={css.accent}>{children}</span>;
 };
 
 export default Accent;

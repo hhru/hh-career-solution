@@ -1,10 +1,11 @@
 import React from "react";
-import LandingGoalsSlide from "./../../components/LandingGoalsSlide";
-import LandingHowItHelpsSlide from "./../../components/LandingHowItHelpsSlide";
-import LandingHowItWorksSlide from "./../../components/LandingHowItWorksSlide";
-import LandingFaqSlide from "./../../components/LandingFaqSlide";
-import LandingWhyNeedSessionSlide from "./../../components/LandingWhyNeedSessionSlide";
-import LandingPeoplesSlide from "./../../components/LandingPeoplesSlide";
+
+import LandingGoalsSlide from "src/components/LandingGoalsSlide";
+import LandingHowItHelpsSlide from "src/components/LandingHowItHelpsSlide";
+import LandingHowItWorksSlide from "src/components/LandingHowItWorksSlide";
+import LandingFaqSlide from "src/components/LandingFaqSlide";
+import LandingWhyNeedSessionSlide from "src/components/LandingWhyNeedSessionSlide";
+import LandingPeoplesSlide from "src/components/LandingPeoplesSlide";
 
 const Landing = () => {
   return (
