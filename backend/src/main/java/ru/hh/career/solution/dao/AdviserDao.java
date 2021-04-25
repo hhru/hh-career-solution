@@ -17,8 +17,9 @@ public class AdviserDao extends GenericDao {
     return getSession()
       .createQuery("SELECT a FROM Adviser a " +
         "LEFT JOIN FETCH a.area " +
-        "LEFT JOIN FETCH a.professionalSkillList " +
-        "LEFT JOIN FETCH a.professionalAssociationList " +
+        "LEFT JOIN FETCH a.educationalSet " +
+        "LEFT JOIN FETCH a.professionalSkillSet " +
+        "LEFT JOIN FETCH a.professionalAssociationSet " +
         "ORDER BY a.id", Adviser.class)
       .setFirstResult(page * perPage)
       .setMaxResults(perPage)
@@ -29,8 +30,9 @@ public class AdviserDao extends GenericDao {
     return getSession()
       .createQuery("SELECT a FROM Adviser a " +
         "LEFT JOIN FETCH a.area " +
-        "LEFT JOIN FETCH a.professionalSkillList " +
-        "LEFT JOIN FETCH a.professionalAssociationList " +
+        "LEFT JOIN FETCH a.educationalSet " +
+        "LEFT JOIN FETCH a.professionalSkillSet " +
+        "LEFT JOIN FETCH a.professionalAssociationSet " +
         "WHERE a.id = :id", Adviser.class)
       .setParameter("id", id)
       .getSingleResult();
@@ -41,4 +43,15 @@ public class AdviserDao extends GenericDao {
       .createQuery("SELECT count(*) FROM Adviser")
       .uniqueResult();
   }
+
+  public Adviser save(Adviser adviser) {
+    getSession().save(adviser);
+    return adviser;
+  }
+
+  public Adviser update(Adviser adviser) {
+    getSession().update(adviser);
+    return adviser;
+  }
+
 }

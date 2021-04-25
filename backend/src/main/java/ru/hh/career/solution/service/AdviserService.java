@@ -29,4 +29,14 @@ public class AdviserService {
   public Integer getPagesCount(Integer limit) {
     return (int) Math.ceil((double) adviserDao.getCount() / limit);
   }
+
+  @Transactional
+  public Adviser save(Adviser adviser) {
+    return adviserDao.save(adviser);
+  }
+
+  @Transactional
+  public Adviser update(Adviser adviser) {
+    return adviserDao.update(adviser);
+  }
 }

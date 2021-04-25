@@ -1,5 +1,7 @@
 package ru.hh.career.solution.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.LocalDate;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 @Table(name = "educational_period")
 public class EducationalPeriod {
@@ -16,7 +19,7 @@ public class EducationalPeriod {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
-  @Column(name = "year_from", nullable = false)
+  @Column(name = "year_from")
   private LocalDate yearFrom;
 
   @Column(name = "year_to")

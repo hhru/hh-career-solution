@@ -16,7 +16,7 @@ public class Area {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
-  @Column(name = "country_iso_code", nullable = false)
+  @Column(name = "country_iso_code")
   private String countryIsoCode;
 
   private String name;
@@ -30,6 +30,13 @@ public class Area {
 
   public Area(Integer id, String countryIsoCode, String name, LocalDateTime created, LocalDateTime updated) {
     this.id = id;
+    this.countryIsoCode = countryIsoCode;
+    this.name = name;
+    this.created = created;
+    this.updated = updated;
+  }
+
+  public Area(String countryIsoCode, String name, LocalDateTime created, LocalDateTime updated) {
     this.countryIsoCode = countryIsoCode;
     this.name = name;
     this.created = created;

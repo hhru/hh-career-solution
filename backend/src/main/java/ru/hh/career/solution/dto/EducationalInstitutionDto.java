@@ -23,11 +23,23 @@ public class EducationalInstitutionDto {
 
   private String diplomaLink;
 
-  public EducationalInstitutionDto(Integer id, String countryIsoCode, String name, String site) {
+  public EducationalInstitutionDto(Integer id, String countryIsoCode, String name, String site,
+                                   EducationalPeriodDto educationalPeriod, String diplomaLink) {
     this.id = id;
     this.countryIsoCode = countryIsoCode;
     this.name = name;
     this.site = site;
+    this.educationalPeriod = educationalPeriod;
+    this.diplomaLink = diplomaLink;
+  }
+
+  public EducationalInstitutionDto(Integer id, EducationalPeriodDto educationalPeriod, String diplomaLink) {
+    this.id = id;
+    this.educationalPeriod = educationalPeriod;
+    this.diplomaLink = diplomaLink;
+  }
+
+  public EducationalInstitutionDto() {
   }
 
   public Integer getId() {

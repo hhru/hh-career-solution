@@ -19,6 +19,13 @@ public class EducationalPeriodDto {
     this.yearTo = yearTo;
   }
 
+  public EducationalPeriodDto(Integer id) {
+    this.id = id;
+  }
+
+  public EducationalPeriodDto() {
+  }
+
   public Integer getId() {
     return id;
   }

@@ -1,7 +1,12 @@
 package ru.hh.career.solution.entity;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,47 +33,142 @@ public class Adviser {
   private String surname;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "area_id")
+  @JoinColumn(name = "area_id", referencedColumnName = "id")
   private Area area;
+
+  //mappedBy = "adviserId"
+  @Cascade(CascadeType.ALL)
+  @ManyToMany(fetch = FetchType.LAZY)
+  //@JoinTable(name = "adviser_to_educational")
+  @JoinColumn(name = "adviser_id")
+  private Set<AdviserToEducational> educationalSet = new HashSet<>();
 
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(name = "adviser_to_professional_skill",
     joinColumns = @JoinColumn(name = "adviser_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "professional_skill_id", referencedColumnName = "id"))
-  private Set<ProfessionalSkill> professionalSkillList = new HashSet<>();
+  private Set<ProfessionalSkill> professionalSkillSet = new HashSet<>();
 
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(name = "adviser_to_professional_association",
     joinColumns = @JoinColumn(name = "adviser_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "professional_association_id", referencedColumnName = "id"))
-  private Set<ProfessionalAssociation> professionalAssociationList = new HashSet<>();
+  private Set<ProfessionalAssociation> professionalAssociationSet = new HashSet<>();
 
-  private String consultation;
+  public enum Consultation {
+    OFFLINE("OFFLINE"), ONLINE("ONLINE"), ALL("ALL");
 
-  private String experience;
+    private final String description;
 
-  @Column(name = "career_practice", nullable = false)
-  private String careerPractice;
+    private Consultation(String description) {
+      this.description = description;
+    }
 
-  @Column(name = "customer_type", nullable = false)
-  private String customerType;
+    public String getDescription() {
+      return this.description;
+    }
+  }
 
-  @Column(name = "problem_type", nullable = false)
-  private String problemType;
+  @Enumerated(EnumType.STRING)
+  private Consultation consultation;
+
+  public enum Experience {
+    UP_TO_ONE_YEAR("UP_TO_ONE_YEAR"),
+    UP_TO_THREE_YEARS("UP_TO_THREE_YEARS"),
+    UP_TO_SIX_YEARS("UP_TO_SIX_YEARS"),
+    MORE_THAN_SIX_YEARS("MORE_THAN_SIX_YEARS");
+
+    private final String description;
+
+    private Experience(String description) {
+      this.description = description;
+    }
+
+    public String getDescription() {
+      return this.description;
+    }
+  }
+
+  @Enumerated(EnumType.STRING)
+  private Experience experience;
+
+  public enum CareerPractice {
+    CONSULTATION("CONSULTATION"),
+    COACHING("COACHING"),
+    ALL("ALL");
+
+    private final String description;
+
+    private CareerPractice(String description) {
+      this.description = description;
+    }
+
+    public String getDescription() {
+      return this.description;
+    }
+  }
+
+  @Enumerated(EnumType.STRING)
+  @Column(name = "career_practice")
+  private CareerPractice careerPractice;
+
+  public enum CustomerType {
+    NO_EXPERIENCE("NO_EXPERIENCE"),
+    SPECIALISTS_AND_EXPERTS("SPECIALISTS_AND_EXPERTS"),
+    MIDDLE_MANAGEMENT("MIDDLE_MANAGEMENT"),
+    TOP_MANAGEMENT("TOP_MANAGEMENT");
+
+    private final String description;
+
+    private CustomerType(String description) {
+      this.description = description;
+    }
+
+    public String getDescription() {
+      return this.description;
+    }
+  }
+
+  @Column(name = "customer_type")
+  @Enumerated(EnumType.STRING)
+  private CustomerType customerType;
+
+  public enum ProblemType {
+    ANY_PROBLEM("ANY_PROBLEM");
+
+    private final String description;
+
+    private ProblemType(String description) {
+      this.description = description;
+    }
+
+    public String getDescription() {
+      return this.description;
+    }
+  }
+
+  @Column(name = "problem_type")
+  @Enumerated(EnumType.STRING)
+  private ProblemType problemType;
 
   private LocalDateTime created;
 
   private LocalDateTime updated;
 
-  public Adviser(Integer id, String name, String surname, Area area, Set<ProfessionalSkill> professionalSkillList,
-                 Set<ProfessionalAssociation> professionalAssociationList, String consultation, String experience,
-                 String careerPractice, String customerType, String problemType, LocalDateTime created, LocalDateTime updated) {
+  public Adviser() {
+  }
+
+  public Adviser(Integer id, String name, String surname, Area area, Set<AdviserToEducational> educationalSet,
+                 Set<ProfessionalSkill> professionalSkillSet, Set<ProfessionalAssociation> professionalAssociationSet,
+                 Consultation consultation, Experience experience, CareerPractice careerPractice, CustomerType customerType,
+                 ProblemType problemType, LocalDateTime created, LocalDateTime updated) {
     this.id = id;
     this.name = name;
     this.surname = surname;
     this.area = area;
-    this.professionalSkillList = professionalSkillList;
-    this.professionalAssociationList = professionalAssociationList;
+    this.educationalSet = educationalSet;
+    this.professionalSkillSet = professionalSkillSet;
+    this.professionalAssociationSet = professionalAssociationSet;
     this.consultation = consultation;
     this.experience = experience;
     this.careerPractice = careerPractice;
@@ -76,9 +176,6 @@ public class Adviser {
     this.problemType = problemType;
     this.created = created;
     this.updated = updated;
-  }
-
-  public Adviser() {
   }
 
   public Integer getId() {
@@ -93,23 +190,23 @@ public class Adviser {
     return surname;
   }
 
-  public String getConsultation() {
+  public Consultation getConsultation() {
     return consultation;
   }
 
-  public String getExperience() {
+  public Experience getExperience() {
     return experience;
   }
 
-  public String getCareerPractice() {
+  public CareerPractice getCareerPractice() {
     return careerPractice;
   }
 
-  public String getCustomerType() {
+  public CustomerType getCustomerType() {
     return customerType;
   }
 
-  public String getProblemType() {
+  public ProblemType getProblemType() {
     return problemType;
   }
 
@@ -133,23 +230,23 @@ public class Adviser {
     this.surname = surname;
   }
 
-  public void setConsultation(String consultation) {
+  public void setConsultation(Consultation consultation) {
     this.consultation = consultation;
   }
 
-  public void setExperience(String experience) {
+  public void setExperience(Experience experience) {
     this.experience = experience;
   }
 
-  public void setCareerPractice(String careerPractice) {
+  public void setCareerPractice(CareerPractice careerPractice) {
     this.careerPractice = careerPractice;
   }
 
-  public void setCustomerType(String customerType) {
+  public void setCustomerType(CustomerType customerType) {
     this.customerType = customerType;
   }
 
-  public void setProblemType(String problemType) {
+  public void setProblemType(ProblemType problemType) {
     this.problemType = problemType;
   }
 
@@ -169,19 +266,27 @@ public class Adviser {
     this.area = area;
   }
 
-  public Set<ProfessionalSkill> getProfessionalSkillList() {
-    return professionalSkillList;
+  public Set<ProfessionalSkill> getProfessionalSkillSet() {
+    return professionalSkillSet;
   }
 
-  public void setProfessionalSkillList(Set<ProfessionalSkill> professionalSkillList) {
-    this.professionalSkillList = professionalSkillList;
+  public void setProfessionalSkillSet(Set<ProfessionalSkill> professionalSkillSet) {
+    this.professionalSkillSet = professionalSkillSet;
   }
 
-  public Set<ProfessionalAssociation> getProfessionalAssociationList() {
-    return professionalAssociationList;
+  public Set<ProfessionalAssociation> getProfessionalAssociationSet() {
+    return professionalAssociationSet;
   }
 
-  public void setProfessionalAssociationList(Set<ProfessionalAssociation> professionalAssociationList) {
-    this.professionalAssociationList = professionalAssociationList;
+  public void setProfessionalAssociationSet(Set<ProfessionalAssociation> professionalAssociationSet) {
+    this.professionalAssociationSet = professionalAssociationSet;
+  }
+
+  public Set<AdviserToEducational> getEducationalSet() {
+    return educationalSet;
+  }
+
+  public void setEducationalSet(Set<AdviserToEducational> educationalSet) {
+    this.educationalSet = educationalSet;
   }
 }

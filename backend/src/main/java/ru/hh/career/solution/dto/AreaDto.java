@@ -26,6 +26,10 @@ public class AreaDto {
     this.name = name;
   }
 
+  public AreaDto(Integer id) {
+    this.id = id;
+  }
+
   public Integer getId() {
     return id;
   }

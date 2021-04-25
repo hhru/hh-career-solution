@@ -12,4 +12,11 @@ public final class EducationalPeriodMapper {
       period.getYearTo());
   }
 
+  public static EducationalPeriod map(EducationalPeriodDto period) {
+    return period == null ? null : new EducationalPeriod(
+      period.getId(),
+      period.getYearFrom(),
+      period.getYearTo());
+  }
+
 }

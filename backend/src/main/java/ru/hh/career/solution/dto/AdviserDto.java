@@ -1,6 +1,7 @@
 package ru.hh.career.solution.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import ru.hh.career.solution.entity.AdviserToEducational;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AdviserDto {
 
-  private Integer adviserId;
+  private Integer id;
 
   private String name;
 
@@ -30,7 +31,7 @@ public class AdviserDto {
 
   private AreaDto area;
 
-  private List<EducationalInstitutionDto> educationalList;
+  private List<AdviserToEducational> educationalList;
 
   private List<ProfessionalSkillDto> professionalSkillList;
 
@@ -40,11 +41,11 @@ public class AdviserDto {
   public AdviserDto() {
   }
 
-  public AdviserDto(Integer adviserId, String name, String surname, String consultation, String experience,
+  public AdviserDto(Integer id, String name, String surname, String consultation, String experience,
                     String careerPractice, String customerType, String problemType, LocalDateTime created,
-                    LocalDateTime updated, AreaDto area, List<ProfessionalSkillDto> professionalSkillList,
-                    List<ProfessionalAssociationDto> professionalAssociationList) {
-    this.adviserId = adviserId;
+                    LocalDateTime updated, AreaDto area, List<AdviserToEducational> educationalList,
+                    List<ProfessionalSkillDto> professionalSkillList, List<ProfessionalAssociationDto> professionalAssociationList) {
+    this.id = id;
     this.name = name;
     this.surname = surname;
     this.consultation = consultation;
@@ -55,12 +56,13 @@ public class AdviserDto {
     this.created = created;
     this.updated = updated;
     this.area = area;
+    this.educationalList = educationalList;
     this.professionalSkillList = professionalSkillList;
     this.professionalAssociationList = professionalAssociationList;
   }
 
-  public Integer getAdviserId() {
-    return adviserId;
+  public Integer getId() {
+    return id;
   }
 
   public String getName() {
@@ -99,8 +101,8 @@ public class AdviserDto {
     return updated;
   }
 
-  public void setAdviserId(Integer adviserId) {
-    this.adviserId = adviserId;
+  public void setId(Integer id) {
+    this.id = id;
   }
 
   public void setName(String name) {
@@ -147,11 +149,11 @@ public class AdviserDto {
     this.area = area;
   }
 
-  public List<EducationalInstitutionDto> getEducationalList() {
+  public List<AdviserToEducational> getEducationalList() {
     return educationalList;
   }
 
-  public void setEducationalList(List<EducationalInstitutionDto> educationalList) {
+  public void setEducationalList(List<AdviserToEducational> educationalList) {
     this.educationalList = educationalList;
   }
 
@@ -170,4 +172,22 @@ public class AdviserDto {
   public void setProfessionalAssociationList(List<ProfessionalAssociationDto> professionalAssociationList) {
     this.professionalAssociationList = professionalAssociationList;
   }
+
+  public AdviserDto clearExceptId() {
+    this.name = null;
+    this.surname = null;
+    this.consultation = null;
+    this.experience = null;
+    this.careerPractice = null;
+    this.customerType = null;
+    this.problemType = null;
+    this.created = null;
+    this.updated = null;
+    this.area = null;
+    this.educationalList = null;
+    this.professionalSkillList = null;
+    this.professionalAssociationList = null;
+    return this;
+  }
+
 }

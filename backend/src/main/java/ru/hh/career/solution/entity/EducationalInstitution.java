@@ -16,7 +16,7 @@ public class EducationalInstitution {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
-  @Column(name = "country_iso_code", nullable = false)
+  @Column(name = "country_iso_code")
   private String countryIsoCode;
 
   private String name;
