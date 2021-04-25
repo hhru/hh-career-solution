@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -36,11 +37,8 @@ public class Adviser {
   @JoinColumn(name = "area_id", referencedColumnName = "id")
   private Area area;
 
-  //mappedBy = "adviserId"
   @Cascade(CascadeType.ALL)
-  @ManyToMany(fetch = FetchType.LAZY)
-  //@JoinTable(name = "adviser_to_educational")
-  @JoinColumn(name = "adviser_id")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "adviserId")
   private Set<AdviserToEducational> educationalSet = new HashSet<>();
 
   @ManyToMany(fetch = FetchType.LAZY)
