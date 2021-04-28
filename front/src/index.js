@@ -1,18 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import { PrivateRoute } from "./router/PrivateRoute";
+
 import { CssBaseline, ThemeProvider } from "@material-ui/core";
-import SignIn from "./pages/SignIn";
-import SignUp from "./pages/SignUp";
-import SignOut from "./pages/SignOut";
-import Landing from "./pages/Landing";
-import NotFound from "./pages/NotFound";
-import PageLayout from "./components/PageLayout";
-import theme from "./services/theme.js";
-import fakeAuth from "./services/fakeAuth";
-import { create } from "jss";
 import { StylesProvider, jssPreset } from "@material-ui/core/styles";
+
+import { create } from "jss";
+import theme from "src/services/theme.js";
+
+import { PrivateRoute } from "src/router/PrivateRoute";
+import fakeAuth from "src/services/fakeAuth";
+import SignIn from "src/pages/SignIn";
+import SignUp from "src/pages/SignUp";
+import SignOut from "src/pages/SignOut";
+import Landing from "src/pages/Landing";
+import NotFound from "src/pages/NotFound";
+import RequestForm from "src/pages/RequestForm";
+import PageLayout from "src/components/PageLayout";
 
 const jss = create({
   ...jssPreset(),
