@@ -1,10 +1,10 @@
 package ru.hh.career.solution.entity;
 
 public enum Experience {
-  noExperience("noExperience"),
-  between1And3("between1And3"),
-  between3And6("between3And6"),
-  moreThan6("moreThan6");
+  NO_EXPERIENCE("NO_EXPERIENCE"),
+  BETWEEN_1_AND_3("BETWEEN_1_AND_3"),
+  BETWEEN_3_AND_6("BETWEEN_3_AND_6"),
+  MORE_THAN_6("MORE_THAN_6");
 
   private final String description;
 

@@ -1,9 +1,9 @@
 package ru.hh.career.solution.entity;
 
 public enum Consultation {
-  offline("offline"),
-  online("online"),
-  all("all");
+  OFFLINE("OFFLINE"),
+  ONLINE("ONLINE"),
+  ALL("ALL");
 
   private final String description;
 

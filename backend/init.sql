@@ -5,13 +5,13 @@ CREATE TABLE account
   password_hash   text        not null
 );
 
-CREATE TYPE adviserConsultationType AS ENUM('offline', 'online', 'all');
+CREATE TYPE adviserConsultationType AS ENUM('OFFLINE', 'ONLINE', 'ALL');
 
-CREATE TYPE adviserExperienceType AS ENUM('noExperience', 'between1And3', 'between3And6', 'moreThan6');
+CREATE TYPE adviserExperienceType AS ENUM('NO_EXPERIENCE', 'BETWEEN_1_AND_3', 'BETWEEN_3_AND_6', 'MORE_THAN_6');
 
-CREATE TYPE adviserCareerType AS ENUM('consultation', 'coaching', 'all');
+CREATE TYPE adviserCareerType AS ENUM('CONSULTATION', 'COACHING', 'ALL');
 
-CREATE TYPE adviserCustomerType AS ENUM('noExperience', 'specialistAndExperts', 'middleManagement', 'topManagement');
+CREATE TYPE adviserCustomerType AS ENUM('NO_EXPERIENCE', 'SPECIALIST_AND_EXPERTS', 'MIDDLE_MANAGEMENT', 'TOP_MANAGEMENT');
 
 CREATE TABLE adviser
 (

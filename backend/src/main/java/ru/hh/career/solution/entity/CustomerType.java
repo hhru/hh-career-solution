@@ -1,10 +1,10 @@
 package ru.hh.career.solution.entity;
 
 public enum CustomerType {
-  noExperience("noExperience"),
-  specialistAndExperts("specialistAndExperts"),
-  middleManagement("middleManagement"),
-  topManagement("topManagement");
+  NO_EXPERIENCE("NO_EXPERIENCE"),
+  SPECIALIST_AND_EXPERTS("SPECIALIST_AND_EXPERTS"),
+  MIDDLE_MANAGEMENT("MIDDLE_MANAGEMENT"),
+  TOP_MANAGEMENT("TOP_MANAGEMENT");
 
   private final String description;
 

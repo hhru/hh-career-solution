@@ -7,4 +7,5 @@ package ru.hh.career.solution.exception;
 public enum ErrorCode {
   RESERVED,
   USER_EXISTS_PRIOR_TO_REGISTRATION,
+  NOT_FOUND,
 }

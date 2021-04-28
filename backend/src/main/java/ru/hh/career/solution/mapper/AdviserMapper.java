@@ -12,7 +12,7 @@ import javax.inject.Singleton;
 @Singleton
 public class AdviserMapper {
 
-  public static Adviser map(AdviserDto adviserDto) {
+  public static Adviser mapToAdviser(AdviserDto adviserDto) {
     return adviserDto == null ? null : new Adviser(
       adviserDto.getId(),
       adviserDto.getName(),
@@ -23,7 +23,7 @@ public class AdviserMapper {
       CustomerType.valueOf(adviserDto.getCustomerType()));
   }
 
-  public static AdviserDto map(Adviser adviser) {
+  public static AdviserDto mapToAdviserDto(Adviser adviser) {
     return adviser == null ? null : new AdviserDto(
       adviser.getId(),
       adviser.getName(),

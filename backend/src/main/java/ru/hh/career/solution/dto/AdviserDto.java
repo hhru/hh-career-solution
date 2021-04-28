@@ -88,20 +88,4 @@ public class AdviserDto {
   public void setCustomerType(String customerType) {
     this.customerType = customerType;
   }
-
-  public static class AdviserIdDto {
-    Integer adviserId;
-
-    public AdviserIdDto(Integer adviserId) {
-      this.adviserId = adviserId;
-    }
-
-    public Integer getAdviserId() {
-      return adviserId;
-    }
-
-    public void setAdviserId(Integer adviserId) {
-      this.adviserId = adviserId;
-    }
-  }
 }

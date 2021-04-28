@@ -1,9 +1,9 @@
 package ru.hh.career.solution.entity;
 
 public enum CareerPractice {
-  consultation("consultation"),
-  coaching("coaching"),
-  all("all");
+  CONSULTATION("CONSULTATION"),
+  COACHING("COACHING"),
+  ALL("ALL");
 
   private final String description;
 
