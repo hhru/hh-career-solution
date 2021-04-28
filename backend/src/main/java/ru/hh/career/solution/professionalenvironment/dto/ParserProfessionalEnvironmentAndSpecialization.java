@@ -1,4 +1,4 @@
-package ru.hh.career.solution.professionalenvironmentandspecialization.dto;
+package ru.hh.career.solution.professionalenvironment.dto;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.hh.jclient.common.DefaultRequestStrategy;
@@ -23,13 +23,12 @@ public class ParserProfessionalEnvironmentAndSpecialization {
   static final ObjectMapper mapper = new ObjectMapper();
 
   private Properties getjClientProperty() throws IOException {
-    InputStream is = ParserProfessionalEnvironmentAndSpecialization.class.getResourceAsStream("./jclient.properties");
     Properties properties = new Properties();
-    properties.load(is);
-    if (is == null) {
-      return properties;
-    }
-    is.close();
+    properties.setProperty("jclient.connectionTimeoutMs", "1100");
+    properties.setProperty("jclient.requestTimeoutMs", "2100");
+    properties.setProperty("jclient.readTimeoutMs", "-1");
+    properties.setProperty("jclient.userAgent", "hh-xmlback");
+    properties.setProperty("jclient.hostsWithSession", "http://localhost");
     return properties;
   }
 
@@ -37,14 +36,14 @@ public class ParserProfessionalEnvironmentAndSpecialization {
           throws IOException, ExecutionException, InterruptedException {
     Properties jClientProperty = this.getjClientProperty();
     HttpClientFactory http = new HttpClientFactoryBuilder(new SingletonStorage<>(() ->
-            new HttpClientContext(Map.of(), Map.of(), List.of())), List.of())
-            .withProperties(jClientProperty)
-            .withRequestStrategy(new DefaultRequestStrategy())
-            .withCallbackExecutor(Runnable::run)
-            .withHostsWithSession(Collections.singleton(jClientProperty
-                    .getProperty("jclient.hostsWithSession")))
-            .withUserAgent("my service")
-            .build();
+      new HttpClientContext(Map.of(), Map.of(), List.of())), List.of())
+      .withProperties(jClientProperty)
+      .withRequestStrategy(new DefaultRequestStrategy())
+      .withCallbackExecutor(Runnable::run)
+      .withHostsWithSession(Collections.singleton(jClientProperty != null ? jClientProperty
+              .getProperty("jclient.hostsWithSession") : null))
+      .withUserAgent("my service")
+      .build();
     Request request = new RequestBuilder("GET").setUrl("https://api.hh.ru/specializations").build();
     CompletableFuture<ProfessionalEnvironmentDto[]> profEnvDTOFuture = http.with(request)
             .expectJson(mapper, ProfessionalEnvironmentDto[].class).result();

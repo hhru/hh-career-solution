@@ -1,11 +1,13 @@
-package ru.hh.career.solution.professionalenvironmentandspecialization.dao;
+package ru.hh.career.solution.professionalenvironment.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.context.annotation.*;
 
 import javax.inject.Inject;
 import java.io.Serializable;
 
+@Primary
 public class GenericDao {
 
   private final SessionFactory sessionFactory;
@@ -19,8 +21,10 @@ public class GenericDao {
     if (object == null) {
       return;
     }
-    getSession().save(object);
+    getSession().saveOrUpdate(object);
   }
+
+
 
   public <T> T get(Class<T> clazz, Serializable id) {
     return getSession().get(clazz, id);

@@ -1,4 +1,4 @@
-package ru.hh.career.solution.professionalenvironmentandspecialization.dto;
+package ru.hh.career.solution.professionalenvironment.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 

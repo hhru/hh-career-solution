@@ -1,25 +1,21 @@
-package ru.hh.career.solution.professionalenvironmentandspecialization.entity;
+package ru.hh.career.solution.professionalenvironment.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "specialization")
-public class SpecializationEntity {
+public class Specialization {
 
-  public SpecializationEntity(Integer id, String name, Boolean laboring, Integer environmentId) {
-    this.environmentId = environmentId;
+  public Specialization(Integer id, String name, Boolean laboring, ProfessionalEnvironment professionalEnvironment) {
+    this.professionalEnvironment = professionalEnvironment;
     this.specializationId = id;
     this.specializationName = name;
     this.laboring = laboring;
   }
 
-  public SpecializationEntity(){}
+  public Specialization() {
+
+  }
 
   @Id
   @Column(name = "specialization_id")
@@ -31,9 +27,9 @@ public class SpecializationEntity {
   @Column(name = "laboring")
   private Boolean laboring;
 
-  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "professional_environment_id")
-  private Integer environmentId;
+  @ManyToOne
+  private ProfessionalEnvironment professionalEnvironment;
 
   public Integer getSpecializationId() {
     return specializationId;
@@ -59,11 +55,11 @@ public class SpecializationEntity {
     this.laboring = laboring;
   }
 
-  public Integer getEnvironmentId() {
-    return environmentId;
+  public ProfessionalEnvironment getProfessionalEnvironment() {
+    return professionalEnvironment;
   }
 
-  public void setEnvironmentId(Integer environmentId) {
-    this.environmentId = environmentId;
+  public void setProfessionalEnvironment(ProfessionalEnvironment professionalEnvironment) {
+    this.professionalEnvironment = professionalEnvironment;
   }
 }
