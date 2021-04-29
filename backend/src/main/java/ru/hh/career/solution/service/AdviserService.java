@@ -41,10 +41,6 @@ public class AdviserService {
 
   @Transactional
   public void saveOrUpdate(Adviser adviser) {
-    try {
-      adviserDao.saveOrUpdate(adviser);
-    } catch (Exception e) {
-      throw new LocalizableException(ErrorCode.INTERNAL, Response.Status.INTERNAL_SERVER_ERROR);
-    }
+    adviserDao.saveOrUpdate(adviser);
   }
 }
