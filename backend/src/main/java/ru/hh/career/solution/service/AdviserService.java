@@ -31,7 +31,7 @@ public class AdviserService {
   }
 
   public Integer getPagesCount(Long count, Integer perPage) {
-    return (int) Math.ceil((double) count / perPage);
+    return (int) (count / perPage) + (count % perPage == 0 ? 0 : 1);
   }
 
   @Transactional
@@ -40,7 +40,11 @@ public class AdviserService {
   }
 
   @Transactional
-  public Adviser saveOrUpdate(Adviser adviser) {
-    return (Adviser) adviserDao.saveOrUpdate(adviser);
+  public void saveOrUpdate(Adviser adviser) {
+    try {
+      adviserDao.saveOrUpdate(adviser);
+    } catch (Exception e) {
+      throw new LocalizableException(ErrorCode.INTERNAL, Response.Status.INTERNAL_SERVER_ERROR);
+    }
   }
 }

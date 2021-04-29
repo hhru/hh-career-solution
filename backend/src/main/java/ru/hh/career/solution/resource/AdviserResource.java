@@ -61,7 +61,12 @@ public class AdviserResource {
 
   @POST
   public IdDto createAdviser(@Valid AdviserDto request) {
-    Adviser adviser = adviserService.saveOrUpdate(AdviserMapper.mapToAdviser(request));
+    Adviser adviser = AdviserMapper.mapToAdviser(request);
+    try {
+      adviserService.saveOrUpdate(adviser);
+    } catch (LocalizableException e) {
+      e.rethrowAsWebApplicationException();
+    }
     return new IdDto(adviser.getId());
   }
 

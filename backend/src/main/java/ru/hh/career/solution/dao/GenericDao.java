@@ -62,11 +62,10 @@ public class GenericDao {
     return sessionFactory.getCurrentSession();
   }
 
-  public Object saveOrUpdate(Object object) {
+  public void saveOrUpdate(Object object) {
     if (object == null) {
-      return null;
+      return;
     }
     getSession().saveOrUpdate(object);
-    return object;
   }
 }
