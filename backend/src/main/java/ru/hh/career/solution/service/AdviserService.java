@@ -30,10 +30,6 @@ public class AdviserService {
       .orElseThrow(() -> new LocalizableException(ErrorCode.NOT_FOUND, Response.Status.NOT_FOUND));
   }
 
-  public Integer getPagesCount(Long count, Integer perPage) {
-    return (int) (count / perPage) + (count % perPage == 0 ? 0 : 1);
-  }
-
   @Transactional
   public Long getCountAdvisers() {
     return adviserDao.getCount();

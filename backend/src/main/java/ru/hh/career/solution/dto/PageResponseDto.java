@@ -2,42 +2,42 @@ package ru.hh.career.solution.dto;
 
 import java.util.List;
 
-public class PageResponseDto {
+public class PageResponseDto<T> {
 
-  List<Object> items;
+  private List<T> items;
 
-  Long found;
+  private Long found;
 
-  Integer pages;
+  private Long pages;
 
-  Integer perPage;
+  private Integer perPage;
 
-  Integer page;
+  private Integer page;
 
   public PageResponseDto() {
   }
 
-  public PageResponseDto(List<Object> items, Long found, Integer pages, Integer perPage, Integer page) {
+  public PageResponseDto(List<T> items, Long found, Integer perPage, Integer page) {
     this.items = items;
     this.found = found;
-    this.pages = pages;
+    this.pages = (found / perPage) + (found % perPage == 0 ? 0 : 1);
     this.perPage = perPage;
     this.page = page;
   }
 
-  public List<Object> getItems() {
+  public List<T> getItems() {
     return items;
   }
 
-  public void setItems(List<Object> items) {
+  public void setItems(List<T> items) {
     this.items = items;
   }
 
-  public Integer getPages() {
+  public Long getPages() {
     return pages;
   }
 
-  public void setPages(Integer pages) {
+  public void setPages(Long pages) {
     this.pages = pages;
   }
 
