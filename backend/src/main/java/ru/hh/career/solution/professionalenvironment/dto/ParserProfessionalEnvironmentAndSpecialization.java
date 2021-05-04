@@ -22,7 +22,7 @@ public class ParserProfessionalEnvironmentAndSpecialization {
 
   static final ObjectMapper mapper = new ObjectMapper();
 
-  private Properties getjClientProperty() throws IOException {
+  private Properties getjClientProperty() {
     Properties properties = new Properties();
     properties.setProperty("jclient.connectionTimeoutMs", "1100");
     properties.setProperty("jclient.requestTimeoutMs", "2100");

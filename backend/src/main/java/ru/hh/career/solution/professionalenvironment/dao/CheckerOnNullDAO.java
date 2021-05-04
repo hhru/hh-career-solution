@@ -4,7 +4,9 @@ import org.hibernate.SessionFactory;
 import ru.hh.career.solution.professionalenvironment.entity.*;
 
 import javax.inject.Inject;
-import javax.persistence.criteria.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 public class CheckerOnNullDAO extends GenericDao {
 

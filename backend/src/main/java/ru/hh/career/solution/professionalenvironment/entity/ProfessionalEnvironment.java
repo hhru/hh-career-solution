@@ -1,5 +1,6 @@
 package ru.hh.career.solution.professionalenvironment.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -28,7 +29,7 @@ public class ProfessionalEnvironment {
   @Column(name = "professional_environment_name")
   private String professionalEnvironmentName;
 
-  @OneToMany(mappedBy = "professionalEnvironment", orphanRemoval = true)
+  @OneToMany(mappedBy = "professionalEnvironment", orphanRemoval = true, cascade = CascadeType.ALL)
   private Set<Specialization> specializationSet;
 
   public Integer getId() {
