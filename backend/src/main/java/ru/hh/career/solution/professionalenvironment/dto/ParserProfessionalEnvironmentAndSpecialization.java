@@ -9,8 +9,7 @@ import ru.hh.jclient.common.Request;
 import ru.hh.jclient.common.RequestBuilder;
 import ru.hh.jclient.common.util.storage.SingletonStorage;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -21,14 +20,18 @@ import java.util.concurrent.ExecutionException;
 public class ParserProfessionalEnvironmentAndSpecialization {
 
   static final ObjectMapper mapper = new ObjectMapper();
+  public static final String pathToProperties = "src/etc/hh-career-solution/jclient.properties";
 
   private Properties getjClientProperty() {
+    FileInputStream fileInputStream;
     Properties properties = new Properties();
-    properties.setProperty("jclient.connectionTimeoutMs", "1100");
-    properties.setProperty("jclient.requestTimeoutMs", "2100");
-    properties.setProperty("jclient.readTimeoutMs", "-1");
-    properties.setProperty("jclient.userAgent", "hh-xmlback");
-    properties.setProperty("jclient.hostsWithSession", "http://localhost");
+    try {
+      fileInputStream = new FileInputStream(pathToProperties);
+      properties.load(fileInputStream);
+    } catch (IOException e) {
+      System.out.println("Ошибка в программе: файл " + pathToProperties + " не обнаружено");
+      e.printStackTrace();
+    }
     return properties;
   }
 
