@@ -1,11 +1,11 @@
 package ru.hh.career.solution.professionalenvironment.services;
 
 
+import org.springframework.stereotype.Service;
 import ru.hh.career.solution.professionalenvironment.dao.CheckerOnNullDAO;
 import ru.hh.career.solution.professionalenvironment.dao.GenericDao;
 import ru.hh.career.solution.professionalenvironment.dto.ParserProfessionalEnvironmentAndSpecialization;
 import ru.hh.career.solution.professionalenvironment.dto.ProfessionalEnvironmentDto;
-import ru.hh.career.solution.professionalenvironment.dto.SpecializationDto;
 import ru.hh.career.solution.professionalenvironment.entity.ProfessionalEnvironment;
 import ru.hh.career.solution.professionalenvironment.entity.Specialization;
 
@@ -15,14 +15,17 @@ import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
+@Service
 public class ParserSpecializationService {
   private final GenericDao genericDao;
   private final CheckerOnNullDAO checkerOnNullDAO;
+  private final ParserProfessionalEnvironmentAndSpecialization parserProfessionalEnvironmentAndSpecialization;
 
   @Inject
-  public ParserSpecializationService(GenericDao genericDao, CheckerOnNullDAO checkerOnNullDAO) {
+  public ParserSpecializationService(GenericDao genericDao, CheckerOnNullDAO checkerOnNullDAO, ParserProfessionalEnvironmentAndSpecialization parserProfessionalEnvironmentAndSpecialization) {
     this.genericDao = genericDao;
     this.checkerOnNullDAO = checkerOnNullDAO;
+    this.parserProfessionalEnvironmentAndSpecialization = parserProfessionalEnvironmentAndSpecialization;
   }
 
   @Transactional
@@ -35,8 +38,6 @@ public class ParserSpecializationService {
     if (checkBdOnNull()) {
       return;
     }
-    ParserProfessionalEnvironmentAndSpecialization parserProfessionalEnvironmentAndSpecialization =
-            new ParserProfessionalEnvironmentAndSpecialization();
     ProfessionalEnvironmentDto[] professionalEnvironmentDtos = parserProfessionalEnvironmentAndSpecialization.parse();
     for (ProfessionalEnvironmentDto professionalEnvironmentDto : professionalEnvironmentDtos) {
       ProfessionalEnvironment professionalEnvironment = new ProfessionalEnvironment(

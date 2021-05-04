@@ -2,7 +2,7 @@ package ru.hh.career.solution.professionalenvironment.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Primary;
 
 import javax.inject.Inject;
 import java.io.Serializable;

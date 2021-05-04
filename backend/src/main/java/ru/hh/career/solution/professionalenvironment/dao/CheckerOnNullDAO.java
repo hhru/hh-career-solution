@@ -1,7 +1,7 @@
 package ru.hh.career.solution.professionalenvironment.dao;
 
 import org.hibernate.SessionFactory;
-import ru.hh.career.solution.professionalenvironment.entity.*;
+import ru.hh.career.solution.professionalenvironment.entity.ProfessionalEnvironment;
 
 import javax.inject.Inject;
 import javax.persistence.criteria.CriteriaBuilder;

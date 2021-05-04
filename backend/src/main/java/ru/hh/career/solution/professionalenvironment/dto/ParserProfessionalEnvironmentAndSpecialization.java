@@ -1,6 +1,7 @@
 package ru.hh.career.solution.professionalenvironment.dto;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.context.annotation.Bean;
 import ru.hh.jclient.common.DefaultRequestStrategy;
 import ru.hh.jclient.common.HttpClientContext;
 import ru.hh.jclient.common.HttpClientFactory;
@@ -9,7 +10,8 @@ import ru.hh.jclient.common.Request;
 import ru.hh.jclient.common.RequestBuilder;
 import ru.hh.jclient.common.util.storage.SingletonStorage;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -17,11 +19,13 @@ import java.util.Properties;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
+
 public class ParserProfessionalEnvironmentAndSpecialization {
 
   static final ObjectMapper mapper = new ObjectMapper();
   public static final String pathToProperties = "src/etc/hh-career-solution/jclient.properties";
 
+  @Bean
   private Properties getjClientProperty() {
     FileInputStream fileInputStream;
     Properties properties = new Properties();

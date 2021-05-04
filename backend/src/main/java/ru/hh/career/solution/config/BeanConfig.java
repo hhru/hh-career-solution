@@ -7,6 +7,7 @@ import ru.hh.career.solution.dao.AccountDao;
 import ru.hh.career.solution.dao.AdviserDao;
 import ru.hh.career.solution.professionalenvironment.dao.CheckerOnNullDAO;
 import ru.hh.career.solution.professionalenvironment.dao.GenericDao;
+import ru.hh.career.solution.professionalenvironment.dto.ParserProfessionalEnvironmentAndSpecialization;
 import ru.hh.career.solution.professionalenvironment.resource.ParserResource;
 import ru.hh.career.solution.professionalenvironment.services.ParserSpecializationService;
 import ru.hh.career.solution.resource.AccountResource;
@@ -27,7 +28,8 @@ import ru.hh.career.solution.service.AdviserService;
   ParserSpecializationService.class,
   ParserResource.class,
   GenericDao.class,
-  CheckerOnNullDAO.class
+  CheckerOnNullDAO.class,
+  ParserProfessionalEnvironmentAndSpecialization.class
 })
 public class BeanConfig {
 }
