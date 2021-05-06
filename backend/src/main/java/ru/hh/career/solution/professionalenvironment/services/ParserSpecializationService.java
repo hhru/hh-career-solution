@@ -26,6 +26,11 @@ public class ParserSpecializationService {
     this.genericDao = genericDao;
     this.checkerOnNullDAO = checkerOnNullDAO;
     this.parserProfessionalEnvironmentAndSpecialization = parserProfessionalEnvironmentAndSpecialization;
+    try {
+      parseSpecialization();
+    } catch (IOException | ExecutionException | InterruptedException e) {
+      e.printStackTrace();
+    }
   }
 
   @Transactional
@@ -34,7 +39,7 @@ public class ParserSpecializationService {
   }
 
   @Transactional
-  public void mainParser() throws IOException, ExecutionException, InterruptedException {
+  public void parseSpecialization() throws IOException, ExecutionException, InterruptedException {
     if (checkBdOnNull()) {
       return;
     }
@@ -45,7 +50,7 @@ public class ParserSpecializationService {
               professionalEnvironmentDto.getName()
       );
       professionalEnvironment.setSpecializationSet(professionalEnvironmentDto.getSpecializations().stream().map(s -> new Specialization(
-              s.getIdSpecialization(),
+              s.getSpecializationId(),
               s.getName(),
               s.getLaboring(),
               professionalEnvironment

@@ -20,8 +20,8 @@ public class SpecializationDeserializer extends StdDeserializer<SpecializationDt
     if (treeNode == null) {
       return null;
     }
-    specializationDto.setIdProfessionalEnvironment(Integer.parseInt(treeNode.get("id").asText().split("\\.")[0]));
-    specializationDto.setIdSpecialization(Integer.parseInt(treeNode.get("id").asText().split("\\.")[1]));
+    specializationDto.setProfessionalEnvironmentId(Integer.parseInt(treeNode.get("id").asText().split("\\.")[0]));
+    specializationDto.setSpecializationId(Integer.parseInt(treeNode.get("id").asText().split("\\.")[1]));
     specializationDto.setName(treeNode.get("name").asText());
     specializationDto.setLaboring(treeNode.get("laboring").asBoolean());
     return specializationDto;

@@ -4,25 +4,25 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @JsonDeserialize(using = SpecializationDeserializer.class)
 public class SpecializationDto {
-  private Integer idSpecialization;
-  private Integer idProfessionalEnvironment;
+  private Integer specializationId;
+  private Integer professionalEnvironmentId;
   private String name;
   private Boolean laboring;
 
-  public Integer getIdProfessionalEnvironment() {
-    return idProfessionalEnvironment;
+  public Integer getProfessionalEnvironmentId() {
+    return professionalEnvironmentId;
   }
 
-  public void setIdProfessionalEnvironment(Integer idProfessionalEnvironment) {
-    this.idProfessionalEnvironment = idProfessionalEnvironment;
+  public void setProfessionalEnvironmentId(Integer professionalEnvironmentId) {
+    this.professionalEnvironmentId = professionalEnvironmentId;
   }
 
-  public Integer getIdSpecialization() {
-    return idSpecialization;
+  public Integer getSpecializationId() {
+    return specializationId;
   }
 
-  public void setIdSpecialization(Integer idSpecialization) {
-    this.idSpecialization = idSpecialization;
+  public void setSpecializationId(Integer specializationId) {
+    this.specializationId = specializationId;
   }
 
   public String getName() {

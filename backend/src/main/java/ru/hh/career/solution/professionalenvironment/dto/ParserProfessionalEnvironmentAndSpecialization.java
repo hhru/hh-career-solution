@@ -2,12 +2,7 @@ package ru.hh.career.solution.professionalenvironment.dto;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
-import ru.hh.jclient.common.DefaultRequestStrategy;
-import ru.hh.jclient.common.HttpClientContext;
-import ru.hh.jclient.common.HttpClientFactory;
-import ru.hh.jclient.common.HttpClientFactoryBuilder;
-import ru.hh.jclient.common.Request;
-import ru.hh.jclient.common.RequestBuilder;
+import ru.hh.jclient.common.*;
 import ru.hh.jclient.common.util.storage.SingletonStorage;
 
 import java.io.FileInputStream;
@@ -16,7 +11,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 
@@ -40,7 +34,7 @@ public class ParserProfessionalEnvironmentAndSpecialization {
   }
 
   public ProfessionalEnvironmentDto[] parse()
-          throws IOException, ExecutionException, InterruptedException {
+          throws ExecutionException, InterruptedException {
     Properties jClientProperty = this.getjClientProperty();
     HttpClientFactory http = new HttpClientFactoryBuilder(new SingletonStorage<>(() ->
       new HttpClientContext(Map.of(), Map.of(), List.of())), List.of())
@@ -52,8 +46,7 @@ public class ParserProfessionalEnvironmentAndSpecialization {
       .withUserAgent("my service")
       .build();
     Request request = new RequestBuilder("GET").setUrl("https://api.hh.ru/specializations").build();
-    CompletableFuture<ProfessionalEnvironmentDto[]> profEnvDTOFuture = http.with(request)
-            .expectJson(mapper, ProfessionalEnvironmentDto[].class).result();
-    return profEnvDTOFuture.get();
+
+    return http.with(request).expectJson(mapper, ProfessionalEnvironmentDto[].class).result().get();
   }
 }
