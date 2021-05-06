@@ -1,0 +1,23 @@
+@import "src/services/theme.scss";
+
+.whyNeedSession {
+  padding: 50px 0;
+  background-color: $color-grey-bg;
+}
+
+.list {
+  padding: 30px 0;
+}
+
+.listItem {
+  padding: 15px;
+}
+
+.itemSubtitle {
+  padding-bottom: 15px;
+}
+
+.itemParagraph {
+  text-align: left;
+  padding-bottom: 15px;
+}

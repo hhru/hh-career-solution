@@ -1,0 +1,22 @@
+@import "src/services/theme.scss";
+
+.advantages {
+  padding: 50px 0;
+  background-color: $color-grey-bg;
+}
+
+.list {
+  padding: 30px 0;
+}
+
+.item {
+  padding: 15px 10px;
+
+  @media #{$screen-gt-md} {
+    padding: 15px 30px
+  }
+}
+
+.itemText {
+  text-align: left;
+}

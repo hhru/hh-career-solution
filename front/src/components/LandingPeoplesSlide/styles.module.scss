@@ -1,0 +1,32 @@
+@import "src/services/theme.scss";
+
+.peoples {
+  background-color: $color-grey-bg;
+  padding: 50px 0;
+}
+
+.wrapSubTitle {
+  padding-top: 15px;
+}
+
+.wrapContainer {
+  padding: 15px 0 30px;
+}
+
+.card {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.cardMedia {
+  height: 0;
+  padding-top: 56.25%;
+}
+
+.itemWrapper {
+  padding: 15px 0;
+
+  @media #{$screen-gt-sm} {
+    padding: 15px;
+  }
+}

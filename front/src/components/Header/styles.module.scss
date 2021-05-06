@@ -1,0 +1,33 @@
+@import "src/services/theme.scss";
+
+.appHeader {
+  background-color: $color-dark-bg;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+}
+
+.header {
+  font-weight: 600;
+}
+
+.subHeader {
+  font-size: 16px;
+  padding-left: 1.5rem;
+  line-height: 1.2rem;
+}
+
+.button {
+  color: white;
+}
+
+.buttonWrapper {
+  padding-left: 10px;
+}
+
+.fill {
+  flex-grow: 1;
+}
