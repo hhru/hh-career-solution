@@ -41,6 +41,7 @@ ReactDOM.render(
                 }
               />
               <Route exact path="/sign-up" component={SignUp} />
+              <Route exact path="/request-form" component={RequestForm} />
               <PrivateRoute
                 exact
                 path="/sign-out"
