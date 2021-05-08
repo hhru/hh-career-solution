@@ -8,14 +8,14 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-public class CheckerOnNullDAO extends GenericDao {
+public class CheckerOnNullDAO extends ru.hh.career.solution.dao.GenericDao {
 
   @Inject
   public CheckerOnNullDAO(SessionFactory sessionFactory) {
     super(sessionFactory);
   }
 
-  public boolean checkOnNullDAO() {
+  public boolean isSpecialisationsAbsent() {
     CriteriaBuilder criteriaBuilder = getSession().getCriteriaBuilder();
     CriteriaQuery<Long> query = criteriaBuilder.createQuery(Long.class);
     Root<ProfessionalEnvironment> root = query.from(ProfessionalEnvironment.class);

@@ -1,9 +1,9 @@
 package ru.hh.career.solution.professionalenvironment.resource;
 
-import com.orbitz.retrofit.http.GET;
 import ru.hh.career.solution.professionalenvironment.services.ParserSpecializationService;
 
 import javax.inject.Inject;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
@@ -17,7 +17,7 @@ public class ParserResource {
     this.parserSpecializationService = parserSpecializationService;
   }
 
-  @GET
+  @POST
   @Path("/specialization")
   public void getSpecialization() {
     try {

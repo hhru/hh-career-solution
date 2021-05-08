@@ -29,7 +29,7 @@ public class ParserSpecializationService {
   }
 
   private boolean checkBdOnNull() {
-    return this.checkerOnNullDAO.checkOnNullDAO();
+    return this.checkerOnNullDAO.isSpecialisationsAbsent();
   }
 
   @Transactional

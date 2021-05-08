@@ -24,8 +24,6 @@ public class GenericDao {
     getSession().saveOrUpdate(object);
   }
 
-
-
   public <T> T get(Class<T> clazz, Serializable id) {
     return getSession().get(clazz, id);
   }
