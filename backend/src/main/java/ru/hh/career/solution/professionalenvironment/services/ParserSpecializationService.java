@@ -29,13 +29,9 @@ public class ParserSpecializationService {
     this.professionalEnvironmentParser = professionalEnvironmentParser;
   }
 
-  private boolean checkBdOnNull() {
-    return this.checkerOnNullDAO.isSpecialisationsAbsent();
-  }
-
   @Transactional
   public void parseSpecialization() throws IOException, ExecutionException, InterruptedException {
-    if (checkBdOnNull()) {
+    if (checkerOnNullDAO.isSpecialisationsPresent()) {
       return;
     }
     ProfessionalEnvironmentDto[] professionalEnvironmentDtos = professionalEnvironmentParser.parse();

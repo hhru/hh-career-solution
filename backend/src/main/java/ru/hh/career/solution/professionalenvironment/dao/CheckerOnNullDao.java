@@ -16,7 +16,7 @@ public class CheckerOnNullDao extends GenericDao {
     super(sessionFactory);
   }
 
-  public boolean isSpecialisationsAbsent() {
+  public boolean isSpecialisationsPresent() {
     CriteriaBuilder criteriaBuilder = getSession().getCriteriaBuilder();
     CriteriaQuery<Long> query = criteriaBuilder.createQuery(Long.class);
     Root<ProfessionalEnvironment> root = query.from(ProfessionalEnvironment.class);
