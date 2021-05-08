@@ -4,7 +4,7 @@ package ru.hh.career.solution.professionalenvironment.services;
 import org.springframework.stereotype.Service;
 import ru.hh.career.solution.professionalenvironment.dao.CheckerOnNullDAO;
 import ru.hh.career.solution.professionalenvironment.dao.GenericDao;
-import ru.hh.career.solution.professionalenvironment.dto.ParserProfessionalEnvironmentAndSpecialization;
+import ru.hh.career.solution.professionalenvironment.dto.ProfessionalEnvironmentParser;
 import ru.hh.career.solution.professionalenvironment.dto.ProfessionalEnvironmentDto;
 import ru.hh.career.solution.professionalenvironment.entity.ProfessionalEnvironment;
 import ru.hh.career.solution.professionalenvironment.entity.Specialization;
@@ -19,22 +19,16 @@ import java.util.stream.Collectors;
 public class ParserSpecializationService {
   private final GenericDao genericDao;
   private final CheckerOnNullDAO checkerOnNullDAO;
-  private final ParserProfessionalEnvironmentAndSpecialization parserProfessionalEnvironmentAndSpecialization;
+  private final ProfessionalEnvironmentParser professionalEnvironmentParser;
 
   @Inject
-  public ParserSpecializationService(GenericDao genericDao, CheckerOnNullDAO checkerOnNullDAO, ParserProfessionalEnvironmentAndSpecialization parserProfessionalEnvironmentAndSpecialization) {
+  public ParserSpecializationService(GenericDao genericDao, CheckerOnNullDAO checkerOnNullDAO, ProfessionalEnvironmentParser professionalEnvironmentParser) {
     this.genericDao = genericDao;
     this.checkerOnNullDAO = checkerOnNullDAO;
-    this.parserProfessionalEnvironmentAndSpecialization = parserProfessionalEnvironmentAndSpecialization;
-    try {
-      parseSpecialization();
-    } catch (IOException | ExecutionException | InterruptedException e) {
-      e.printStackTrace();
-    }
+    this.professionalEnvironmentParser = professionalEnvironmentParser;
   }
 
-  @Transactional
-  public boolean checkBdOnNull() {
+  private boolean checkBdOnNull() {
     return this.checkerOnNullDAO.checkOnNullDAO();
   }
 
@@ -43,7 +37,7 @@ public class ParserSpecializationService {
     if (checkBdOnNull()) {
       return;
     }
-    ProfessionalEnvironmentDto[] professionalEnvironmentDtos = parserProfessionalEnvironmentAndSpecialization.parse();
+    ProfessionalEnvironmentDto[] professionalEnvironmentDtos = professionalEnvironmentParser.parse();
     for (ProfessionalEnvironmentDto professionalEnvironmentDto : professionalEnvironmentDtos) {
       ProfessionalEnvironment professionalEnvironment = new ProfessionalEnvironment(
               professionalEnvironmentDto.getId(),
