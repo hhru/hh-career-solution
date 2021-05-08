@@ -2,10 +2,10 @@ package ru.hh.career.solution.professionalenvironment.services;
 
 
 import org.springframework.stereotype.Service;
-import ru.hh.career.solution.professionalenvironment.dao.CheckerOnNullDAO;
-import ru.hh.career.solution.professionalenvironment.dao.GenericDao;
-import ru.hh.career.solution.professionalenvironment.dto.ProfessionalEnvironmentParser;
+import ru.hh.career.solution.dao.GenericDao;
+import ru.hh.career.solution.professionalenvironment.dao.CheckerOnNullDao;
 import ru.hh.career.solution.professionalenvironment.dto.ProfessionalEnvironmentDto;
+import ru.hh.career.solution.professionalenvironment.dto.ProfessionalEnvironmentParser;
 import ru.hh.career.solution.professionalenvironment.entity.ProfessionalEnvironment;
 import ru.hh.career.solution.professionalenvironment.entity.Specialization;
 
@@ -18,11 +18,12 @@ import java.util.stream.Collectors;
 @Service
 public class ParserSpecializationService {
   private final GenericDao genericDao;
-  private final CheckerOnNullDAO checkerOnNullDAO;
+  private final CheckerOnNullDao checkerOnNullDAO;
   private final ProfessionalEnvironmentParser professionalEnvironmentParser;
 
   @Inject
-  public ParserSpecializationService(GenericDao genericDao, CheckerOnNullDAO checkerOnNullDAO, ProfessionalEnvironmentParser professionalEnvironmentParser) {
+  public ParserSpecializationService(GenericDao genericDao, CheckerOnNullDao checkerOnNullDAO,
+                                     ProfessionalEnvironmentParser professionalEnvironmentParser) {
     this.genericDao = genericDao;
     this.checkerOnNullDAO = checkerOnNullDAO;
     this.professionalEnvironmentParser = professionalEnvironmentParser;

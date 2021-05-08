@@ -1,6 +1,7 @@
 package ru.hh.career.solution.professionalenvironment.dao;
 
 import org.hibernate.SessionFactory;
+import ru.hh.career.solution.dao.GenericDao;
 import ru.hh.career.solution.professionalenvironment.entity.ProfessionalEnvironment;
 
 import javax.inject.Inject;
@@ -8,10 +9,10 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-public class CheckerOnNullDAO extends ru.hh.career.solution.dao.GenericDao {
+public class CheckerOnNullDao extends GenericDao {
 
   @Inject
-  public CheckerOnNullDAO(SessionFactory sessionFactory) {
+  public CheckerOnNullDao(SessionFactory sessionFactory) {
     super(sessionFactory);
   }
 

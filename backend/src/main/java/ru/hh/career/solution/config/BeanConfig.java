@@ -5,8 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import ru.hh.career.solution.dao.AccountDao;
 import ru.hh.career.solution.dao.AdviserDao;
-import ru.hh.career.solution.professionalenvironment.dao.CheckerOnNullDAO;
-import ru.hh.career.solution.professionalenvironment.dao.GenericDao;
+import ru.hh.career.solution.dao.GenericDao;
+import ru.hh.career.solution.professionalenvironment.dao.CheckerOnNullDao;
 import ru.hh.career.solution.professionalenvironment.dto.ProfessionalEnvironmentParser;
 import ru.hh.career.solution.professionalenvironment.resource.ParserResource;
 import ru.hh.career.solution.professionalenvironment.services.ParserSpecializationService;
@@ -37,16 +37,16 @@ import java.util.Properties;
   AdviserService.class,
   AdviserDao.class,
 
+  GenericDao.class,
   ParserSpecializationService.class,
   ParserResource.class,
-  GenericDao.class,
-  CheckerOnNullDAO.class,
+  CheckerOnNullDao.class,
   ProfessionalEnvironmentParser.class
 })
 public class BeanConfig {
 
   @Bean
-  public HttpClientFactory httpClientFactory(){
+  public HttpClientFactory httpClientFactory() {
     String pathToProperties = "src/etc/hh-career-solution/jclient.properties";
     FileInputStream fileInputStream;
     Properties jClientProperty = new Properties();
@@ -54,7 +54,7 @@ public class BeanConfig {
       fileInputStream = new FileInputStream(pathToProperties);
       jClientProperty.load(fileInputStream);
     } catch (IOException e) {
-      System.out.println("Ошибка в программе: файл " + pathToProperties + " не обнаружено");
+      System.err.println("Ошибка в программе: файл " + pathToProperties + " не обнаружено");
       e.printStackTrace();
     }
     return new HttpClientFactoryBuilder(new SingletonStorage<>(() ->
