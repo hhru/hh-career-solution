@@ -18,20 +18,20 @@ import java.util.stream.Collectors;
 @Service
 public class ParserSpecializationService {
   private final GenericDao genericDao;
-  private final CheckerOnNullDao checkerOnNullDAO;
+  private final CheckerOnNullDao checkerOnNullDao;
   private final ProfessionalEnvironmentParser professionalEnvironmentParser;
 
   @Inject
-  public ParserSpecializationService(GenericDao genericDao, CheckerOnNullDao checkerOnNullDAO,
+  public ParserSpecializationService(GenericDao genericDao, CheckerOnNullDao checkerOnNullDao,
                                      ProfessionalEnvironmentParser professionalEnvironmentParser) {
     this.genericDao = genericDao;
-    this.checkerOnNullDAO = checkerOnNullDAO;
+    this.checkerOnNullDao = checkerOnNullDao;
     this.professionalEnvironmentParser = professionalEnvironmentParser;
   }
 
   @Transactional
   public void parseSpecialization() throws IOException, ExecutionException, InterruptedException {
-    if (checkerOnNullDAO.isSpecialisationsPresent()) {
+    if (checkerOnNullDao.isSpecialisationsPresent()) {
       return;
     }
     ProfessionalEnvironmentDto[] professionalEnvironmentDtos = professionalEnvironmentParser.parse();
