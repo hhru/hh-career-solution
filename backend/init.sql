@@ -27,7 +27,8 @@ CREATE TABLE adviser
   consultation    adviserConsultationType,
   experience      adviserExperienceType,
   career_practice adviserCareerType,
-  customer_type   adviserCustomerType
+  customer_type   adviserCustomerType,
+  account_id INTEGER NOT NULL REFERENCES account(id)
 );
 
 CREATE TABLE professional_environment

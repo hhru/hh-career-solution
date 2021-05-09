@@ -4,9 +4,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -35,11 +38,15 @@ public class Adviser {
   @Enumerated(EnumType.STRING)
   private CustomerType customerType;
 
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "account_id")
+  private Account account;
+
   public Adviser() {
   }
 
   public Adviser(Integer id, String name, String surname, Consultation consultation, Experience experience,
-                 CareerPractice careerPractice, CustomerType customerType) {
+                 CareerPractice careerPractice, CustomerType customerType, Account account) {
     this.id = id;
     this.name = name;
     this.surname = surname;
@@ -47,6 +54,7 @@ public class Adviser {
     this.experience = experience;
     this.careerPractice = careerPractice;
     this.customerType = customerType;
+    this.account = account;
   }
 
   public Integer getId() {

@@ -1,6 +1,7 @@
 package ru.hh.career.solution.mapper;
 
 import ru.hh.career.solution.dto.AdviserDto;
+import ru.hh.career.solution.entity.Account;
 import ru.hh.career.solution.entity.Adviser;
 import ru.hh.career.solution.entity.CareerPractice;
 import ru.hh.career.solution.entity.Consultation;
@@ -20,7 +21,8 @@ public class AdviserMapper {
       Consultation.valueOf(adviserDto.getConsultation()),
       Experience.valueOf(adviserDto.getExperience()),
       CareerPractice.valueOf(adviserDto.getCareerPractice()),
-      CustomerType.valueOf(adviserDto.getCustomerType()));
+      CustomerType.valueOf(adviserDto.getCustomerType()),
+      new Account(adviserDto.getAccountId()));
   }
 
   public static AdviserDto mapToAdviserDto(Adviser adviser) {
@@ -28,9 +30,9 @@ public class AdviserMapper {
       adviser.getId(),
       adviser.getName(),
       adviser.getSurname(),
-      adviser.getConsultation().getDescription(),
-      adviser.getExperience().getDescription(),
-      adviser.getCareerPractice().getDescription(),
-      adviser.getCustomerType().getDescription());
+      adviser.getConsultation().toString(),
+      adviser.getExperience().toString(),
+      adviser.getCareerPractice().toString(),
+      adviser.getCustomerType().toString());
   }
 }
