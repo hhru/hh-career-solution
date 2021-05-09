@@ -1,6 +1,10 @@
 package ru.hh.career.solution.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import ru.hh.career.solution.professionalenvironment.dto.SpecializationDto;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AdviserDto {
@@ -21,11 +25,13 @@ public class AdviserDto {
 
   private Integer accountId;
 
+  private List<SpecializationDto> specializationList = new ArrayList<>();
+
   public AdviserDto() {
   }
 
   public AdviserDto(Integer id, String name, String surname, String consultation, String experience,
-                    String careerPractice, String customerType) {
+                    String careerPractice, String customerType, List<SpecializationDto> specializationList) {
     this.id = id;
     this.name = name;
     this.surname = surname;
@@ -33,6 +39,7 @@ public class AdviserDto {
     this.experience = experience;
     this.careerPractice = careerPractice;
     this.customerType = customerType;
+    this.specializationList = specializationList;
   }
 
   public Integer getId() {
@@ -97,5 +104,13 @@ public class AdviserDto {
 
   public void setAccountId(Integer accountId) {
     this.accountId = accountId;
+  }
+
+  public List<SpecializationDto> getSpecializationList() {
+    return specializationList;
+  }
+
+  public void setSpecializationList(List<SpecializationDto> specializationList) {
+    this.specializationList = specializationList;
   }
 }

@@ -9,6 +9,16 @@ public class SpecializationDto {
   private String name;
   private Boolean laboring;
 
+  public SpecializationDto(Integer specializationId, Integer professionalEnvironmentId, String name, Boolean laboring) {
+    this.specializationId = specializationId;
+    this.professionalEnvironmentId = professionalEnvironmentId;
+    this.name = name;
+    this.laboring = laboring;
+  }
+
+  public SpecializationDto() {
+  }
+
   public Integer getProfessionalEnvironmentId() {
     return professionalEnvironmentId;
   }

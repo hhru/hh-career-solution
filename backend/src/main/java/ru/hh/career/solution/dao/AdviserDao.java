@@ -5,7 +5,6 @@ import ru.hh.career.solution.entity.Adviser;
 
 import javax.inject.Inject;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 public class AdviserDao extends GenericDao {
@@ -18,6 +17,7 @@ public class AdviserDao extends GenericDao {
   public List<Adviser> getList(Integer perPage, Integer page) {
     return getSession()
       .createQuery("SELECT a FROM Adviser a " +
+        "LEFT JOIN FETCH a.specializationSet " +
         "ORDER BY a.id", Adviser.class)
       .setFirstResult(page * perPage)
       .setMaxResults(perPage)
@@ -25,7 +25,12 @@ public class AdviserDao extends GenericDao {
   }
 
   public Optional<Adviser> getById(Integer id) {
-    return getSession().createQuery(selectWhereAllEqual(Adviser.class, Map.of("id", id))).uniqueResultOptional();
+    return getSession()
+      .createQuery("SELECT a FROM Adviser a " +
+        "LEFT JOIN FETCH a.specializationSet " +
+        "WHERE a.id = :id", Adviser.class)
+      .setParameter("id", id)
+      .uniqueResultOptional();
   }
 
   public Long getCount() {
