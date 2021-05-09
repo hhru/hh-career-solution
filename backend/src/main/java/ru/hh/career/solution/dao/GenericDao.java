@@ -2,6 +2,7 @@ package ru.hh.career.solution.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.context.annotation.Primary;
 
 import javax.inject.Inject;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -11,6 +12,7 @@ import javax.persistence.criteria.Root;
 import java.io.Serializable;
 import java.util.Map;
 
+@Primary
 public class GenericDao {
 
   private final SessionFactory sessionFactory;

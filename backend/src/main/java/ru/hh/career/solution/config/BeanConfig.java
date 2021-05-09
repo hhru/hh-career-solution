@@ -19,8 +19,8 @@ import ru.hh.jclient.common.HttpClientContext;
 import ru.hh.jclient.common.HttpClientFactory;
 import ru.hh.jclient.common.HttpClientFactoryBuilder;
 import ru.hh.jclient.common.util.storage.SingletonStorage;
+import ru.hh.nab.common.properties.PropertiesUtils;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
@@ -46,17 +46,8 @@ import java.util.Properties;
 public class BeanConfig {
 
   @Bean
-  public HttpClientFactory httpClientFactory() {
-    String pathToProperties = "src/etc/hh-career-solution/jclient.properties";
-    FileInputStream fileInputStream;
-    Properties jClientProperty = new Properties();
-    try {
-      fileInputStream = new FileInputStream(pathToProperties);
-      jClientProperty.load(fileInputStream);
-    } catch (IOException e) {
-      System.err.println("Ошибка в программе: файл " + pathToProperties + " не обнаружено");
-      e.printStackTrace();
-    }
+  public HttpClientFactory httpClientFactory() throws IOException {
+    Properties jClientProperty = PropertiesUtils.fromFilesInSettingsDir("jclient.properties");
     return new HttpClientFactoryBuilder(new SingletonStorage<>(() ->
             new HttpClientContext(Map.of(), Map.of(), List.of())), List.of())
             .withProperties(jClientProperty)
