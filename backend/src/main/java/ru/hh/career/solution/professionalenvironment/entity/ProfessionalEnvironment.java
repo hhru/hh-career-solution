@@ -32,10 +32,6 @@ public class ProfessionalEnvironment {
   @OneToMany(mappedBy = "professionalEnvironment", orphanRemoval = true, cascade = CascadeType.ALL)
   private Set<Specialization> specializationSet;
 
-  public ProfessionalEnvironment(Integer id) {
-    this.id = id;
-  }
-
   public Integer getId() {
     return id;
   }

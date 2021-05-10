@@ -1,7 +1,6 @@
 package ru.hh.career.solution.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ru.hh.career.solution.professionalenvironment.dto.SpecializationDto;
 
 import java.util.ArrayList;
 import java.util.List;

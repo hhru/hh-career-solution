@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.util.Objects;
 
 @Entity
 @Table(name = "specialization")
@@ -66,5 +67,22 @@ public class Specialization {
 
   public void setProfessionalEnvironment(ProfessionalEnvironment professionalEnvironment) {
     this.professionalEnvironment = professionalEnvironment;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Specialization that = (Specialization) o;
+    return specializationId.equals(that.specializationId);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(specializationId);
   }
 }

@@ -1,6 +1,6 @@
 package ru.hh.career.solution.mapper;
 
-import ru.hh.career.solution.professionalenvironment.dto.SpecializationDto;
+import ru.hh.career.solution.dto.SpecializationDto;
 import ru.hh.career.solution.professionalenvironment.entity.Specialization;
 
 import javax.inject.Singleton;
@@ -13,13 +13,13 @@ public class SpecializationMapper {
       specializationDto.getSpecializationId(),
       specializationDto.getName(),
       specializationDto.getLaboring(),
-      ProfessionalEnvironmentMapper.mapToProfessionalEnvironment(specializationDto.getProfessionalEnvironmentId()));
+      ProfessionalEnvironmentMapper.mapToProfessionalEnvironment(specializationDto.getProfessionalEnvironment()));
   }
 
   public static SpecializationDto mapToSpecializationDto(Specialization specialization) {
     return specialization == null ? null : new SpecializationDto(
       specialization.getSpecializationId(),
-      specialization.getProfessionalEnvironment().getId(),
+      ProfessionalEnvironmentMapper.mapToProfessionalEnvironmentDto(specialization.getProfessionalEnvironment()),
       specialization.getSpecializationName(),
       specialization.getLaboring());
   }
