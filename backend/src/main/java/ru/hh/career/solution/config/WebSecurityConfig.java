@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Primary;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -19,6 +21,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.FilterChainProxy;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
+import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 
 import ru.hh.career.solution.resource.AccountResource;
 
@@ -35,6 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   private static final String SIGNUP_URL = fromResource(AccountResource.class).path(AccountResource.class, "signup").toString();
   private static final String LOGIN_URL = fromResource(AccountResource.class).path("login").toString();
+  private static final String LOGOUT_URL = fromResource(AccountResource.class).path("logout").toString();
 
   private DataSource dataSource;
 
@@ -52,13 +58,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     http
       .csrf().disable()
       .authorizeRequests()
-      .antMatchers(SIGNUP_URL, LOGIN_URL).permitAll()
-      .antMatchers("/hello").authenticated()
-      .anyRequest().permitAll()
+        .antMatchers(HttpMethod.POST, SIGNUP_URL, LOGIN_URL, LOGOUT_URL).permitAll()
+        .anyRequest().permitAll()
       .and()
-      .formLogin()
-      .loginPage(LOGIN_URL)
-      .loginProcessingUrl(LOGIN_URL);
+        .exceptionHandling()
+        .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
+      .and()
+        .formLogin()
+        .loginProcessingUrl(LOGIN_URL)
+        .successHandler((request, response, authentication) -> response.setStatus(HttpStatus.NO_CONTENT.value()))
+        .failureHandler(new SimpleUrlAuthenticationFailureHandler())
+      .and()
+        .logout()
+        .logoutUrl(LOGOUT_URL)
+        .logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler(HttpStatus.NO_CONTENT));
   }
 
   @Override
