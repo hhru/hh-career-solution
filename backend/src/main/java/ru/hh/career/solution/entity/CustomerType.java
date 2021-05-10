@@ -5,7 +5,4 @@ public enum CustomerType {
   SPECIALIST_AND_EXPERTS,
   MIDDLE_MANAGEMENT,
   TOP_MANAGEMENT;
-
-  private CustomerType() {
-  }
 }

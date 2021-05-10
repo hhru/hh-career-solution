@@ -4,7 +4,4 @@ public enum CareerPractice {
   CONSULTATION,
   COACHING,
   ALL;
-
-  private CareerPractice() {
-  }
 }

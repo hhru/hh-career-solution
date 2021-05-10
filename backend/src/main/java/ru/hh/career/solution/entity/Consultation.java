@@ -4,7 +4,4 @@ public enum Consultation {
   OFFLINE,
   ONLINE,
   ALL;
-
-  private Consultation() {
-  }
 }
