@@ -1,5 +1,6 @@
-package ru.hh.career.solution.professionalenvironment.resource;
+package ru.hh.career.solution.resource;
 
+import ru.hh.career.solution.area.service.ParserAreaService;
 import ru.hh.career.solution.professionalenvironment.services.ParserSpecializationService;
 
 import javax.inject.Inject;
@@ -11,10 +12,12 @@ import java.util.concurrent.ExecutionException;
 @Path("/download")
 public class ParserResource {
   private final ParserSpecializationService parserSpecializationService;
+  private final ParserAreaService parserAreaService;
 
   @Inject
-  public ParserResource(ParserSpecializationService parserSpecializationService) {
+  public ParserResource(ParserSpecializationService parserSpecializationService, ParserAreaService parserAreaService) {
     this.parserSpecializationService = parserSpecializationService;
+    this.parserAreaService = parserAreaService;
   }
 
   @POST
@@ -23,6 +26,16 @@ public class ParserResource {
     try {
       parserSpecializationService.parseSpecialization();
     } catch (IOException | ExecutionException | InterruptedException e) {
+      e.printStackTrace();
+    }
+  }
+
+  @POST
+  @Path("/area")
+  public void getArea() {
+    try {
+      parserAreaService.parseArea();
+    } catch (ExecutionException | InterruptedException e) {
       e.printStackTrace();
     }
   }

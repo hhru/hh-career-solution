@@ -9,6 +9,15 @@ import java.util.Objects;
 @Entity
 @Table(name = "area")
 public class Area {
+  public Area(Integer id, String name, Integer parentId) {
+    this.id = id;
+    this.name = name;
+    this.parentId = parentId;
+  }
+
+  public Area() {
+
+  }
 
   @Id
   @Column(name = "area_id")

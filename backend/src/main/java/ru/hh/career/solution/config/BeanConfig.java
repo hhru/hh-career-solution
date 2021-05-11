@@ -3,15 +3,17 @@ package ru.hh.career.solution.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import ru.hh.career.solution.area.dto.AreaParser;
+import ru.hh.career.solution.area.service.ParserAreaService;
 import ru.hh.career.solution.dao.AccountDao;
 import ru.hh.career.solution.dao.AdviserDao;
 import ru.hh.career.solution.dao.GenericDao;
 import ru.hh.career.solution.professionalenvironment.dao.CheckerOnNullDao;
 import ru.hh.career.solution.professionalenvironment.dto.ProfessionalEnvironmentParser;
-import ru.hh.career.solution.professionalenvironment.resource.ParserResource;
 import ru.hh.career.solution.professionalenvironment.services.ParserSpecializationService;
 import ru.hh.career.solution.resource.AccountResource;
 import ru.hh.career.solution.resource.AdviserResource;
+import ru.hh.career.solution.resource.ParserResource;
 import ru.hh.career.solution.service.AccountService;
 import ru.hh.career.solution.service.AdviserService;
 import ru.hh.jclient.common.DefaultRequestStrategy;
@@ -41,7 +43,11 @@ import java.util.Properties;
   ParserSpecializationService.class,
   ParserResource.class,
   CheckerOnNullDao.class,
-  ProfessionalEnvironmentParser.class
+  ProfessionalEnvironmentParser.class,
+
+  ParserAreaService.class,
+  ru.hh.career.solution.area.dao.CheckerOnNullDao.class,
+  AreaParser.class
 })
 public class BeanConfig {
 

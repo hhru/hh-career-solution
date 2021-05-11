@@ -26,6 +26,7 @@ public class ProdConfig {
     MappingConfig mappingConfig = new MappingConfig();
     mappingConfig.addPackagesToScan("ru.hh.career.solution.entity");
     mappingConfig.addPackagesToScan("ru.hh.career.solution.professionalenvironment.entity");
+    mappingConfig.addPackagesToScan("ru.hh.career.solution.area.entity");
     return mappingConfig;
   }
 
