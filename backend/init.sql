@@ -44,3 +44,10 @@ CREATE TABLE specialization
   laboring BOOLEAN NOT NULL,
   FOREIGN KEY (professional_environment_id) REFERENCES professional_environment (professional_environment_id)
 );
+
+CREATE TABLE area
+{
+  area_id INTEGER PRIMARY KEY,
+  area_name VARCHAR(25) NOT NULL,
+  area_parent INTEGER
+}
