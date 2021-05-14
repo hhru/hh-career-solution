@@ -7,10 +7,8 @@ import ru.hh.career.solution.entity.Consultation;
 import ru.hh.career.solution.entity.CustomerType;
 import ru.hh.career.solution.entity.Experience;
 
-import javax.inject.Singleton;
 import java.util.stream.Collectors;
 
-@Singleton
 public class AdviserMapper {
 
   public static Adviser mapToAdviser(AdviserDto adviserDto) {
@@ -25,7 +23,8 @@ public class AdviserMapper {
       AccountMapper.mapToAccount(adviserDto.getAccountId()),
       adviserDto.getSpecializationList().stream().
         map(SpecializationMapper::mapToSpecialization).
-        collect(Collectors.toSet()));
+        collect(Collectors.toSet()),
+      adviserDto.getImageLink());
   }
 
   public static AdviserDto mapToAdviserDto(Adviser adviser) {
@@ -39,6 +38,7 @@ public class AdviserMapper {
       adviser.getCustomerType().toString(),
       adviser.getSpecializationSet().stream().
         map(SpecializationMapper::mapToSpecializationDto).
-        collect(Collectors.toList()));
+        collect(Collectors.toList()),
+      adviser.getImageLink());
   }
 }

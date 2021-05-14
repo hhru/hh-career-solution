@@ -3,9 +3,6 @@ package ru.hh.career.solution.mapper;
 import ru.hh.career.solution.dto.SpecializationDto;
 import ru.hh.career.solution.professionalenvironment.entity.Specialization;
 
-import javax.inject.Singleton;
-
-@Singleton
 public class SpecializationMapper {
 
   public static Specialization mapToSpecialization(SpecializationDto specializationDto) {

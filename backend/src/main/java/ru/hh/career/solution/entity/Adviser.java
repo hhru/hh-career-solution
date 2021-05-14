@@ -54,11 +54,15 @@ public class Adviser {
     inverseJoinColumns = @JoinColumn(name = "specialization_id", referencedColumnName = "specialization_id"))
   private Set<Specialization> specializationSet = new HashSet<>();
 
+  @Column(name = "image_link")
+  private String imageLink;
+
   public Adviser() {
   }
 
   public Adviser(Integer id, String name, String surname, Consultation consultation, Experience experience,
-                 CareerPractice careerPractice, CustomerType customerType, Account account, Set<Specialization> specializationSet) {
+                 CareerPractice careerPractice, CustomerType customerType, Account account,
+                 Set<Specialization> specializationSet, String imageLink) {
     this.id = id;
     this.name = name;
     this.surname = surname;
@@ -68,6 +72,7 @@ public class Adviser {
     this.customerType = customerType;
     this.account = account;
     this.specializationSet = specializationSet;
+    this.imageLink = imageLink;
   }
 
   public Integer getId() {
@@ -140,5 +145,13 @@ public class Adviser {
 
   public void setSpecializationSet(Set<Specialization> specializationSet) {
     this.specializationSet = specializationSet;
+  }
+
+  public String getImageLink() {
+    return imageLink;
+  }
+
+  public void setImageLink(String imageLink) {
+    this.imageLink = imageLink;
   }
 }
