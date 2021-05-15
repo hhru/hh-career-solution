@@ -26,7 +26,9 @@ public class AdviserMapper {
       adviserDto.getSpecializationList().stream().
         map(SpecializationMapper::mapToSpecialization).
         collect(Collectors.toSet()),
-      adviserDto.getImageLink());
+      adviserDto.getImageLink(),
+      AreaMapper.mapToArea(adviserDto.getArea()),
+      adviserDto.getPosition());
   }
 
   public static AdviserDto mapToAdviserDto(Adviser adviser) {
@@ -41,6 +43,8 @@ public class AdviserMapper {
       adviser.getSpecializationSet().stream().
         map(SpecializationMapper::mapToSpecializationDto).
         collect(Collectors.toList()),
-      adviser.getImageLink());
+      adviser.getImageLink(),
+      AreaMapper.mapToAreaDto(adviser.getArea()),
+      adviser.getPosition());
   }
 }

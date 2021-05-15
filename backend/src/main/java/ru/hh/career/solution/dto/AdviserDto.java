@@ -26,11 +26,16 @@ public class AdviserDto {
 
   private String imageLink;
 
+  private AreaDto area;
+
+  private String position;
+
   public AdviserDto() {
   }
 
   public AdviserDto(Integer id, String name, String surname, String consultation, String experience,
-                    String careerPractice, String customerType, List<SpecializationDto> specializationList, String imageLink) {
+                    String careerPractice, String customerType, List<SpecializationDto> specializationList,
+                    String imageLink, AreaDto area, String position) {
     this.id = id;
     this.name = name;
     this.surname = surname;
@@ -40,6 +45,8 @@ public class AdviserDto {
     this.customerType = customerType;
     this.specializationList = specializationList;
     this.imageLink = imageLink;
+    this.area = area;
+    this.position = position;
   }
 
   public Integer getId() {
@@ -112,5 +119,21 @@ public class AdviserDto {
 
   public void setImageLink(String imageLink) {
     this.imageLink = imageLink;
+  }
+
+  public AreaDto getArea() {
+    return area;
+  }
+
+  public void setArea(AreaDto area) {
+    this.area = area;
+  }
+
+  public String getPosition() {
+    return position;
+  }
+
+  public void setPosition(String position) {
+    this.position = position;
   }
 }

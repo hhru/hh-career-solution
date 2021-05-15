@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.util.HashSet;
@@ -57,12 +58,18 @@ public class Adviser {
   @Column(name = "image_link")
   private String imageLink;
 
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "area_id")
+  private Area area;
+
+  private String position;
+
   public Adviser() {
   }
 
   public Adviser(Integer id, String name, String surname, Consultation consultation, Experience experience,
                  CareerPractice careerPractice, CustomerType customerType, Account account,
-                 Set<Specialization> specializationSet, String imageLink) {
+                 Set<Specialization> specializationSet, String imageLink, Area area, String position) {
     this.id = id;
     this.name = name;
     this.surname = surname;
@@ -73,6 +80,8 @@ public class Adviser {
     this.account = account;
     this.specializationSet = specializationSet;
     this.imageLink = imageLink;
+    this.area = area;
+    this.position = position;
   }
 
   public Integer getId() {
@@ -153,5 +162,21 @@ public class Adviser {
 
   public void setImageLink(String imageLink) {
     this.imageLink = imageLink;
+  }
+
+  public Area getArea() {
+    return area;
+  }
+
+  public void setArea(Area area) {
+    this.area = area;
+  }
+
+  public String getPosition() {
+    return position;
+  }
+
+  public void setPosition(String position) {
+    this.position = position;
   }
 }

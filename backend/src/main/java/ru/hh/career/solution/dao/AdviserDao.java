@@ -14,20 +14,22 @@ public class AdviserDao extends GenericDao {
     super(sessionFactory);
   }
 
-  public List<Adviser> getList(Integer perPage, Integer page) {
+  public List<Adviser> getListWithFetchedFields(Integer perPage, Integer page) {
     return getSession()
       .createQuery("SELECT a FROM Adviser a " +
         "LEFT JOIN FETCH a.specializationSet " +
+        "LEFT JOIN FETCH a.area " +
         "ORDER BY a.id", Adviser.class)
       .setFirstResult(page * perPage)
       .setMaxResults(perPage)
       .getResultList();
   }
 
-  public Optional<Adviser> getById(Integer id) {
+  public Optional<Adviser> getByIdWithFetchedFields(Integer id) {
     return getSession()
       .createQuery("SELECT a FROM Adviser a " +
         "LEFT JOIN FETCH a.specializationSet " +
+        "LEFT JOIN FETCH a.area " +
         "WHERE a.id = :id", Adviser.class)
       .setParameter("id", id)
       .uniqueResultOptional();

@@ -29,7 +29,9 @@ CREATE TABLE adviser
   career_practice adviserCareerType,
   customer_type   adviserCustomerType,
   account_id INTEGER NOT NULL REFERENCES account(id),
-  image_link TEXT
+  image_link TEXT,
+  area_id INTEGER NOT NULL REFERENCES area(area_id),
+  position TEXT
 );
 
 CREATE TABLE professional_environment
