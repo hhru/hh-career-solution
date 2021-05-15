@@ -27,7 +27,9 @@ CREATE TABLE adviser
   consultation    adviserConsultationType,
   experience      adviserExperienceType,
   career_practice adviserCareerType,
-  customer_type   adviserCustomerType
+  customer_type   adviserCustomerType,
+  account_id INTEGER NOT NULL REFERENCES account(id),
+  image_link TEXT
 );
 
 CREATE TABLE professional_environment
@@ -43,4 +45,12 @@ CREATE TABLE specialization
   specialization_name VARCHAR(100) NOT NULL,
   laboring BOOLEAN NOT NULL,
   FOREIGN KEY (professional_environment_id) REFERENCES professional_environment (professional_environment_id)
+);
+
+CREATE TABLE adviser_to_specialization
+(
+  adviser_id INTEGER NOT NULL REFERENCES adviser(id),
+  specialization_id INTEGER NOT NULL REFERENCES specialization(specialization_id),
+
+  PRIMARY KEY (adviser_id, specialization_id)
 );

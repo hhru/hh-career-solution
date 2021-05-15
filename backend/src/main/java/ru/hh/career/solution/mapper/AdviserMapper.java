@@ -1,18 +1,19 @@
 package ru.hh.career.solution.mapper;
 
 import ru.hh.career.solution.dto.AdviserDto;
+import ru.hh.career.solution.entity.Account;
 import ru.hh.career.solution.entity.Adviser;
 import ru.hh.career.solution.entity.CareerPractice;
 import ru.hh.career.solution.entity.Consultation;
 import ru.hh.career.solution.entity.CustomerType;
 import ru.hh.career.solution.entity.Experience;
 
-import javax.inject.Singleton;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
-@Singleton
 public class AdviserMapper {
 
-  public static Adviser mapToAdviser(AdviserDto adviserDto) {
+  public static Adviser mapToAdviser(AdviserDto adviserDto, Integer accountId) {
     return adviserDto == null ? null : new Adviser(
       adviserDto.getId(),
       adviserDto.getName(),
@@ -20,7 +21,12 @@ public class AdviserMapper {
       Consultation.valueOf(adviserDto.getConsultation()),
       Experience.valueOf(adviserDto.getExperience()),
       CareerPractice.valueOf(adviserDto.getCareerPractice()),
-      CustomerType.valueOf(adviserDto.getCustomerType()));
+      CustomerType.valueOf(adviserDto.getCustomerType()),
+      Optional.ofNullable(accountId).map(Account::new).orElse(null),
+      adviserDto.getSpecializationList().stream().
+        map(SpecializationMapper::mapToSpecialization).
+        collect(Collectors.toSet()),
+      adviserDto.getImageLink());
   }
 
   public static AdviserDto mapToAdviserDto(Adviser adviser) {
@@ -28,9 +34,13 @@ public class AdviserMapper {
       adviser.getId(),
       adviser.getName(),
       adviser.getSurname(),
-      adviser.getConsultation().getDescription(),
-      adviser.getExperience().getDescription(),
-      adviser.getCareerPractice().getDescription(),
-      adviser.getCustomerType().getDescription());
+      adviser.getConsultation().toString(),
+      adviser.getExperience().toString(),
+      adviser.getCareerPractice().toString(),
+      adviser.getCustomerType().toString(),
+      adviser.getSpecializationSet().stream().
+        map(SpecializationMapper::mapToSpecializationDto).
+        collect(Collectors.toList()),
+      adviser.getImageLink());
   }
 }
