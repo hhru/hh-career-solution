@@ -22,8 +22,6 @@ public class AdviserDto {
 
   private String customerType;
 
-  private Integer accountId;
-
   private List<SpecializationDto> specializationList = new ArrayList<>();
 
   private String imageLink;
@@ -98,14 +96,6 @@ public class AdviserDto {
 
   public void setCustomerType(String customerType) {
     this.customerType = customerType;
-  }
-
-  public Integer getAccountId() {
-    return accountId;
-  }
-
-  public void setAccountId(Integer accountId) {
-    this.accountId = accountId;
   }
 
   public List<SpecializationDto> getSpecializationList() {

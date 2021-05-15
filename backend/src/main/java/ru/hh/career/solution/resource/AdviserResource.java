@@ -61,7 +61,8 @@ public class AdviserResource {
 
   @POST
   public IdDto createAdviser(@Valid AdviserDto request) {
-    Adviser adviser = AdviserMapper.mapToAdviser(request);
+    // TODO [back-14] fix account id
+    Adviser adviser = AdviserMapper.mapToAdviser(request, null);
     adviserService.saveOrUpdate(adviser);
     return new IdDto(adviser.getId());
   }
@@ -69,7 +70,8 @@ public class AdviserResource {
   @PUT
   public void updateAdviser(@Valid AdviserDto request) {
     try {
-      adviserService.saveOrUpdate(AdviserMapper.mapToAdviser(request));
+      // TODO [back-14] fix account id
+      adviserService.saveOrUpdate(AdviserMapper.mapToAdviser(request, null));
     } catch (LocalizableException e) {
       e.rethrowAsWebApplicationException();
     }
