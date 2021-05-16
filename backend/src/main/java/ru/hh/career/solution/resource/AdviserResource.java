@@ -34,15 +34,14 @@ public class AdviserResource {
   }
 
   @GET
-  public PageResponseDto getAdvisers(@DefaultValue("100") @QueryParam("per_page") Integer perPage,
-                                     @DefaultValue("0") @QueryParam("page") Integer page) {
+  public PageResponseDto<AdviserDto> getAdvisers(@DefaultValue("100") @QueryParam("per_page") Integer perPage,
+                                                 @DefaultValue("0") @QueryParam("page") Integer page) {
     Long countAdvisers = adviserService.getCountAdvisers();
     List<Adviser> adviserList = adviserService.getAdvisers(perPage, page);
-    return new PageResponseDto(adviserList.stream().
+    return new PageResponseDto<>(adviserList.stream().
       map(AdviserMapper::mapToAdviserDto).
       collect(Collectors.toList()),
       countAdvisers,
-      adviserService.getPagesCount(countAdvisers, perPage),
       perPage,
       page);
   }
