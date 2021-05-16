@@ -4,15 +4,15 @@ export default function fetchConsultationType() {
   return function (dispatch, getState) {
     const data = [
       {
-        id: "1",
+        id: "OFFLINE",
         name: "лично",
       },
       {
-        id: "2",
+        id: "ONLINE",
         name: "онлайн",
       },
       {
-        id: "3",
+        id: "ALL",
         name: "оба варианта подходят",
       },
     ];

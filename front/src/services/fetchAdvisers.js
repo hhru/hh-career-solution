@@ -1,10 +1,8 @@
 import { setAdvisers } from "src/redux/Advisers";
 
-export default function fetchAdvisers() {
+export default function fetchAdvisers(problemId) {
   return function (dispatch, getState) {
-    return fetch(`http://localhost:9999/advisers`, {
-      
-    })
+    return fetch(`http://localhost:9999/customers/problems/${problemId}/matches`)
       .then(response => response.json())
       .then(data => {
         console.log(data);

@@ -4,19 +4,19 @@ export default function fetchCustomerTypeList() {
   return function (dispatch, getState) {
     const data = [
       {
-        id: "1",
+        id: "NO_EXPERIENCE",
         name: "Стажёр",
       },
       {
-        id: "2",
+        id: "SPECIALIST_AND_EXPERTS",
         name: "Специалист",
       },
       {
-        id: "3",
+        id: "MIDDLE_MANAGEMENT",
         name: "Менеджер",
       },
       {
-        id: "4",
+        id: "TOP_MANAGEMENT",
         name: "Топ - менеджер",
       }
     ];

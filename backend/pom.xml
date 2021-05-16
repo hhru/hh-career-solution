@@ -45,6 +45,11 @@
             <artifactId>spring-security-config</artifactId>
             <version>${spring-security.version}</version>
         </dependency>
+        <dependency>
+            <groupId>ru.hh.nab</groupId>
+            <artifactId>nab-jclient</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -145,7 +150,8 @@
                 </plugins>
             </build>
         </profile>
-    </profiles>    
+    </profiles>
+
 
     <repositories>
         <repository>

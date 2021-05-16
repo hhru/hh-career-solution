@@ -4,19 +4,19 @@ export default function fetchExperienceList() {
   return function (dispatch, getState) {
     const data = [
       {
-        id: "1",
+        id: "NO_EXPERIENCE",
         name: "менее 1 года",
       },
       {
-        id: "2",
+        id: "BETWEEN_1_AND_3",
         name: "от 1 года до 3 лет",
       },
       {
-        id: "3",
+        id: "BETWEEN_3_AND_6",
         name: "от 3 лет до 6 лет",
       },
       {
-        id: "4",
+        id: "MORE_THAN_6",
         name: "более 6 лет",
       }
     ];

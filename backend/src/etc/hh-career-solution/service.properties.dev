@@ -1,1 +1,1 @@
-master.jdbcUrl=jdbc:postgresql://localhost:5435/hh
+master.jdbcUrl=jdbc:postgresql://localhost:5435/hh?stringtype=unspecified

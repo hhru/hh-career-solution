@@ -8,6 +8,8 @@ export function setAdvisers(data) {
 }
 
 const defaultState = {
+  problemId: null,
+  list: [],
 };
 
 export default function tags(state = defaultState, { type, payload }) {
