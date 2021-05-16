@@ -6,11 +6,11 @@ export default function fetchAdvisers(problemId) {
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        // if (Array.isArray(data.items)) {
-        //   dispatch(setAdvisers(data.items));
-        // } else {
-        //   console.log('invalid data', data);
-        // }
+        if (Array.isArray(data.items)) {
+          dispatch(setAdvisers({ list: data.items }));
+        } else {
+          console.log('invalid data', data);
+        }
       })
       .catch((error) => console.error(error));
   };

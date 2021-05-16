@@ -8,11 +8,11 @@ export function setRequestForm(data) {
 }
 
 const defaultState = {
-  consultationType: "ONLINE",
+  consultationType: '', //"ONLINE",
   consultationTypeList: [],
-  experience: "NO_EXPERIENCE",
+  experience: '', //"NO_EXPERIENCE",
   experienceList: [],
-  customerType: "NO_EXPERIENCE",
+  customerType: '', //"NO_EXPERIENCE",
   customerTypeList: [],
 };
 

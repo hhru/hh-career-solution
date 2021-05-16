@@ -54,7 +54,7 @@ export default function area(state = defaultArea, { type, payload }) {
       if (regions.length == 0) {
         areaId = payload;
       }
-      return { ...state, ...{ countryId: payload, regionId: '', cityId: '', regions: regions, areaId: areaId } };
+      return { ...state, ...{ countryId: payload, regionId: '', cityId: '', regions: regions, cities: [], areaId: areaId } };
     case SET_REGION_ACTION:
       const region = state.regions.filter((item) => {
         return item.id == payload
