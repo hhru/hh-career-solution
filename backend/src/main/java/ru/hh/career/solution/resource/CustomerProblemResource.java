@@ -1,6 +1,8 @@
 package ru.hh.career.solution.resource;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
@@ -13,9 +15,10 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
+import ru.hh.career.solution.dto.AdviserDto;
 import ru.hh.career.solution.dto.CustomerProblemDto;
 import ru.hh.career.solution.dto.PageResponseDto;
-import ru.hh.career.solution.entity.Adviser;
+import ru.hh.career.solution.mapper.AdviserMapper;
 import ru.hh.career.solution.service.CustomerService;
 
 @Path("/customers/problems")
@@ -33,7 +36,6 @@ public class CustomerProblemResource {
   @POST
   public Response postProblem(CustomerProblemDto problem) {
     Integer problemId = customerService.saveProblem(problem);
-    // problemId problem in json
     return Response.created(UriBuilder.fromResource(getClass()).path(getClass(), "getProblem").build(problemId))
       .entity(Map.of("problemId", problemId)).build();
   }
@@ -46,11 +48,13 @@ public class CustomerProblemResource {
 
   @GET
   @Path("/{problemId:[\\d]+}/matches")
-  public PageResponseDto<Adviser> getProblemMatches(
+  public PageResponseDto<AdviserDto> getProblemMatches(
       @PathParam("problemId") Integer problemId,
       @QueryParam("perPage") @DefaultValue("3") Integer perPage,
       @QueryParam("page") @DefaultValue("0") Integer page) {
     Long matchCount = customerService.getMatchCount(problemId);
-    return new PageResponseDto<>(customerService.getProblemMatches(problemId, perPage, page), matchCount, perPage, page);
+    List<AdviserDto> matches = customerService.getProblemMatches(problemId, perPage, page).stream()
+        .map(AdviserMapper::mapToAdviserDto).collect(Collectors.toList());
+    return new PageResponseDto<>(matches, matchCount, perPage, page);
   }
 }
