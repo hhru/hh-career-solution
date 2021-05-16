@@ -1,15 +1,15 @@
 package ru.hh.career.solution.mapper;
 
+import java.util.Optional;
+import java.util.stream.Collectors;
 import ru.hh.career.solution.dto.AdviserDto;
+import ru.hh.career.solution.dto.MatchingAdviserDto;
 import ru.hh.career.solution.entity.Account;
 import ru.hh.career.solution.entity.Adviser;
 import ru.hh.career.solution.entity.CareerPractice;
 import ru.hh.career.solution.entity.Consultation;
 import ru.hh.career.solution.entity.CustomerType;
 import ru.hh.career.solution.entity.Experience;
-
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class AdviserMapper {
 
@@ -26,7 +26,8 @@ public class AdviserMapper {
       adviserDto.getSpecializationList().stream().
         map(SpecializationMapper::mapToSpecialization).
         collect(Collectors.toSet()),
-      adviserDto.getImageLink());
+      adviserDto.getImageLink()
+    );
   }
 
   public static AdviserDto mapToAdviserDto(Adviser adviser) {
@@ -41,6 +42,19 @@ public class AdviserMapper {
       adviser.getSpecializationSet().stream().
         map(SpecializationMapper::mapToSpecializationDto).
         collect(Collectors.toList()),
-      adviser.getImageLink());
+      adviser.getImageLink()
+    );
+  }
+
+  public static MatchingAdviserDto mapToMatchingAdviserDto(Adviser adviser) {
+    return adviser == null ? null : new MatchingAdviserDto(
+      adviser.getId(),
+      adviser.getName(),
+      adviser.getSurname(),
+      adviser.getImageLink(),
+      adviser.getExperience().toString(),
+      adviser.getConsultation().toString(),
+      adviser.getCareerPractice().toString()
+    );
   }
 }

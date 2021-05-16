@@ -15,8 +15,8 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
-import ru.hh.career.solution.dto.AdviserDto;
 import ru.hh.career.solution.dto.CustomerProblemDto;
+import ru.hh.career.solution.dto.MatchingAdviserDto;
 import ru.hh.career.solution.dto.PageResponseDto;
 import ru.hh.career.solution.mapper.AdviserMapper;
 import ru.hh.career.solution.service.CustomerService;
@@ -48,13 +48,13 @@ public class CustomerProblemResource {
 
   @GET
   @Path("/{problemId:[\\d]+}/matches")
-  public PageResponseDto<AdviserDto> getProblemMatches(
+  public PageResponseDto<MatchingAdviserDto> getProblemMatches(
       @PathParam("problemId") Integer problemId,
       @QueryParam("perPage") @DefaultValue("3") Integer perPage,
       @QueryParam("page") @DefaultValue("0") Integer page) {
     Long matchCount = customerService.getMatchCount(problemId);
-    List<AdviserDto> matches = customerService.getProblemMatches(problemId, perPage, page).stream()
-        .map(AdviserMapper::mapToAdviserDto).collect(Collectors.toList());
+    List<MatchingAdviserDto> matches = customerService.getProblemMatches(problemId, perPage, page).stream()
+        .map(AdviserMapper::mapToMatchingAdviserDto).collect(Collectors.toList());
     return new PageResponseDto<>(matches, matchCount, perPage, page);
   }
 }
