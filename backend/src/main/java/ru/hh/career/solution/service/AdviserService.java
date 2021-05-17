@@ -21,12 +21,12 @@ public class AdviserService {
 
   @Transactional
   public List<Adviser> getAdvisers(Integer perPage, Integer page) {
-    return adviserDao.getList(perPage, page);
+    return adviserDao.getListWithFetchedFields(perPage, page);
   }
 
   @Transactional
   public Adviser getAdviserById(Integer adviserId) {
-    return adviserDao.getById(adviserId)
+    return adviserDao.getByIdWithFetchedFields(adviserId)
       .orElseThrow(() -> new LocalizableException(ErrorCode.NOT_FOUND, Response.Status.NOT_FOUND));
   }
 
