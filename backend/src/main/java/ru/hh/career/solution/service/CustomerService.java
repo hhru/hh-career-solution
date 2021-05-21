@@ -1,5 +1,6 @@
 package ru.hh.career.solution.service;
 
+import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +25,7 @@ public class CustomerService {
 
   @Transactional
   public Integer saveProblem(CustomerProblemDto customerProblemDto) {
-    CustomerProblem customerProblem = customerProblemMapper.toEntity(customerProblemDto);
+    CustomerProblem customerProblem = customerProblemMapper.toCustomerProblem(customerProblemDto);
     // TODO set customer from current session
     // customerProblem.setCustomer();
     return (Integer) genericDao.save(customerProblem);
@@ -32,7 +33,7 @@ public class CustomerService {
 
   @Transactional
   public CustomerProblemDto getProblem(Integer problemId) {
-    return customerProblemMapper.toDto(genericDao.get(CustomerProblem.class, problemId));
+    return customerProblemMapper.toCustomerProblemDto(genericDao.get(CustomerProblem.class, problemId));
   }
 
   @Transactional
@@ -42,6 +43,10 @@ public class CustomerService {
 
   @Transactional
   public List<Adviser> getProblemMatches(Integer problemId, Integer perPage, Integer page) {
-    return adviserDao.getMatchingAdvisers(genericDao.get(CustomerProblem.class, problemId), page * perPage, perPage);
+    CustomerProblem customerProblem = genericDao.get(CustomerProblem.class, problemId);
+    if (customerProblem == null) {
+      return Collections.emptyList();
+    }
+    return adviserDao.getMatchingAdvisers(customerProblem, page * perPage, perPage);
   }
 }
