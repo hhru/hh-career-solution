@@ -3,7 +3,6 @@ package ru.hh.career.solution.mapper;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import ru.hh.career.solution.dto.AdviserDto;
-import ru.hh.career.solution.dto.MatchingAdviserDto;
 import ru.hh.career.solution.entity.Account;
 import ru.hh.career.solution.entity.Adviser;
 import ru.hh.career.solution.entity.CareerPractice;
@@ -44,14 +43,16 @@ public class AdviserMapper {
       adviser.getImageLink());
   }
 
-  public static MatchingAdviserDto mapToMatchingAdviserDto(Adviser adviser) {
-    return adviser == null ? null : new MatchingAdviserDto(
-      adviser.getId(),
-      adviser.getName(),
-      adviser.getSurname(),
-      adviser.getImageLink(),
-      adviser.getExperience().toString(),
-      adviser.getConsultation().toString(),
-      adviser.getCareerPractice().toString());
+  public static AdviserDto mapToMatchingAdviserDto(Adviser adviser) {
+    return adviser == null ? null : new AdviserDto(
+        adviser.getId(),
+        adviser.getName(),
+        adviser.getSurname(),
+        adviser.getConsultation().toString(),
+        adviser.getExperience().toString(),
+        adviser.getCareerPractice().toString(),
+        null,
+        null,
+        adviser.getImageLink());
   }
 }
