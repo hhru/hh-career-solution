@@ -20,6 +20,7 @@ import ru.hh.career.solution.dto.CustomerProblemDto;
 import ru.hh.career.solution.dto.PageResponseDto;
 import ru.hh.career.solution.exception.LocalizableException;
 import ru.hh.career.solution.mapper.AdviserMapper;
+import ru.hh.career.solution.mapper.CustomerProblemMapper;
 import ru.hh.career.solution.service.CustomerService;
 
 @Path("/customers/problems")
@@ -28,15 +29,17 @@ import ru.hh.career.solution.service.CustomerService;
 public class CustomerProblemResource {
 
   private final CustomerService customerService;
+  private final CustomerProblemMapper customerProblemMapper;
 
   @Inject
-  public CustomerProblemResource(CustomerService customerService) {
+  public CustomerProblemResource(CustomerService customerService, CustomerProblemMapper customerProblemMapper) {
     this.customerService = customerService;
+    this.customerProblemMapper = customerProblemMapper;
   }
 
   @POST
-  public Response postProblem(CustomerProblemDto problem) {
-    Integer problemId = customerService.saveProblem(problem);
+  public Response postProblem(CustomerProblemDto CustomerProblemDto) {
+    Integer problemId = customerService.saveProblem(customerProblemMapper.toCustomerProblem(CustomerProblemDto));
     return Response.created(UriBuilder.fromResource(getClass()).path(getClass(), "getProblem").build(problemId))
       .entity(Map.of("problemId", problemId)).build();
   }
@@ -44,7 +47,11 @@ public class CustomerProblemResource {
   @GET
   @Path("/{problemId:[\\d]+}")
   public CustomerProblemDto getProblem(@PathParam("problemId") Integer problemId) {
-    return customerService.getProblem(problemId);
+    try {
+      return customerProblemMapper.toCustomerProblemDto(customerService.getProblem(problemId));
+    } catch (LocalizableException e) {
+      throw e.asWebApplicationException();
+    }
   }
 
   @GET
