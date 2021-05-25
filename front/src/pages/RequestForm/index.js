@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import {
-  MobileStepper, Stepper, Step, StepLabel, Button, Typography, Container, Grid
+  Stepper, Step, StepLabel, Button, Typography
 } from '@material-ui/core';
 import RequestFormStepOne from 'src/components/RequestFormStepOne';
 import RequestFormStepTwo from 'src/components/RequestFormStepTwo';
@@ -10,11 +10,10 @@ import RequestFormStepThree from 'src/components/RequestFormStepThree';
 import RequestFormStepFour from 'src/components/RequestFormStepFour';
 import RequestFormStepFive from 'src/components/RequestFormStepFive';
 
+import css from "./styles.module.scss";
 import sendRegisterCustomer from 'src/services/sendRegisterCustomer';
 import sendLoginCustomer from 'src/services/sendLoginCustomer';
 import sendCustomerProblem from 'src/services/sendCustomerProblem';
-import fetchAdvisers from "src/services/fetchAdvisers";
-import area from "../../redux/Area";
 
 function getSteps() {
   return [
@@ -54,7 +53,7 @@ function getStepContent(stepIndex) {
 }
 
 const RequestForm = () => {
-  const defaultStep = 0; // 3
+  const defaultStep = 0;
   const [activeStep, setActiveStep] = React.useState(defaultStep);
   const [sendRequestForm, setSendRequestForm] = React.useState(false);
   const steps = getSteps();
@@ -62,12 +61,10 @@ const RequestForm = () => {
   const requestForm = useSelector(({ requestForm }) => requestForm);
   const specialization = useSelector(({ specialization }) => specialization);
   const area = useSelector(({ area }) => area);
-  // const advisers = useSelector(({ advisers }) => advisers);
 
   const dispatch = useDispatch();
   useEffect(() => {
     if (sendRequestForm) {
-      // если уже залогинен скипнуть...
       dispatch(sendRegisterCustomer({
         username: registerCustomerForm.email,
         password: registerCustomerForm.password,
@@ -114,9 +111,9 @@ const RequestForm = () => {
   return (
     <div>
       {activeStep !== steps.length ? (
-        <div>
+        <Container maxWidth="md" className={css.stepContainer}>
           {getStepContent(activeStep)}
-        </div>
+        </Container>
       ) : (
         <React.Fragment>
           Форма оплаты...

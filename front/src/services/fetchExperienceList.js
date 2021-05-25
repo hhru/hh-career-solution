@@ -21,16 +21,5 @@ export default function fetchExperienceList() {
       }
     ];
     dispatch(setRequestForm({ experienceList: data }));
-
-    // return fetch(`https://api.hh.ru/dictionaries`)
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     if (Array.isArray(data.experience)) {
-    //       dispatch(setRequestForm({ experienceList: data.experience }));
-    //     } else {
-    //       console.log('invalid data', data);
-    //     }
-    //   })
-    //   .catch((error) => console.error(error));
   };
 }

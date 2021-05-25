@@ -26,7 +26,7 @@ const sendRegisterCustomer = (data) => {
       if (response.status == 401 || response.status == 403) {
         const result = {
           code: -1,
-          message: `bad credential: ${response.status}`
+          message: `Bad credential: ${response.status}`
         };
         return result;
       } else {

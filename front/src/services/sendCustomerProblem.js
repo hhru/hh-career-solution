@@ -13,7 +13,7 @@ const sendCustomerProblem = (data) => {
       if (response.status == 201) {
         return response.json();
       } else {
-        throw new Error("Некорректный ответ");
+        throw new Error("Bad response");
       }
     }).then(data => {
       console.log(data);

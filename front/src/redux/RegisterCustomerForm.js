@@ -14,16 +14,7 @@ const defaultState = {
   password: '',
   repeatPassword: '',
   messanger: '',
-  messangerList: [
-    {
-      id: "1",
-      name: "Telegram",
-    },
-    {
-      id: "2",
-      name: "WhatsApp",
-    },
-  ],
+  messangerList: [],
   isUserPolicyConfirm: false,
 };
 
