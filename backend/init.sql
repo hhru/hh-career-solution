@@ -56,3 +56,16 @@ CREATE TABLE adviser_to_specialization
 
   PRIMARY KEY (adviser_id, specialization_id)
 );
+
+CREATE TABLE customer_problem
+(
+  customer_problem_id   SERIAL PRIMARY KEY,
+  -- TODO
+  -- customer_id           INTEGER NOT NULL REFERENCES customer(customer_id),
+  -- area_id               INTEGER NOT NULL,
+  specialization_id     INTEGER NOT NULL REFERENCES specialization(specialization_id),
+  consultation_type     adviserConsultationType,
+  experience            adviserExperienceType,
+  career_practice       adviserCareerType,
+  customer_type         adviserCustomerType
+);

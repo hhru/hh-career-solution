@@ -24,6 +24,7 @@ import org.springframework.security.web.FilterChainProxy;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
+import org.springframework.security.web.header.writers.StaticHeadersWriter;
 
 import ru.hh.career.solution.resource.AccountResource;
 
@@ -57,7 +58,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
     http
       .csrf().disable()
-      .authorizeRequests()
+      .headers()
+        .addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Origin", "*"))
+        .addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Credentials", "true"))
+        .addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Headers", "content-type"))
+        .addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS"))
+      .and()
+        .authorizeRequests()
         .antMatchers(HttpMethod.POST, SIGNUP_URL, LOGIN_URL, LOGOUT_URL).permitAll()
         .anyRequest().permitAll()
       .and()

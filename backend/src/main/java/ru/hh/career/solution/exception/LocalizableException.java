@@ -1,7 +1,6 @@
 package ru.hh.career.solution.exception;
 
 import java.util.Map;
-
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -32,8 +31,8 @@ public class LocalizableException extends RuntimeException {
     this.httpStatusCode = httpStatusCode;
   }
 
-  public void rethrowAsWebApplicationException() throws WebApplicationException {
-    throw new WebApplicationException(Response.status(httpStatusCode)
+  public WebApplicationException asWebApplicationException() {
+    return new WebApplicationException(Response.status(httpStatusCode)
       .entity(Map.of(
         "code", errorCode.ordinal(),
         "message", errorCode.toString()

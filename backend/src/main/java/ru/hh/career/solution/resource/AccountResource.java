@@ -7,7 +7,6 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
 import ru.hh.career.solution.exception.LocalizableException;
 import ru.hh.career.solution.service.AccountService;
 
@@ -31,7 +30,7 @@ public class AccountResource {
       service.createUser(username, password);
     }
     catch (LocalizableException e) {
-      e.rethrowAsWebApplicationException();
+      throw e.asWebApplicationException();
     }
   }
 }
