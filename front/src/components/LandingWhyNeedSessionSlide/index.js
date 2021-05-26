@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Container, Grid, Button, Typography } from "@material-ui/core";
+import OrderButton from "src/components/OrderButton";
 
 import css from "./styles.module.scss";
 
@@ -65,9 +66,7 @@ const LandingWhyNeedSessionSlide = () => {
             );
           })}
         </Grid>
-        <Button variant="contained" color="secondary" size="large">
-          Заказать консультацию
-        </Button>
+        <OrderButton />
       </Container>
     </section>
   );
