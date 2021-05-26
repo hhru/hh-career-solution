@@ -1,10 +1,16 @@
 import React from "react";
+import { useHistory } from 'react-router';
 
 import { Hidden, Typography, Container, Grid, Button } from "@material-ui/core";
 
 import css from "./styles.module.scss";
 
 const Header = () => {
+  const history = useHistory();
+  const handleLogoClick = () => {
+    history.push('/');
+  };
+
   return (
     <header className={css.appHeader}>
       <Container>
@@ -16,6 +22,7 @@ const Header = () => {
                 variant="h3"
                 component="h1"
                 color="secondary"
+                onClick={handleLogoClick}
               >
                 Lift
               </Typography>
