@@ -1,7 +1,7 @@
 package ru.hh.career.solution.entity;
 
-import ru.hh.career.solution.professionalenvironment.entity.Specialization;
-
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -16,8 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import java.util.HashSet;
-import java.util.Set;
+import ru.hh.career.solution.professionalenvironment.entity.Specialization;
 
 @Entity
 @Table(name = "adviser")
@@ -45,8 +44,11 @@ public class Adviser {
   @Enumerated(EnumType.STRING)
   private CustomerType customerType;
 
+  @Column(name = "account_id")
+  private Integer accountId;
+
   @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "account_id")
+  @JoinColumn(name = "account_id", insertable = false, updatable = false)
   private Account account;
 
   @ManyToMany(fetch = FetchType.LAZY)
@@ -68,7 +70,7 @@ public class Adviser {
   }
 
   public Adviser(Integer id, String name, String surname, Consultation consultation, Experience experience,
-                 CareerPractice careerPractice, CustomerType customerType, Account account,
+                 CareerPractice careerPractice, CustomerType customerType, Integer accountId,
                  Set<Specialization> specializationSet, String imageLink, Area area, String position) {
     this.id = id;
     this.name = name;
@@ -77,7 +79,7 @@ public class Adviser {
     this.experience = experience;
     this.careerPractice = careerPractice;
     this.customerType = customerType;
-    this.account = account;
+    this.accountId = accountId;
     this.specializationSet = specializationSet;
     this.imageLink = imageLink;
     this.area = area;
@@ -140,11 +142,20 @@ public class Adviser {
     this.customerType = customerType;
   }
 
+  public Integer getAccountId() {
+    return accountId;
+  }
+
+  public void setAccountId(Integer accountId) {
+    this.accountId = accountId;
+  }
+
   public Account getAccount() {
     return account;
   }
 
   public void setAccount(Account account) {
+    this.accountId = account.getId();
     this.account = account;
   }
 

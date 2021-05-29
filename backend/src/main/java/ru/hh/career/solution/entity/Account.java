@@ -20,16 +20,15 @@ public class Account {
   @Column(name = "password_hash")
   private String passwordHash;
 
+  @Column(name = "profile_id")
+  private Integer profileId;
+
   public Account() {
   }
 
   public Account(String username, String passwordHash) {
     this.username = username;
     this.passwordHash = passwordHash;
-  }
-
-  public Account(Integer id) {
-    this.id = id;
   }
 
   public Integer getId() {
@@ -54,5 +53,13 @@ public class Account {
 
   public void setPasswordHash(String passwordHash) {
     this.passwordHash = passwordHash;
+  }
+
+  public Integer getProfileId() {
+    return profileId;
+  }
+
+  public void setProfileId(Integer profileId) {
+    this.profileId = profileId;
   }
 }

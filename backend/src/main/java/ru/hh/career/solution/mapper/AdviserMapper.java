@@ -1,9 +1,7 @@
 package ru.hh.career.solution.mapper;
 
-import java.util.Optional;
 import java.util.stream.Collectors;
 import ru.hh.career.solution.dto.AdviserDto;
-import ru.hh.career.solution.entity.Account;
 import ru.hh.career.solution.entity.Adviser;
 import ru.hh.career.solution.entity.CareerPractice;
 import ru.hh.career.solution.entity.Consultation;
@@ -21,7 +19,7 @@ public class AdviserMapper {
       Experience.valueOf(adviserDto.getExperience()),
       CareerPractice.valueOf(adviserDto.getCareerPractice()),
       CustomerType.valueOf(adviserDto.getCustomerType()),
-      Optional.ofNullable(accountId).map(Account::new).orElse(null),
+      accountId,
       adviserDto.getSpecializationList().stream().
         map(SpecializationMapper::mapToSpecialization).
         collect(Collectors.toSet()),
@@ -57,6 +55,8 @@ public class AdviserMapper {
         adviser.getCareerPractice().toString(),
         null,
         null,
-        adviser.getImageLink());
+        adviser.getImageLink(),
+        AreaMapper.mapToAreaDto(adviser.getArea()),
+        adviser.getPosition());
   }
 }

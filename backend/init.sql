@@ -8,7 +8,8 @@ CREATE TABLE account
 (
   id              serial      primary key,
   username        text        not null,
-  password_hash   text        not null
+  password_hash   text        not null,
+  profile_id      integer
 );
 
 CREATE TYPE adviserConsultationType AS ENUM('OFFLINE', 'ONLINE', 'ALL');
