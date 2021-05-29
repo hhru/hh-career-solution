@@ -18,6 +18,7 @@ public class AreaParser {
 
   public AreaDto[] parse() throws ExecutionException, InterruptedException {
     Request request = new RequestBuilder("GET").setUrl("https://api.hh.ru/areas").build();
+
     return http.with(request).expectJson(MAPPER, AreaDto[].class).result().get();
   }
 }

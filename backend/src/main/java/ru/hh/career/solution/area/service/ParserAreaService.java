@@ -9,6 +9,9 @@ import ru.hh.career.solution.dao.GenericDao;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @Service
@@ -24,19 +27,36 @@ public class ParserAreaService {
     this.areaParser = areaParser;
   }
 
+  public List<AreaDto> parseSubArea(List<AreaDto> areaDtos) {
+    List<AreaDto> areas = new ArrayList<>(areaDtos);
+    for (AreaDto areaDto : areaDtos) {
+      if (areaDto.getAreaDtos().size() == 0) {
+        return areaDtos;
+      }
+      areas.addAll(parseSubArea(areaDto.getAreaDtos()));
+//      try {
+//        areaDtos.addAll(parseSubArea(areaDto.getAreaDtos()));
+//      } catch (Exception e) {
+//        System.out.println(e.toString());
+//      }
+    }
+    return areas;
+  }
+
   @Transactional
   public void parseArea() throws ExecutionException, InterruptedException {
     if (checkerOnNullDao.isAreaPresent()) {
       return;
     }
-    AreaDto[] areaDtos = areaParser.parse();
+    List<AreaDto> areaDtos = Arrays.asList(areaParser.parse());
+    areaDtos = parseSubArea(areaDtos);
     for (AreaDto areaDto : areaDtos) {
       Area area = new Area(
               areaDto.getId(),
               areaDto.getName(),
               areaDto.getParentId()
       );
-      genericDao.saveOrUpdate(area);
+      genericDao.save(area);
     }
   }
 }

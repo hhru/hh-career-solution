@@ -1,7 +1,8 @@
 CREATE TABLE area
 (
   area_id     INTEGER PRIMARY KEY,
-  name   VARCHAR(100) NOT NULL
+  name   VARCHAR(100) NOT NULL,
+  area_parent INTEGER
 );
 
 CREATE TABLE account
@@ -44,10 +45,3 @@ CREATE TABLE specialization
   laboring BOOLEAN NOT NULL,
   FOREIGN KEY (professional_environment_id) REFERENCES professional_environment (professional_environment_id)
 );
-
-CREATE TABLE area
-{
-  area_id INTEGER PRIMARY KEY,
-  area_name VARCHAR(25) NOT NULL,
-  area_parent INTEGER
-}
