@@ -38,8 +38,8 @@ public class CustomerProblemResource {
   }
 
   @POST
-  public Response postProblem(CustomerProblemDto CustomerProblemDto) {
-    Integer problemId = customerService.saveProblem(customerProblemMapper.toCustomerProblem(CustomerProblemDto));
+  public Response postProblem(CustomerProblemDto customerProblemDto) {
+    Integer problemId = customerService.saveProblem(customerProblemMapper.toCustomerProblem(customerProblemDto));
     return Response.created(UriBuilder.fromResource(getClass()).path(getClass(), "getProblem").build(problemId))
       .entity(Map.of("problemId", problemId)).build();
   }
