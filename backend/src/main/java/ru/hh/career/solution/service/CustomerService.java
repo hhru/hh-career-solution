@@ -1,12 +1,16 @@
 package ru.hh.career.solution.service;
 
 import java.util.List;
+import java.util.Optional;
 import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 import org.springframework.transaction.annotation.Transactional;
 import ru.hh.career.solution.dao.AdviserDao;
 import ru.hh.career.solution.dao.GenericDao;
+import ru.hh.career.solution.dto.CustomerRegistrationInfoDto;
+import ru.hh.career.solution.entity.Account;
 import ru.hh.career.solution.entity.Adviser;
+import ru.hh.career.solution.entity.Customer;
 import ru.hh.career.solution.entity.CustomerProblem;
 import ru.hh.career.solution.exception.ErrorCode;
 import ru.hh.career.solution.exception.LocalizableException;
@@ -14,17 +18,42 @@ import ru.hh.career.solution.exception.LocalizableException;
 public class CustomerService {
   private final GenericDao genericDao;
   private final AdviserDao adviserDao;
+  private final AccountService accountService;
 
   @Inject
-  public CustomerService(GenericDao genericDao, AdviserDao adviserDao) {
+  public CustomerService(GenericDao genericDao, AdviserDao adviserDao, AccountService accountService) {
     this.genericDao = genericDao;
     this.adviserDao = adviserDao;
+    this.accountService = accountService;
+  }
+
+  @Transactional
+  public void createCustomer(CustomerRegistrationInfoDto info) {
+    Integer accountId = accountService.createUser(info.getAccount().getUsername(), info.getAccount().getPassword());
+    genericDao.save(new Customer(accountId, info.getCustomer().getName(), info.getCustomer().getSurname()));
+  }
+
+  @Transactional
+  public Customer getCustomer(Integer id) {
+    return genericDao.get(Customer.class, id);
+  }
+
+  public Optional<Customer> getCurrentCustomer() {
+    Optional<Account> currentAccount = accountService.getCurrentAccount();
+    // TODO add check if it's a customer's account
+    if (currentAccount.isEmpty()) {
+      return Optional.empty();
+    }
+    return Optional.ofNullable(genericDao.get(Customer.class, currentAccount.get().getProfileId()));
   }
 
   @Transactional
   public Integer saveProblem(CustomerProblem customerProblem) {
-    // TODO set customer from current session
-    // customerProblem.setCustomer();
+    Optional<Customer> currentCustomer = getCurrentCustomer();
+    if (currentCustomer.isEmpty()) {
+      throw new LocalizableException(ErrorCode.CUSTOMER_SHOULD_BE_AUTHENTICATED_TO_SAVE_PROBLEM, Response.Status.UNAUTHORIZED);
+    }
+    customerProblem.setCustomer(currentCustomer.get());
     return (Integer) genericDao.save(customerProblem);
   }
 

@@ -1,7 +1,6 @@
 package ru.hh.career.solution.entity;
 
 import java.util.Objects;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,8 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
 import ru.hh.career.solution.professionalenvironment.entity.Specialization;
 
 @Entity
@@ -25,8 +24,14 @@ public class CustomerProblem {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
-  // TODO add area and customer reference
-  // private Customer customer;
+  @Column(name = "customer_id")
+  private Integer customerId;
+
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "customer_id", insertable = false, updatable = false)
+  private Customer customer;
+
+  // TODO add area reference
   // private Area area;
 
   @Column(name = "specialization_id")
@@ -69,6 +74,23 @@ public class CustomerProblem {
 
   public void setId(Integer id) {
     this.id = id;
+  }
+
+  public Integer getCustomerId() {
+    return customerId;
+  }
+
+  public void setCustomerId(Integer customerId) {
+    this.customerId = customerId;
+  }
+
+  public Customer getCustomer() {
+    return customer;
+  }
+
+  public void setCustomer(Customer customer) {
+    setCustomerId(customer.getId());
+    this.customer = customer;
   }
 
   public Integer getSpecializationId() {
@@ -121,7 +143,7 @@ public class CustomerProblem {
 
   @Override
   public int hashCode() {
-    return Objects.hash(specializationId, careerPractice, consultationType, customerType, experience);
+    return Objects.hash(customerId, specializationId, careerPractice, consultationType, customerType, experience);
   }
 
   @Override
@@ -133,7 +155,7 @@ public class CustomerProblem {
       return false;
     }
     CustomerProblem other = (CustomerProblem) obj;
-    return specializationId.equals(other.specializationId) && careerPractice == other.careerPractice
+    return customerId.equals(other.customerId) && specializationId.equals(other.specializationId) && careerPractice == other.careerPractice
         && consultationType == other.consultationType && customerType == other.customerType
         && experience == other.experience;
   }
