@@ -39,4 +39,15 @@ public class ParserResource {
       e.printStackTrace();
     }
   }
+
+  @POST
+  @Path("/init")
+  public void getAll() {
+    try {
+      parserAreaService.parseArea();
+      parserSpecializationService.parseSpecialization();
+    } catch (IOException | ExecutionException | InterruptedException e) {
+      e.printStackTrace();
+    }
+  }
 }

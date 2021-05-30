@@ -7,8 +7,8 @@ import ru.hh.career.solution.area.dto.AreaParser;
 import ru.hh.career.solution.area.service.ParserAreaService;
 import ru.hh.career.solution.dao.AccountDao;
 import ru.hh.career.solution.dao.AdviserDao;
+import ru.hh.career.solution.dao.CheckerOnNullDao;
 import ru.hh.career.solution.dao.GenericDao;
-import ru.hh.career.solution.professionalenvironment.dao.CheckerOnNullDao;
 import ru.hh.career.solution.professionalenvironment.dto.ProfessionalEnvironmentParser;
 import ru.hh.career.solution.professionalenvironment.services.ParserSpecializationService;
 import ru.hh.career.solution.resource.AccountResource;
@@ -46,7 +46,7 @@ import java.util.Properties;
   ProfessionalEnvironmentParser.class,
 
   ParserAreaService.class,
-  ru.hh.career.solution.area.dao.CheckerOnNullDao.class,
+  CheckerOnNullDao.class,
   AreaParser.class
 })
 public class BeanConfig {

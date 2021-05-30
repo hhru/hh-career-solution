@@ -3,7 +3,7 @@ package ru.hh.career.solution.professionalenvironment.services;
 
 import org.springframework.stereotype.Service;
 import ru.hh.career.solution.dao.GenericDao;
-import ru.hh.career.solution.professionalenvironment.dao.CheckerOnNullDao;
+import ru.hh.career.solution.dao.CheckerOnNullDao;
 import ru.hh.career.solution.professionalenvironment.dto.ProfessionalEnvironmentDto;
 import ru.hh.career.solution.professionalenvironment.dto.ProfessionalEnvironmentParser;
 import ru.hh.career.solution.professionalenvironment.entity.ProfessionalEnvironment;
