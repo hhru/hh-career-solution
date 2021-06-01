@@ -22,32 +22,20 @@ public class ParserResource {
 
   @POST
   @Path("/specialization")
-  public void getSpecialization() {
-    try {
-      parserSpecializationService.parseSpecialization();
-    } catch (IOException | ExecutionException | InterruptedException e) {
-      e.printStackTrace();
-    }
+  public void downloadSpecialization() throws IOException, ExecutionException, InterruptedException {
+    parserSpecializationService.parseSpecialization();
   }
 
   @POST
   @Path("/area")
-  public void getArea() {
-    try {
-      parserAreaService.parseArea();
-    } catch (ExecutionException | InterruptedException e) {
-      e.printStackTrace();
-    }
+  public void downloadArea() throws ExecutionException, InterruptedException {
+    parserAreaService.parseArea();
   }
 
   @POST
   @Path("/init")
-  public void getAll() {
-    try {
-      parserAreaService.parseArea();
-      parserSpecializationService.parseSpecialization();
-    } catch (IOException | ExecutionException | InterruptedException e) {
-      e.printStackTrace();
-    }
+  public void getAll() throws ExecutionException, InterruptedException, IOException {
+    parserAreaService.parseArea();
+    parserSpecializationService.parseSpecialization();
   }
 }

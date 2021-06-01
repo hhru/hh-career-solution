@@ -46,7 +46,6 @@ import java.util.Properties;
   ProfessionalEnvironmentParser.class,
 
   ParserAreaService.class,
-  CheckerOnNullDao.class,
   AreaParser.class
 })
 public class BeanConfig {

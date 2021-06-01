@@ -1,14 +1,21 @@
 package ru.hh.career.solution.area.dto;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-@JsonDeserialize(using = AreaDeserializer.class)
+//@JsonDeserialize(using = AreaDeserializer.class)
 public class AreaDto {
   private Integer id;
   private String name;
+  @JsonProperty("parent_id")
   private Integer parentId;
+  @JsonProperty("areas")
+  private List<AreaDto> areaDtos;
+
+  public AreaDto() {
+
+  }
 
   public List<AreaDto> getAreaDtos() {
     return areaDtos;
@@ -17,8 +24,6 @@ public class AreaDto {
   public void setAreaDtos(List<AreaDto> areaDtos) {
     this.areaDtos = areaDtos;
   }
-
-  private List<AreaDto> areaDtos;
 
   public Integer getId() {
     return id;

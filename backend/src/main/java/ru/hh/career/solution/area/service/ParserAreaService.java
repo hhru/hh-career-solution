@@ -30,18 +30,26 @@ public class ParserAreaService {
   public List<AreaDto> parseSubArea(List<AreaDto> areaDtos) {
     List<AreaDto> areas = new ArrayList<>(areaDtos);
     for (AreaDto areaDto : areaDtos) {
-      if (areaDto.getAreaDtos().size() == 0) {
+      if (areaDto.getAreaDtos().isEmpty()) {
         return areaDtos;
       }
       areas.addAll(parseSubArea(areaDto.getAreaDtos()));
-//      try {
-//        areaDtos.addAll(parseSubArea(areaDto.getAreaDtos()));
-//      } catch (Exception e) {
-//        System.out.println(e.toString());
-//      }
     }
     return areas;
   }
+
+//  public List<AreaDto> parseSubArea(List<AreaDto> areaDtos) {
+//    List<AreaDto> areas = new ArrayList<AreaDto>();
+//    for (AreaDto areaDto : areaDtos) {
+//      areas.add(new AreaDto(areaDto.getId(), areaDto.getName(), areaDto.getParentId()));
+//      if (areaDto.getAreaDtos().size() == 0) {
+//        return areas;
+//      }
+//      areas.addAll(parseSubArea(areaDto.getAreaDtos()));
+//    }
+//    return areas;
+//  }
+
 
   @Transactional
   public void parseArea() throws ExecutionException, InterruptedException {
