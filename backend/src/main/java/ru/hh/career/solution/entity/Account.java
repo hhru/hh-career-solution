@@ -20,9 +20,6 @@ public class Account {
   @Column(name = "password_hash")
   private String passwordHash;
 
-  @Column(name = "profile_id")
-  private Integer profileId;
-
   public Account() {
   }
 
@@ -55,11 +52,4 @@ public class Account {
     this.passwordHash = passwordHash;
   }
 
-  public Integer getProfileId() {
-    return profileId;
-  }
-
-  public void setProfileId(Integer profileId) {
-    this.profileId = profileId;
-  }
 }

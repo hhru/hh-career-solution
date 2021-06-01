@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 import org.springframework.transaction.annotation.Transactional;
 import ru.hh.career.solution.dao.AdviserDao;
+import ru.hh.career.solution.dao.CustomerDao;
 import ru.hh.career.solution.dao.GenericDao;
 import ru.hh.career.solution.dto.CustomerRegistrationInfoDto;
 import ru.hh.career.solution.entity.Account;
@@ -18,12 +19,14 @@ import ru.hh.career.solution.exception.LocalizableException;
 public class CustomerService {
   private final GenericDao genericDao;
   private final AdviserDao adviserDao;
+  private final CustomerDao customerDao;
   private final AccountService accountService;
 
   @Inject
-  public CustomerService(GenericDao genericDao, AdviserDao adviserDao, AccountService accountService) {
+  public CustomerService(GenericDao genericDao, AdviserDao adviserDao, CustomerDao customerDao, AccountService accountService) {
     this.genericDao = genericDao;
     this.adviserDao = adviserDao;
+    this.customerDao = customerDao;
     this.accountService = accountService;
   }
 
@@ -38,13 +41,13 @@ public class CustomerService {
     return genericDao.get(Customer.class, id);
   }
 
+  @Transactional
   public Optional<Customer> getCurrentCustomer() {
     Optional<Account> currentAccount = accountService.getCurrentAccount();
-    // TODO add check if it's a customer's account
     if (currentAccount.isEmpty()) {
       return Optional.empty();
     }
-    return Optional.ofNullable(genericDao.get(Customer.class, currentAccount.get().getProfileId()));
+    return Optional.of(customerDao.getCustomerFromAccountId(currentAccount.get().getId()));
   }
 
   @Transactional

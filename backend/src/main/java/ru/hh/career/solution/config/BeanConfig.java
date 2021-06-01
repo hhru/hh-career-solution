@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import ru.hh.career.solution.dao.AccountDao;
 import ru.hh.career.solution.dao.AdviserDao;
+import ru.hh.career.solution.dao.CustomerDao;
 import ru.hh.career.solution.dao.GenericDao;
 import ru.hh.career.solution.mapper.CustomerProblemMapper;
 import ru.hh.career.solution.professionalenvironment.dao.CheckerOnNullDao;
@@ -50,6 +51,7 @@ import ru.hh.nab.common.properties.PropertiesUtils;
   CustomerProblemMapper.class,
   CustomerService.class,
   CustomerResource.class,
+  CustomerDao.class,
 })
 public class BeanConfig {
 
