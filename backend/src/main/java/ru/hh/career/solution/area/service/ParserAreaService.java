@@ -9,9 +9,7 @@ import ru.hh.career.solution.dao.GenericDao;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 @Service
@@ -27,29 +25,13 @@ public class ParserAreaService {
     this.areaParser = areaParser;
   }
 
-  public List<AreaDto> parseSubArea(List<AreaDto> areaDtos) {
-    List<AreaDto> areas = new ArrayList<>(areaDtos);
+  public Set<AreaDto> parseSubArea(List<AreaDto> areaDtos) {
+    Set<AreaDto> areas = new HashSet<>(areaDtos) {};
     for (AreaDto areaDto : areaDtos) {
-      if (areaDto.getAreaDtos().isEmpty()) {
-        return areaDtos;
-      }
       areas.addAll(parseSubArea(areaDto.getAreaDtos()));
     }
     return areas;
   }
-
-//  public List<AreaDto> parseSubArea(List<AreaDto> areaDtos) {
-//    List<AreaDto> areas = new ArrayList<AreaDto>();
-//    for (AreaDto areaDto : areaDtos) {
-//      areas.add(new AreaDto(areaDto.getId(), areaDto.getName(), areaDto.getParentId()));
-//      if (areaDto.getAreaDtos().size() == 0) {
-//        return areas;
-//      }
-//      areas.addAll(parseSubArea(areaDto.getAreaDtos()));
-//    }
-//    return areas;
-//  }
-
 
   @Transactional
   public void parseArea() throws ExecutionException, InterruptedException {
@@ -57,14 +39,11 @@ public class ParserAreaService {
       return;
     }
     List<AreaDto> areaDtos = Arrays.asList(areaParser.parse());
-    areaDtos = parseSubArea(areaDtos);
-    for (AreaDto areaDto : areaDtos) {
-      Area area = new Area(
-              areaDto.getId(),
-              areaDto.getName(),
-              areaDto.getParentId()
-      );
-      genericDao.save(area);
-    }
+    Set<AreaDto> areaDtosSet = parseSubArea(areaDtos);
+    areaDtosSet.forEach(area -> genericDao.save((new Area(
+            area.getId(),
+            area.getName(),
+            area.getParentId()
+    ))));
   }
 }
