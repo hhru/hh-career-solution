@@ -9,9 +9,7 @@ import ru.hh.career.solution.dao.GenericDao;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
@@ -28,7 +26,7 @@ public class ParserAreaService {
     this.areaParser = areaParser;
   }
 
-  public Set<AreaDto> parseSubArea(List<AreaDto> areaDtos) {
+  public Set<AreaDto> parseSubArea(Set<AreaDto> areaDtos) {
     Set<AreaDto> areas = new HashSet<>(areaDtos) {};
     for (AreaDto areaDto : areaDtos) {
       areas.addAll(parseSubArea(areaDto.getAreaDtos()));
@@ -41,7 +39,7 @@ public class ParserAreaService {
     if (checkerOnNullDao.isAreaPresent()) {
       return;
     }
-    List<AreaDto> areaDtos = Arrays.asList(areaParser.parse());
+    var areaDtos = Set.of(areaParser.parse());
     Set<AreaDto> areaDtosSet = parseSubArea(areaDtos);
     areaDtosSet.forEach(area -> genericDao.save((new Area(
             area.getId(),
