@@ -47,7 +47,7 @@ public class CustomerService {
     if (currentAccount.isEmpty()) {
       return Optional.empty();
     }
-    return Optional.of(customerDao.getCustomerFromAccountId(currentAccount.get().getId()));
+    return customerDao.getCustomerFromAccountId(currentAccount.get().getId());
   }
 
   @Transactional

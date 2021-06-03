@@ -38,10 +38,10 @@ public class CustomerResource {
 
   @GET
   @Path("/current")
-  public Response getCurrentCustomer() {
+  public CustomerDto getCurrentCustomer() {
     Optional<Customer> currentCustomer = customerService.getCurrentCustomer();
     if (currentCustomer.isPresent()) {
-      return Response.ok(new CustomerDto(currentCustomer.get())).build();
+      return new CustomerDto(currentCustomer.get());
     }
     throw new LocalizableException(ErrorCode.NOT_FOUND, Response.Status.NOT_FOUND).asWebApplicationException();
   }
