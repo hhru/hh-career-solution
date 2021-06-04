@@ -1,7 +1,8 @@
 CREATE TABLE area
 (
   area_id     INTEGER PRIMARY KEY,
-  name   VARCHAR(100) NOT NULL
+  name   VARCHAR(100) NOT NULL,
+  area_parent INTEGER
 );
 
 CREATE TABLE account

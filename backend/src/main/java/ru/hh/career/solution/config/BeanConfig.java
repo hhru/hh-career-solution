@@ -8,19 +8,25 @@ import java.util.Properties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import ru.hh.career.solution.area.dto.AreaParser;
+import ru.hh.career.solution.area.service.ParserAreaService;
 import ru.hh.career.solution.dao.AccountDao;
 import ru.hh.career.solution.dao.AdviserDao;
+
 import ru.hh.career.solution.dao.CustomerDao;
 import ru.hh.career.solution.dao.GenericDao;
 import ru.hh.career.solution.mapper.CustomerProblemMapper;
 import ru.hh.career.solution.professionalenvironment.dao.CheckerOnNullDao;
 import ru.hh.career.solution.professionalenvironment.dto.ProfessionalEnvironmentParser;
-import ru.hh.career.solution.professionalenvironment.resource.ParserResource;
 import ru.hh.career.solution.professionalenvironment.services.ParserSpecializationService;
 import ru.hh.career.solution.resource.AccountResource;
 import ru.hh.career.solution.resource.AdviserResource;
+
+import ru.hh.career.solution.resource.ParserResource;
+
 import ru.hh.career.solution.resource.CustomerProblemResource;
 import ru.hh.career.solution.resource.CustomerResource;
+
 import ru.hh.career.solution.service.AccountService;
 import ru.hh.career.solution.service.AdviserService;
 import ru.hh.career.solution.service.CustomerService;
@@ -47,11 +53,16 @@ import ru.hh.nab.common.properties.PropertiesUtils;
   CheckerOnNullDao.class,
   ProfessionalEnvironmentParser.class,
 
+
+  ParserAreaService.class,
+  AreaParser.class
+
   CustomerProblemResource.class,
   CustomerProblemMapper.class,
   CustomerService.class,
   CustomerResource.class,
   CustomerDao.class,
+
 })
 public class BeanConfig {
 
