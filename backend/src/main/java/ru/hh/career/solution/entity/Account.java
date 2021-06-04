@@ -28,10 +28,6 @@ public class Account {
     this.passwordHash = passwordHash;
   }
 
-  public Account(Integer id) {
-    this.id = id;
-  }
-
   public Integer getId() {
     return id;
   }
@@ -55,4 +51,5 @@ public class Account {
   public void setPasswordHash(String passwordHash) {
     this.passwordHash = passwordHash;
   }
+
 }

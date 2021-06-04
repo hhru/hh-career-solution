@@ -1,10 +1,16 @@
 package ru.hh.career.solution.config;
 
+import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import ru.hh.career.solution.dao.AccountDao;
 import ru.hh.career.solution.dao.AdviserDao;
+import ru.hh.career.solution.dao.CustomerDao;
 import ru.hh.career.solution.dao.GenericDao;
 import ru.hh.career.solution.mapper.CustomerProblemMapper;
 import ru.hh.career.solution.professionalenvironment.dao.CheckerOnNullDao;
@@ -14,6 +20,7 @@ import ru.hh.career.solution.professionalenvironment.services.ParserSpecializati
 import ru.hh.career.solution.resource.AccountResource;
 import ru.hh.career.solution.resource.AdviserResource;
 import ru.hh.career.solution.resource.CustomerProblemResource;
+import ru.hh.career.solution.resource.CustomerResource;
 import ru.hh.career.solution.service.AccountService;
 import ru.hh.career.solution.service.AdviserService;
 import ru.hh.career.solution.service.CustomerService;
@@ -23,12 +30,6 @@ import ru.hh.jclient.common.HttpClientFactory;
 import ru.hh.jclient.common.HttpClientFactoryBuilder;
 import ru.hh.jclient.common.util.storage.SingletonStorage;
 import ru.hh.nab.common.properties.PropertiesUtils;
-
-import java.io.IOException;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
 
 @Configuration
 @Import({
@@ -49,6 +50,8 @@ import java.util.Properties;
   CustomerProblemResource.class,
   CustomerProblemMapper.class,
   CustomerService.class,
+  CustomerResource.class,
+  CustomerDao.class,
 })
 public class BeanConfig {
 
