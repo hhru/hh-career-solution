@@ -9,6 +9,9 @@ public class SpecializationDto {
   private String name;
   private Boolean laboring;
 
+  public SpecializationDto() {
+  }
+
   public Integer getProfessionalEnvironmentId() {
     return professionalEnvironmentId;
   }

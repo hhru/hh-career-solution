@@ -50,14 +50,16 @@ public class GenericDao {
     getSession().delete(object);
   }
 
-  protected <T> CriteriaQuery<T> selectWhereAllEqual(Class<T> clazz, Map<String, Object> entityFieldNamesToExpectedValues) {
+  protected <T> Predicate allEqual(Root<T> entity, Map<String, Object> entityFieldNamesToExpectedValues) {
     CriteriaBuilder cb = getSession().getCriteriaBuilder();
-    CriteriaQuery<T> query = cb.createQuery(clazz);
-    Root<T> entity = query.from(clazz);
-    Predicate allEqual = entityFieldNamesToExpectedValues.entrySet().stream()
+    return entityFieldNamesToExpectedValues.entrySet().stream()
       .map(nameToValue -> cb.equal(entity.get(nameToValue.getKey()), nameToValue.getValue()))
       .reduce(cb::and).orElseGet(cb::and);
-    return query.where(allEqual);
+  }
+
+  protected <T> CriteriaQuery<T> selectWhereAllEqual(Class<T> clazz, Map<String, Object> entityFieldNamesToExpectedValues) {
+    CriteriaQuery<T> query = getSession().getCriteriaBuilder().createQuery(clazz);
+    return query.where(allEqual(query.from(clazz), entityFieldNamesToExpectedValues));
   }
 
   protected Session getSession() {
@@ -69,5 +71,17 @@ public class GenericDao {
       return;
     }
     getSession().saveOrUpdate(object);
+  }
+
+  public <T> Long getCount(Class<T> clazz) {
+    return getCount(clazz, Map.of());
+  }
+
+  public <T> Long getCount(Class<T> clazz, Map<String, Object> entityFieldNamesToExpectedValues) {
+    CriteriaBuilder cb = getSession().getCriteriaBuilder();
+    CriteriaQuery<Long> query = cb.createQuery(Long.class);
+    Root<T> entity = query.from(clazz);
+    query.select(cb.count(entity)).where(allEqual(entity, entityFieldNamesToExpectedValues));
+    return getSession().createQuery(query).getSingleResult();
   }
 }

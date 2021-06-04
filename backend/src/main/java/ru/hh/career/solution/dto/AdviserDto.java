@@ -2,6 +2,9 @@ package ru.hh.career.solution.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AdviserDto {
 
@@ -19,11 +22,20 @@ public class AdviserDto {
 
   private String customerType;
 
+  private List<SpecializationDto> specializationList = new ArrayList<>();
+
+  private String imageLink;
+
+  private AreaDto area;
+
+  private String position;
+
   public AdviserDto() {
   }
 
   public AdviserDto(Integer id, String name, String surname, String consultation, String experience,
-                    String careerPractice, String customerType) {
+                    String careerPractice, String customerType, List<SpecializationDto> specializationList,
+                    String imageLink, AreaDto area, String position) {
     this.id = id;
     this.name = name;
     this.surname = surname;
@@ -31,6 +43,10 @@ public class AdviserDto {
     this.experience = experience;
     this.careerPractice = careerPractice;
     this.customerType = customerType;
+    this.specializationList = specializationList;
+    this.imageLink = imageLink;
+    this.area = area;
+    this.position = position;
   }
 
   public Integer getId() {
@@ -87,5 +103,37 @@ public class AdviserDto {
 
   public void setCustomerType(String customerType) {
     this.customerType = customerType;
+  }
+
+  public List<SpecializationDto> getSpecializationList() {
+    return specializationList;
+  }
+
+  public void setSpecializationList(List<SpecializationDto> specializationList) {
+    this.specializationList = specializationList;
+  }
+
+  public String getImageLink() {
+    return imageLink;
+  }
+
+  public void setImageLink(String imageLink) {
+    this.imageLink = imageLink;
+  }
+
+  public AreaDto getArea() {
+    return area;
+  }
+
+  public void setArea(AreaDto area) {
+    this.area = area;
+  }
+
+  public String getPosition() {
+    return position;
+  }
+
+  public void setPosition(String position) {
+    this.position = position;
   }
 }
