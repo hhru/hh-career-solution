@@ -1,6 +1,6 @@
 package ru.hh.career.solution.resource;
 
-import ru.hh.career.solution.area.service.ParserAreaService;
+import ru.hh.career.solution.service.ParserAreaService;
 import ru.hh.career.solution.professionalenvironment.services.ParserSpecializationService;
 
 import javax.inject.Inject;

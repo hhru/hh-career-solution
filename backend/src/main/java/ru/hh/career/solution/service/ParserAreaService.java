@@ -1,11 +1,11 @@
-package ru.hh.career.solution.area.service;
+package ru.hh.career.solution.service;
 
 import org.springframework.stereotype.Service;
-import ru.hh.career.solution.area.dto.AreaDto;
-import ru.hh.career.solution.area.dto.AreaParser;
-import ru.hh.career.solution.area.entity.Area;
+import ru.hh.career.solution.parser.AreaParser;
 import ru.hh.career.solution.dao.CheckerOnNullDao;
 import ru.hh.career.solution.dao.GenericDao;
+import ru.hh.career.solution.dto.AreaDto;
+import ru.hh.career.solution.entity.Area;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
