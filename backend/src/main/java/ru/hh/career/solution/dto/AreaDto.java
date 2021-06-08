@@ -1,32 +1,57 @@
 package ru.hh.career.solution.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.Set;
+
 public class AreaDto {
-
-  private Integer areaId;
-
+  private Integer id;
   private String name;
+  @JsonProperty("parent_id")
+  private Integer parentId;
+  @JsonProperty("areas")
+  private Set<AreaDto> areaDtos;
 
   public AreaDto() {
   }
 
-  public AreaDto(Integer areaId, String name) {
-    this.areaId = areaId;
+  public AreaDto(Integer id, String name, Integer parentId) {
+    this.id = id;
     this.name = name;
+    this.parentId = parentId;
   }
 
-  public Integer getAreaId() {
-    return areaId;
+  public Set<AreaDto> getAreaDtos() {
+    return areaDtos;
+  }
+
+  public void setAreaDtos(Set<AreaDto> areaDtos) {
+    this.areaDtos = areaDtos;
+  }
+
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
   }
 
   public String getName() {
     return name;
   }
 
-  public void setAreaId(Integer areaId) {
-    this.areaId = areaId;
-  }
-
   public void setName(String name) {
     this.name = name;
   }
+
+  public Integer getParentId() {
+    return parentId;
+  }
+
+  public void setParentId(Integer parentId) {
+    this.parentId = parentId;
+  }
+
+
 }

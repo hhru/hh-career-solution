@@ -1,6 +1,7 @@
-package ru.hh.career.solution.area.dto;
+package ru.hh.career.solution.parser;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ru.hh.career.solution.dto.AreaDto;
 import ru.hh.jclient.common.HttpClientFactory;
 import ru.hh.jclient.common.Request;
 import ru.hh.jclient.common.RequestBuilder;

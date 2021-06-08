@@ -1,7 +1,7 @@
 package ru.hh.career.solution.dao;
 
 import org.hibernate.SessionFactory;
-import ru.hh.career.solution.area.entity.Area;
+import ru.hh.career.solution.entity.Area;
 import ru.hh.career.solution.professionalenvironment.entity.Specialization;
 
 import javax.inject.Inject;

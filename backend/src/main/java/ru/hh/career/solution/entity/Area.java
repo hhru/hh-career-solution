@@ -2,43 +2,70 @@ package ru.hh.career.solution.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Objects;
 
 @Entity
 @Table(name = "area")
 public class Area {
-
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "area_id")
-  private Integer areaId;
-
-  private String name;
+  public Area(Integer id, String name, Integer parentId) {
+    this.id = id;
+    this.name = name;
+    this.parentId = parentId;
+  }
 
   public Area() {
   }
+  
+  @Id
+  @Column(name = "area_id")
+  private Integer id;
 
-  public Area(Integer areaId, String name) {
-    this.areaId = areaId;
-    this.name = name;
+  @Column(name = "name")
+  private String name;
+
+  @Column(name = "area_parent")
+  private Integer parentId;
+
+  public Integer getId() {
+    return id;
   }
 
-  public Integer getAreaId() {
-    return areaId;
+  public void setId(Integer id) {
+    this.id = id;
   }
 
   public String getName() {
     return name;
   }
 
-  public void setAreaId(Integer areaId) {
-    this.areaId = areaId;
-  }
-
   public void setName(String name) {
     this.name = name;
+  }
+
+  public Integer getParentId() {
+    return parentId;
+  }
+
+  public void setParentId(Integer parentId) {
+    this.parentId = parentId;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof Area)) {
+      return false;
+    }
+    Area area = (Area) o;
+    return Objects.equals(getId(), area.getId()) && Objects.equals(getName(), area.getName());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getId(), getName());
   }
 }
