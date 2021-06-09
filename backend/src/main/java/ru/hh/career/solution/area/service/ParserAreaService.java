@@ -27,7 +27,8 @@ public class ParserAreaService {
   }
 
   public Set<AreaDto> parseSubArea(Set<AreaDto> areaDtos) {
-    Set<AreaDto> areas = new HashSet<>(areaDtos) {};
+    Set<AreaDto> areas = new HashSet<>(areaDtos) {
+    };
     for (AreaDto areaDto : areaDtos) {
       areas.addAll(parseSubArea(areaDto.getAreaDtos()));
     }
@@ -42,9 +43,9 @@ public class ParserAreaService {
     var areaDtos = Set.of(areaParser.parse());
     Set<AreaDto> areaDtosSet = parseSubArea(areaDtos);
     areaDtosSet.forEach(area -> genericDao.save((new Area(
-            area.getId(),
-            area.getName(),
-            area.getParentId()
+      area.getId(),
+      area.getName(),
+      area.getParentId()
     ))));
   }
 }

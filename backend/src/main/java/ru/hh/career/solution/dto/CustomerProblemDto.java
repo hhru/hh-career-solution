@@ -79,4 +79,20 @@ public class CustomerProblemDto {
   public void setCustomerType(CustomerType customerType) {
     this.customerType = customerType;
   }
+
+  public static class CustomerProblemIdDto {
+    private Integer customerProblemId;
+
+    public CustomerProblemIdDto(Integer customerProblemId) {
+      this.customerProblemId = customerProblemId;
+    }
+
+    public Integer getCustomerProblemId() {
+      return customerProblemId;
+    }
+
+    public void setCustomerProblemId(Integer customerProblemId) {
+      this.customerProblemId = customerProblemId;
+    }
+  }
 }

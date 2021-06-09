@@ -1,6 +1,7 @@
 package ru.hh.career.solution.entity;
 
-import java.util.Objects;
+import ru.hh.career.solution.professionalenvironment.entity.Specialization;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -13,7 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import ru.hh.career.solution.professionalenvironment.entity.Specialization;
+import java.util.Objects;
 
 @Entity
 @Table(name = "customer_problem")
@@ -66,6 +67,10 @@ public class CustomerProblem {
     this.experience = experience;
     this.careerPractice = careerPractice;
     this.customerType = customerType;
+  }
+
+  public CustomerProblem(Integer id) {
+    this.id = id;
   }
 
   public Integer getId() {

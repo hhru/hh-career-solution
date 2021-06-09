@@ -1,12 +1,13 @@
 package ru.hh.career.solution.mapper;
 
-import java.util.stream.Collectors;
 import ru.hh.career.solution.dto.AdviserDto;
 import ru.hh.career.solution.entity.Adviser;
 import ru.hh.career.solution.entity.CareerPractice;
 import ru.hh.career.solution.entity.Consultation;
 import ru.hh.career.solution.entity.CustomerType;
 import ru.hh.career.solution.entity.Experience;
+
+import java.util.stream.Collectors;
 
 public class AdviserMapper {
 

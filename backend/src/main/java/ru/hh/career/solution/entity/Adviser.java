@@ -1,7 +1,7 @@
 package ru.hh.career.solution.entity;
 
-import java.util.HashSet;
-import java.util.Set;
+import ru.hh.career.solution.professionalenvironment.entity.Specialization;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -16,7 +16,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import ru.hh.career.solution.professionalenvironment.entity.Specialization;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "adviser")
@@ -84,6 +85,10 @@ public class Adviser {
     this.imageLink = imageLink;
     this.area = area;
     this.position = position;
+  }
+
+  public Adviser(Integer id) {
+    this.id = id;
   }
 
   public Integer getId() {

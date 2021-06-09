@@ -77,3 +77,15 @@ CREATE TABLE customer_problem
     career_practice       adviserCareerType,
     customer_type         adviserCustomerType
 );
+
+CREATE TYPE customerResponseState AS ENUM('OFFER', 'APPLIED', 'DENIED');
+
+CREATE TABLE customer_response
+(
+  id                      SERIAL PRIMARY KEY,
+  customer_problem_id     INTEGER NOT NULL REFERENCES customer_problem(customer_problem_id),
+  adviser_id              INTEGER NOT NULL REFERENCES adviser(id),
+  state customerResponseState,
+
+  CONSTRAINT customer_response_unique_fields UNIQUE (customer_problem_id, adviser_id)
+);

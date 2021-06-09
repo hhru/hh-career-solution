@@ -1,9 +1,5 @@
 package ru.hh.career.solution.service;
 
-import java.util.List;
-import java.util.Optional;
-import javax.inject.Inject;
-import javax.ws.rs.core.Response;
 import org.springframework.transaction.annotation.Transactional;
 import ru.hh.career.solution.dao.AdviserDao;
 import ru.hh.career.solution.dao.CustomerDao;
@@ -15,6 +11,12 @@ import ru.hh.career.solution.entity.Customer;
 import ru.hh.career.solution.entity.CustomerProblem;
 import ru.hh.career.solution.exception.ErrorCode;
 import ru.hh.career.solution.exception.LocalizableException;
+import ru.hh.career.solution.mapper.CustomerResponseMapper;
+
+import javax.inject.Inject;
+import javax.ws.rs.core.Response;
+import java.util.List;
+import java.util.Optional;
 
 public class CustomerService {
   private final GenericDao genericDao;
@@ -77,5 +79,10 @@ public class CustomerService {
   @Transactional
   public List<Adviser> getProblemMatches(Integer problemId, Integer perPage, Integer page) {
     return adviserDao.getMatchingAdvisers(getProblem(problemId), page * perPage, perPage);
+  }
+
+  @Transactional
+  public Integer saveResponse(Integer customerProblemId, Integer adviserId) {
+    return (Integer) genericDao.save(CustomerResponseMapper.mapToCustomerResponse(customerProblemId, adviserId));
   }
 }

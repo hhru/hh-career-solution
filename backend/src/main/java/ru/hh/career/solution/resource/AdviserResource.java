@@ -1,7 +1,15 @@
 package ru.hh.career.solution.resource;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import ru.hh.career.solution.dto.AdviserDto;
+import ru.hh.career.solution.dto.CustomerProblemDto;
+import ru.hh.career.solution.dto.IdDto;
+import ru.hh.career.solution.dto.PageResponseDto;
+import ru.hh.career.solution.entity.Adviser;
+import ru.hh.career.solution.exception.LocalizableException;
+import ru.hh.career.solution.mapper.AdviserMapper;
+import ru.hh.career.solution.service.AdviserService;
+import ru.hh.career.solution.service.CustomerService;
+
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
@@ -13,13 +21,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-import ru.hh.career.solution.dto.AdviserDto;
-import ru.hh.career.solution.dto.IdDto;
-import ru.hh.career.solution.dto.PageResponseDto;
-import ru.hh.career.solution.entity.Adviser;
-import ru.hh.career.solution.exception.LocalizableException;
-import ru.hh.career.solution.mapper.AdviserMapper;
-import ru.hh.career.solution.service.AdviserService;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Path("/advisers")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -27,9 +30,11 @@ import ru.hh.career.solution.service.AdviserService;
 public class AdviserResource {
 
   private final AdviserService adviserService;
+  private final CustomerService customerService;
 
-  public AdviserResource(AdviserService adviserService) {
+  public AdviserResource(AdviserService adviserService, CustomerService customerService) {
     this.adviserService = adviserService;
+    this.customerService = customerService;
   }
 
   @GET
@@ -72,5 +77,14 @@ public class AdviserResource {
     } catch (LocalizableException e) {
       throw e.asWebApplicationException();
     }
+  }
+
+  @POST
+  @Path(value = "/{adviserId:[\\d]+}/response")
+  public IdDto createResponse(
+    @PathParam(value = "adviserId") Integer adviserId,
+    CustomerProblemDto.CustomerProblemIdDto customerProblemId) {
+    Integer responseId = customerService.saveResponse(customerProblemId.getCustomerProblemId(), adviserId);
+    return new IdDto(responseId);
   }
 }
