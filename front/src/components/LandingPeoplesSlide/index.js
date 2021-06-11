@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Container, Grid, Card, CardContent, CardMedia, Typography, Button } from "@material-ui/core";
+import OrderButton from "src/components/OrderButton";
 
 import css from "./styles.module.scss";
 import people1 from './people1.jpg';
@@ -117,9 +118,7 @@ const LandingPeoplesSlide = () => {
                 );
               })}
             </Grid>
-            <Button variant="contained" color="secondary" size="large">
-              Заказать консультацию
-            </Button>
+            <OrderButton />
           </Grid>
         </Grid>
       </Container>

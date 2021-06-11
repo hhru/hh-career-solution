@@ -2,6 +2,7 @@ import React from "react";
 
 import { Container, Grid, Typography, Button } from "@material-ui/core";
 import Accent from "src/components/Accent";
+import OrderButton from "src/components/OrderButton";
 
 import css from "./styles.module.scss";
 import mainImg from './Career_progress-pana.png';
@@ -18,9 +19,7 @@ const LandingGoalsSlide = () => {
               найти <Accent>подходящую&nbsp;работу</Accent>
               <br />и получать <Accent>достойную&nbsp;зарплату</Accent>
             </Typography>
-            <Button variant="contained" color="secondary" size="large">
-              Заказать консультацию
-            </Button>
+            <OrderButton />
           </Grid>
           <Grid item xs={12} sm={6}>
             <img
