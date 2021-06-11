@@ -33,15 +33,15 @@ const defaultSpecialization = {
 export default function specialization(state = defaultSpecialization, { type, payload }) {
   switch (type) {
     case SET_SPECIALIZATIONS_ACTION:
-      return { ...state, ...{ industries: payload } };
+      return { ...state, industries: payload };
     case SET_INDUSTRY_ACTION:
       const industry = state.industries.filter((item) => {
         return item.id == payload
       }).pop();
       const specializations = industry.specializations;
-      return { ...state, ...{ industryId: payload, specializationId: '', specializations: specializations } };
+      return { ...state, industryId: payload, specializationId: '', specializations: specializations };
     case SET_SPECIALIZATION_ACTION:
-      return { ...state, ...{ specializationId: payload } };
+      return { ...state, specializationId: payload };
     default:
       return state;
   }

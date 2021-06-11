@@ -1,31 +1,27 @@
 import React from "react";
-import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 
 import { Hidden, Typography, Container, Grid, Button } from "@material-ui/core";
 
 import css from "./styles.module.scss";
 
 const Header = () => {
-  const history = useHistory();
-  const handleLogoClick = () => {
-    history.push('/');
-  };
-
   return (
     <header className={css.appHeader}>
       <Container>
         <Grid container alignItems="center">
           <Grid item xs={4} sm={6} md={5}>
             <Grid container alignItems="center" direction="row" wrap="nowrap">
-              <Typography
-                className={css.header}
-                variant="h3"
-                component="h1"
-                color="secondary"
-                onClick={handleLogoClick}
-              >
-                Lift
-              </Typography>
+              <Link to={`/`} className={css.headerLink}>
+                <Typography
+                  className={css.header}
+                  variant="h3"
+                  component="h1"
+                  color="secondary"
+                >
+                  Lift
+                </Typography>
+              </Link>
               <Hidden only="xs">
                 <Typography
                   className={css.subHeader}

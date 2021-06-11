@@ -10,11 +10,9 @@ const OrderButton = () => {
   }
 
   return (
-    <React.Fragment>
-      <Button variant="contained" color="secondary" size="large" onClick={handleButton}>
-        Построить карьеру
-      </Button>
-    </React.Fragment>
+    <Button variant="contained" color="secondary" size="large" onClick={handleButton}>
+      Построить карьеру
+    </Button>
   );
 }
 
