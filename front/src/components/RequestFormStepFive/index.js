@@ -8,6 +8,7 @@ import Accent from "src/components/Accent";
 
 import css from "./styles.module.scss";
 import fetchMessangerList from "src/services/fetchMessangerList";
+import { getSpecialization, getExperience } from 'src/services/renderHelpers';
 
 const RequestFormStepFive = () => {
   const dispatch = useDispatch();
@@ -16,25 +17,6 @@ const RequestFormStepFive = () => {
   }, []);
 
   const advisers = useSelector(({ advisers }) => advisers.list);
-
-  const getSpecialization = (item) => {
-    const map = {
-      'CONSULTATION': 'Карьерный консультант',
-      'COACHING': 'Карьерный коуч',
-      'ALL': 'Карьерный коуч и консультант',
-    };
-    return map[item.careerPractice];
-  };
-
-  const getExperience = (item) => {
-    const map = {
-      'NO_EXPERIENCE': 'опыт менее 1 года',
-      'BETWEEN_1_AND_3': 'опыт от 1 года до 3 лет',
-      'BETWEEN_3_AND_6': 'опыт от 3 лет до 6 лет',
-      'MORE_THAN_6': 'опыт более 6 лет',
-    };
-    return map[item.experience];
-  };
 
   return (
     <React.Fragment>

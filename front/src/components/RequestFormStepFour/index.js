@@ -26,13 +26,11 @@ import { setRegisterCustomerForm } from "src/redux/RegisterCustomerForm";
 
 const RequestFormStepFour = () => {
   const dispatch = useDispatch();
-  useEffect(() => {
-  }, []);
 
   const registerCustomerForm = useSelector(({ registerCustomerForm }) => registerCustomerForm);
 
   const [showPassword, setShowPassword] = useState(false);
-  const handleClickShowPassword = (event) => {
+  const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   }
 
