@@ -1,11 +1,18 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { Hidden, Typography, Container, Grid, Button } from "@material-ui/core";
 
 import css from "./styles.module.scss";
+import { setAuth } from "src/redux/Auth";
 
 const Header = () => {
+  const auth = useSelector(({ auth }) => auth);
+  const dispatch = useDispatch();
+  const isAuthenticated = auth.isAuthenticated;
+  let history = useHistory();
+
   return (
     <header className={css.appHeader}>
       <Container>
@@ -35,9 +42,21 @@ const Header = () => {
           </Grid>
           <Grid className={css.fill} item />
           <Grid className={css.buttonWrapper} item>
-            <Button className={css.button} variant="outlined" color="secondary">
-              Войти
-            </Button>
+            {isAuthenticated && (
+              <Button className={css.button} variant="outlined" color="secondary" onClick={() => {
+                dispatch(setAuth({ isAuthenticated: false, isAdviser: false, isCustomer: false }));
+                history.push("/");
+              }}>
+                Выйти
+              </Button>
+            )}
+            {!isAuthenticated && (
+              <Link to={`/sign-in`} className={css.headerLink}>
+                <Button className={css.button} variant="outlined" color="secondary">
+                  Войти
+                </Button>
+              </Link>
+            )}
           </Grid>
         </Grid>
       </Container>

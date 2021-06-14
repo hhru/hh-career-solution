@@ -6,6 +6,7 @@ import specialization from "./Specialization";
 import tags from "./Tags";
 import registerCustomerForm from "./RegisterCustomerForm";
 import advisers from "./Advisers";
+import auth from "./Auth";
 
 const composeEnhancers =
   (typeof window !== "undefined" &&
@@ -18,7 +19,8 @@ const reducer = combineReducers({
   specialization,
   tags,
   registerCustomerForm,
-  advisers
+  advisers,
+  auth
 });
 
 export default createStore(

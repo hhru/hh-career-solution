@@ -1,3 +1,4 @@
+import { setAuth } from "src/redux/Auth";
 
 function getCookie(name) {
   let matches = document.cookie.match(new RegExp(
@@ -7,7 +8,7 @@ function getCookie(name) {
 }
 
 const sendRegisterCustomer = (data) => {
-  return function(dispatch, getState) {
+  return function (dispatch, getState) {
     var formBody = [];
     for (var property in data) {
       var encodedKey = encodeURIComponent(property);
@@ -38,6 +39,9 @@ const sendRegisterCustomer = (data) => {
       }
     }).then(data => {
       console.log(data);
+      if (data.code === 0) {
+        dispatch(setAuth({ isAuthenticated: true, isAdviser: false, isCustomer: true })) // @todo
+      }
     }).catch((error) => console.log('err', error));
   }
 }
